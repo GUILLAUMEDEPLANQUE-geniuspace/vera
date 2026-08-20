@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/jobs", label: "Emplois" },
   { to: "/companies", label: "Maisons" },
+  { to: "/journal", label: "Journal" },
   { to: "/savoirs", label: "Savoirs" },
   { to: "/lieux", label: "Lieux" },
-  { to: "/viviers", label: "Viviers" },
 ] as const;
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -137,6 +137,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </Link>
             <Link to="/journal" className="hover:text-ink">
               Journal
+            </Link>
+            <Link to="/admin" className="hover:text-ink">
+              Admin
             </Link>
             <Link to="/tension" className="hover:text-ink">
               Tension

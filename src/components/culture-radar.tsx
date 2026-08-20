@@ -1,4 +1,5 @@
 import { CULTURE_AXES, type CultureProfile } from "@/lib/culture";
+import { CHART } from "@/lib/marks";
 
 export function CultureRadar({ culture, fit }: { culture: CultureProfile; fit?: number | null }) {
   return (
@@ -6,9 +7,10 @@ export function CultureRadar({ culture, fit }: { culture: CultureProfile; fit?: 
       <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">Fit interculturel</p>
       <h2 className="mt-2 font-serif text-2xl">Comment on travaille ici</h2>
       <p className="mt-2 text-sm leading-relaxed text-muted">{culture.essay}</p>
-      <ul className="mt-5 space-y-3">
-        {CULTURE_AXES.map((ax) => {
+      <ul className="mt-5 space-y-4">
+        {CULTURE_AXES.map((ax, i) => {
           const v = culture.axes[ax.id];
+          const color = CHART[i % CHART.length];
           return (
             <li key={ax.id}>
               <div className="flex justify-between text-xs text-muted">
@@ -16,13 +18,15 @@ export function CultureRadar({ culture, fit }: { culture: CultureProfile; fit?: 
                 <span className="font-medium text-ink">{ax.label}</span>
                 <span>{ax.high}</span>
               </div>
-              <div className="mt-1 h-1.5 rounded-full bg-paper">
-                <div className="relative h-1.5">
-                  <span
-                    className="absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary"
-                    style={{ left: `${v}%` }}
-                  />
-                </div>
+              <div className="relative mt-1.5 h-2 rounded-full bg-paper">
+                <span
+                  className="absolute inset-y-0 left-0 rounded-full"
+                  style={{ width: `${v}%`, background: color, opacity: 0.35 }}
+                />
+                <span
+                  className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-surface"
+                  style={{ left: `${v}%`, background: color }}
+                />
               </div>
             </li>
           );

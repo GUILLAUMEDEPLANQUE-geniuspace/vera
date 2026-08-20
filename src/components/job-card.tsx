@@ -22,7 +22,7 @@ export function JobCard({ job }: { job: JobListItem }) {
       className="group block rounded-xl border border-border bg-surface p-5 shadow-soft transition-transform duration-200 hover:-translate-y-0.5"
     >
       <div className="flex items-start gap-4">
-        <CompanyMark name={job.company.name} />
+        <CompanyMark name={job.company.name} slug={job.company.slug} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
             <span className="font-medium text-ink">{job.company.name}</span>

@@ -29,9 +29,10 @@ export function HonestyBlock({ honesty, benefits }: { honesty: Honesty; benefits
 
 function Col({ kicker, body, tone }: { kicker: string; body: string; tone: "bad" | "warn" | "good" }) {
   const border = tone === "bad" ? "border-bad" : tone === "good" ? "border-good" : "border-warn";
+  const kickerColor = tone === "bad" ? "text-bad" : tone === "good" ? "text-good" : "text-warn";
   return (
     <div className={`rounded-xl border-l-2 bg-surface px-4 py-4 ${border}`}>
-      <p className="text-xs tracking-wide text-muted uppercase">{kicker}</p>
+      <p className={`text-xs tracking-wide uppercase ${kickerColor}`}>{kicker}</p>
       <p className="mt-2 text-sm leading-relaxed text-ink">{body}</p>
     </div>
   );

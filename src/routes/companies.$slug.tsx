@@ -119,7 +119,7 @@ function CompanyPage() {
         {company.name}
       </nav>
       <div className="mt-4 flex items-start gap-5">
-        <CompanyMark name={company.name} className="size-14 text-2xl" />
+        <CompanyMark name={company.name} slug={company.slug} className="size-16 text-2xl" />
         <div>
           <p className="text-xs tracking-wide text-muted uppercase">{company.industry}</p>
           <h1 className="font-serif text-4xl sm:text-5xl">{company.name}</h1>
@@ -151,6 +151,27 @@ function CompanyPage() {
           </Badge>
         ))}
       </div>
+
+      {articles.length > 0 && (
+        <section className="mt-12">
+          <p className="text-xs tracking-wide text-primary uppercase">Journal de la maison</p>
+          <h2 className="mt-1 font-serif text-3xl">Blog — preuves, pas plaquette</h2>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+            {articles.map((a) => (
+              <li key={a.id} className="rounded-2xl border border-border bg-surface p-5">
+                <p className="text-xs tracking-wide text-muted uppercase">{a.kind}</p>
+                <Link to="/journal/$slug" params={{ slug: a.slug }} className="mt-1 block font-serif text-2xl hover:text-primary">
+                  {a.title}
+                </Link>
+                <p className="mt-1 text-sm text-muted">{a.excerpt}</p>
+              </li>
+            ))}
+          </ul>
+          <Link to="/journal" className="mt-4 inline-block text-sm font-medium text-primary">
+            Tous les blogs maisons et carnets
+          </Link>
+        </section>
+      )}
 
       <section className="mt-10">
         <h2 className="font-serif text-2xl">Management et semaine</h2>
@@ -210,24 +231,6 @@ function CompanyPage() {
                   · {s.vendor} · {s.price}
                 </span>
                 <p className="text-sm text-muted">{s.blurb}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {articles.length > 0 && (
-        <section className="mt-14">
-          <h2 className="font-serif text-2xl">Journal de la maison</h2>
-          <p className="mt-2 text-sm text-muted">Preuves de métier, pas une plaquette RH.</p>
-          <ul className="mt-4 space-y-3">
-            {articles.map((a) => (
-              <li key={a.id}>
-                <Link to="/journal/$slug" params={{ slug: a.slug }} className="font-medium text-primary">
-                  {a.title}
-                </Link>
-                <span className="text-sm text-muted"> · {a.kind}</span>
-                <p className="text-sm text-muted">{a.excerpt}</p>
               </li>
             ))}
           </ul>

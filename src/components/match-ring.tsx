@@ -17,6 +17,8 @@ export function MatchRing({
       </div>
     );
   }
+  const hue =
+    value >= 75 ? "var(--color-good)" : value >= 50 ? "var(--color-chart-3)" : "var(--color-warn)";
   const r = 15;
   const c = 2 * Math.PI * r;
   const offset = c - (Math.max(0, Math.min(100, value)) / 100) * c;
@@ -29,7 +31,7 @@ export function MatchRing({
           cy="18"
           r={r}
           fill="none"
-          stroke="var(--color-primary)"
+          stroke={hue}
           strokeWidth="3"
           strokeDasharray={c}
           strokeDashoffset={offset}

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
+import { CompanyMark } from "@/components/company-mark";
 import { Term } from "@/components/term";
 import { JobCard } from "@/components/job-card";
 import { SearchBar } from "@/components/search-bar";
@@ -78,6 +79,32 @@ function Home() {
               value={p.medianSalary ? formatSalary(p.medianSalary, p.medianSalary) : "—"}
             />
           </dl>
+        </div>
+      </section>
+
+      <section className="border-b border-border">
+        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-3 sm:px-6">
+          <LabCard
+            kicker="Journal"
+            title="Blogs maisons & carnets"
+            body="Relève, Northline, Kora écrivent le geste. Malik et Hélène tiennent un carnet. Pas un LinkedIn."
+            to="/journal"
+            cta="Lire le journal"
+          />
+          <LabCard
+            kicker="Savoirs"
+            title="Catégories que vous créez"
+            body="Marché, droit, robotique — et les vôtres. L’opérateur ajoute un rayon en trente secondes."
+            to="/savoirs"
+            cta="Ouvrir les savoirs"
+          />
+          <LabCard
+            kicker="Admin"
+            title="Tester la console"
+            body="Connexion → /admin → phrase « l’honneur est public ». Catégories, champs, Drive, pipeline."
+            to="/admin"
+            cta="Ouvrir l’admin"
+          />
         </div>
       </section>
 
@@ -402,6 +429,7 @@ function Home() {
                   className="flex items-center gap-4 px-4 py-3.5"
                 >
                   <span className="w-5 font-serif text-lg tabular-nums text-subtle">{i + 1}</span>
+                  <CompanyMark name={h.name} slug={h.slug} className="size-10" />
                   <div className="min-w-0 flex-1">
                     <span className="font-medium">{h.name}</span>
                     <span className="text-sm text-muted"> · {h.industry}</span>
@@ -438,6 +466,31 @@ function Stat({ label, value }: { label: string; value: string }) {
       <dt className="text-xs tracking-wide text-muted uppercase">{label}</dt>
       <dd className="mt-1 font-serif text-3xl tabular-nums text-ink">{value}</dd>
     </div>
+  );
+}
+
+function LabCard({
+  kicker,
+  title,
+  body,
+  to,
+  cta,
+}: {
+  kicker: string;
+  title: string;
+  body: string;
+  to: "/journal" | "/savoirs" | "/admin";
+  cta: string;
+}) {
+  return (
+    <Link to={to} className="rounded-2xl border border-border bg-surface p-5 hover:border-primary">
+      <p className="text-xs tracking-wide text-primary uppercase">{kicker}</p>
+      <h2 className="mt-1 font-serif text-2xl">{title}</h2>
+      <p className="mt-2 text-sm text-muted">{body}</p>
+      <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
+        {cta} <ArrowRight className="size-3.5" />
+      </span>
+    </Link>
   );
 }
 

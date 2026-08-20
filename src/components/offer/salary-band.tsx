@@ -33,8 +33,13 @@ export function SalaryBand({
         <div className="relative h-16">
           <div className="absolute inset-x-0 top-7 h-2 rounded-full bg-paper" />
           <div
-            className="absolute top-7 h-2 rounded-full bg-primary/25"
-            style={{ left: x(mark.p25), width: `calc(${x(mark.p75)} - ${x(mark.p25)})` }}
+            className="absolute top-7 h-2 rounded-full"
+            style={{
+              left: x(mark.p25),
+              width: `calc(${x(mark.p75)} - ${x(mark.p25)})`,
+              background: "var(--color-chart-3)",
+              opacity: 0.45,
+            }}
           />
           <Tick left={x(mark.p25)} label="P25" value={mark.p25} />
           <Tick left={x(mark.p50)} label="Médiane" value={mark.p50} strong />

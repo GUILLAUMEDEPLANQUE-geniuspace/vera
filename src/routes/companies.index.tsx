@@ -56,7 +56,7 @@ function CompaniesPage() {
             className="rounded-xl border border-border bg-surface p-5 transition-transform duration-200 hover:-translate-y-0.5"
           >
             <div className="flex items-start gap-4">
-              <CompanyMark name={c.name} />
+              <CompanyMark name={c.name} slug={c.slug} className="size-14 text-lg" />
               <div className="min-w-0 flex-1">
                 <h2 className="font-serif text-2xl">{c.name}</h2>
                 <p className="mt-1 text-sm text-muted">{c.tagline}</p>

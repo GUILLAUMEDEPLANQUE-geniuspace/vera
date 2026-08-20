@@ -3,7 +3,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Bookmark, BookmarkCheck, Hand } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { ApplyTrial, OfferBody } from "@/components/offer/offer-body";
+import { ApplyTrial } from "@/components/offer/offer-body";
+import { CareerMap } from "@/components/offer/career-map";
+import { HonestyBlock } from "@/components/offer/honesty";
+import { SalaryBand } from "@/components/offer/salary-band";
+import { TaskSimPanel } from "@/components/offer/task-sim";
+import { ToolsRack } from "@/components/offer/tools-rack";
+import { Voices } from "@/components/offer/voices";
+import { WeekRing } from "@/components/offer/week-ring";
+import { WorkplaceTour } from "@/components/offer/workplace-tour";
+import { OfferOrb, OfferPanel, OfferToolbar, type OfferTabId } from "@/components/offer/offer-orb";
 import { CultureRadar } from "@/components/culture-radar";
 import { CultureSim } from "@/components/culture-sim";
 import { DriveCard } from "@/components/drive-reader";
@@ -119,6 +128,7 @@ function JobPage() {
   const [simMisses, setSimMisses] = useState<string[]>([]);
   const [gridScore, setGridScore] = useState<number | null>(null);
   const [gridAnswers, setGridAnswers] = useState<GridAnswers>({});
+  const [tab, setTab] = useState<OfferTabId>("lire");
   useEffect(() => setAuthReady(true), []);
   const showLoginNudge = authReady && !authPending && !user;
 
@@ -226,7 +236,7 @@ function JobPage() {
   const ppqc = ppqcPrice(job);
 
   return (
-    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 pb-28 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:pb-10">
       <article className="min-w-0">
         <nav className="text-xs text-muted">
           <Link to="/" className="hover:text-ink">
@@ -281,12 +291,17 @@ function JobPage() {
             {job.company.name}
           </Link>
         </nav>
-        <p className="mt-3 text-xs tracking-wide text-muted uppercase">{job.company.industry}</p>
-        <h1 className="mt-2 font-serif text-4xl sm:text-5xl">{job.title}</h1>
-        <p className="mt-3 text-lg text-muted">
-          {job.company.name} · {job.location} · {REMOTE_LABEL[job.remoteType]} · {CONTRACT_LABEL[job.contract]} ·{" "}
-          {SENIORITY_LABEL[job.seniority]}
-        </p>
+        <div className="mt-4 flex items-start gap-4">
+          <CompanyMark name={job.company.name} slug={job.company.slug} className="size-14 text-lg" />
+          <div className="min-w-0">
+            <p className="text-xs tracking-wide text-muted uppercase">{job.company.industry}</p>
+            <h1 className="font-serif text-4xl sm:text-5xl">{job.title}</h1>
+            <p className="mt-2 text-lg text-muted">
+              {job.company.name} · {job.location} · {REMOTE_LABEL[job.remoteType]} · {CONTRACT_LABEL[job.contract]} ·{" "}
+              {SENIORITY_LABEL[job.seniority]}
+            </p>
+          </div>
+        </div>
         <p className="mt-2 text-sm text-subtle">
           {formatPosted(job.postedAt)} · {job.applicantsCount} candidatures visibles · {job.quietCount} main
           {job.quietCount > 1 ? "s" : ""} levée{job.quietCount > 1 ? "s" : ""}
@@ -318,138 +333,172 @@ function JobPage() {
           <VerdictCard verdict={verdict} />
         </div>
 
-        <div className="mt-8 space-y-6">
-          <p className="max-w-prose text-base leading-relaxed text-ink">{job.description}</p>
-          <Block title="Vous ferez" items={job.responsibilities} />
-          <Block title="Il vous faut" items={job.requirements} />
-          {job.nice.length > 0 && <Block title="Un plus" items={job.nice} />}
-        </div>
-
-        <OfferBody
-          pack={job.offer}
-          salaryMin={job.salaryMin}
-          salaryMax={job.salaryMax}
-          currency={job.currency}
-          onSimResolved={(out) => {
-            setSimOk(out.ok);
-            setSimScore(out.score);
-            setSimMisses(out.misses);
-          }}
+        <p className="mt-6 text-center text-xs tracking-wide text-muted uppercase">
+          Cinq faces — plus de page-fleuve
+        </p>
+        <OfferOrb
+          active={tab}
+          onChange={setTab}
+          mark={<CompanyMark name={job.company.name} slug={job.company.slug} className="size-16 text-xl" />}
         />
+        <OfferToolbar active={tab} onChange={setTab} />
 
-        {preformQ.data && (
-          <SkillPath missing={preformQ.data.missing} path={preformQ.data.path} totalMinutes={preformQ.data.totalMinutes} />
+        {tab === "lire" && (
+          <OfferPanel tab="lire">
+            <p className="max-w-prose text-base leading-relaxed text-ink">{job.description}</p>
+            <Block title="Vous ferez" items={job.responsibilities} />
+            <Block title="Il vous faut" items={job.requirements} />
+            {job.nice.length > 0 && <Block title="Un plus" items={job.nice} />}
+            <SalaryBand
+              min={job.salaryMin}
+              max={job.salaryMax}
+              currency={job.currency}
+              mark={job.offer.pay}
+            />
+            <HonestyBlock honesty={job.offer.honesty} benefits={job.offer.benefits} />
+          </OfferPanel>
         )}
 
-        {(driveQ.data ?? []).length > 0 && (
-          <section className="mt-10">
-            <h2 className="font-serif text-2xl">
-              <Term k="drive">GeniusDrive</Term> de l’offre
-            </h2>
-            <ul className="mt-4 grid gap-3">
-              {(driveQ.data ?? []).map((d) => (
-                <li key={d.id}>
-                  <DriveCard asset={d} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {(job.barriers.length > 0 || job.tryBuy) && (
-          <section className="mt-10 rounded-xl border border-border bg-surface p-5">
-            <p className="text-xs tracking-wide text-primary uppercase">Freins périphériques</p>
-            <h2 className="mt-1 font-serif text-2xl">Ce que la maison lève — écrit</h2>
-            {job.tryBuy && (
-              <p className="mt-3 text-sm leading-relaxed">
-                <Term k="trybuy">Try & Buy</Term> {job.tryBuy.days} jours · {job.tryBuy.dailyPay} € / jour · {job.tryBuy.supervisor}. {job.tryBuy.startNote}
-              </p>
+        {tab === "epreuve" && (
+          <OfferPanel tab="epreuve">
+            {job.offer.sim ? (
+              <TaskSimPanel
+                sim={job.offer.sim}
+                onResolved={(out) => {
+                  setSimOk(out.ok);
+                  setSimScore(out.score);
+                  setSimMisses(out.misses);
+                }}
+              />
+            ) : (
+              <p className="text-sm text-muted">Pas d’épreuve machine sur cette offre — la grille tient encore.</p>
             )}
-            <ul className="mt-4 space-y-2">
-              {BARRIERS.filter((b) => job.barriers.includes(b.id)).map((b) => (
-                <li key={b.id} className="border-t border-border pt-2 text-sm">
-                  <span className="font-medium">{b.label}</span>
-                  <span className="text-muted"> — {b.house}</span>
-                </li>
-              ))}
-            </ul>
-            {user && (profileQ.data?.barriers.length ?? 0) > 0 && (
-              <BarrierFitNote need={profileQ.data!.barriers} cover={job.barriers} />
+            <EvalGridPanel
+              grid={grid}
+              onScore={(s, a) => {
+                setGridScore(s);
+                setGridAnswers(a);
+              }}
+            />
+          </OfferPanel>
+        )}
+
+        {tab === "maison" && (
+          <OfferPanel tab="maison">
+            <WeekRing slices={job.offer.week} />
+            <CareerMap nodes={job.offer.career} />
+            {job.offer.workplace && <WorkplaceTour workplace={job.offer.workplace} />}
+            <Voices voices={job.offer.voices} />
+            <ToolsRack tools={job.offer.tools} />
+            <CultureRadar culture={culture} />
+            <CultureSim slug={job.company.slug} culture={culture} />
+          </OfferPanel>
+        )}
+
+        {tab === "former" && (
+          <OfferPanel tab="former">
+            {preformQ.data && (
+              <SkillPath missing={preformQ.data.missing} path={preformQ.data.path} totalMinutes={preformQ.data.totalMinutes} />
             )}
-            <p className="mt-3 text-sm">
-              <Link to="/me" className="text-primary">Cocher vos freins au profil</Link>
-              {" · "}
-              <Link to="/viviers/$slug" params={{ slug: "rsa-freins" }} className="text-primary">Vivier RSA</Link>
-            </p>
-          </section>
+            {(driveQ.data ?? []).length > 0 && (
+              <section>
+                <h2 className="font-serif text-2xl">
+                  <Term k="drive">GeniusDrive</Term> de l’offre
+                </h2>
+                <ul className="mt-4 grid gap-3">
+                  {(driveQ.data ?? []).map((d) => (
+                    <li key={d.id}>
+                      <DriveCard asset={d} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {(job.barriers.length > 0 || job.tryBuy) && (
+              <section className="rounded-xl border border-border bg-surface p-5">
+                <p className="text-xs tracking-wide text-primary uppercase">Freins périphériques</p>
+                <h2 className="mt-1 font-serif text-2xl">Ce que la maison lève — écrit</h2>
+                {job.tryBuy && (
+                  <p className="mt-3 text-sm leading-relaxed">
+                    <Term k="trybuy">Try & Buy</Term> {job.tryBuy.days} jours · {job.tryBuy.dailyPay} € / jour · {job.tryBuy.supervisor}. {job.tryBuy.startNote}
+                  </p>
+                )}
+                <ul className="mt-4 space-y-2">
+                  {BARRIERS.filter((b) => job.barriers.includes(b.id)).map((b) => (
+                    <li key={b.id} className="border-t border-border pt-2 text-sm">
+                      <span className="font-medium">{b.label}</span>
+                      <span className="text-muted"> — {b.house}</span>
+                    </li>
+                  ))}
+                </ul>
+                {user && (profileQ.data?.barriers.length ?? 0) > 0 && (
+                  <BarrierFitNote need={profileQ.data!.barriers} cover={job.barriers} />
+                )}
+                <p className="mt-3 text-sm">
+                  <Link to="/me" className="text-primary">Cocher vos freins au profil</Link>
+                  {" · "}
+                  <Link to="/viviers/$slug" params={{ slug: "rsa-freins" }} className="text-primary">Vivier RSA</Link>
+                </p>
+              </section>
+            )}
+            {job.slots.length > 0 && (
+              <section className="rounded-xl border border-border bg-surface p-5">
+                <p className="text-xs tracking-wide text-primary uppercase">Senior fractional</p>
+                <h2 className="mt-1 font-serif text-2xl">Créneaux — un jour, une maison</h2>
+                <ul className="mt-3 space-y-2 text-sm">
+                  {job.slots.map((s, i) => (
+                    <li key={`${s.weekday}-${s.startHour}-${i}`}>
+                      {WEEKDAYS[s.weekday]} {s.startHour}h–{s.startHour + s.hours}h · {s.city} · {s.seats} place{s.seats > 1 ? "s" : ""}
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/me/creneaux" className="mt-3 inline-block text-sm font-medium text-primary">
+                  Tenir un créneau
+                </Link>
+              </section>
+            )}
+            <InterviewPrep jobId={job.id} signedIn={Boolean(user)} />
+          </OfferPanel>
         )}
 
-        {job.slots.length > 0 && (
-          <section className="mt-10 rounded-xl border border-border bg-surface p-5">
-            <p className="text-xs tracking-wide text-primary uppercase">Senior fractional</p>
-            <h2 className="mt-1 font-serif text-2xl">Créneaux — un jour, une maison</h2>
-            <ul className="mt-3 space-y-2 text-sm">
-              {job.slots.map((s, i) => (
-                <li key={`${s.weekday}-${s.startHour}-${i}`}>
-                  {WEEKDAYS[s.weekday]} {s.startHour}h–{s.startHour + s.hours}h · {s.city} · {s.seats} place{s.seats > 1 ? "s" : ""}
-                </li>
-              ))}
-            </ul>
-            <Link to="/me/creneaux" className="mt-3 inline-block text-sm font-medium text-primary">
-              Tenir un créneau
-            </Link>
-          </section>
-        )}
-
-        <div className="mt-10 space-y-10">
-          <EvalGridPanel
-            grid={grid}
-            onScore={(s, a) => {
-              setGridScore(s);
-              setGridAnswers(a);
-            }}
-          />
-          <CultureRadar culture={culture} />
-          <CultureSim slug={job.company.slug} culture={culture} />
-          <InterviewPrep jobId={job.id} signedIn={Boolean(user)} />
-          <section>
-            <h2 className="font-serif text-2xl">Lecture complète</h2>
-            <div className="mt-3 max-w-prose space-y-3 text-sm leading-relaxed text-ink">
-              {longform.split("\n\n").map((p) => (
-                <p key={p.slice(0, 40)}>{p}</p>
-              ))}
-            </div>
-          </section>
-          <SeoFaq items={faqs} />
-          {relatedGuides.length > 0 && (
+        {tab === "agir" && (
+          <OfferPanel tab="agir">
             <section>
-              <h2 className="font-serif text-2xl">Guides</h2>
-              <ul className="mt-3 space-y-2">
-                {relatedGuides.map((p) => (
-                  <li key={p.slug}>
-                    <Link to="/guides/$slug" params={{ slug: p.slug }} className="text-sm font-medium text-primary">
-                      {p.title}
-                    </Link>
-                  </li>
+              <h2 className="font-serif text-2xl">Lecture complète</h2>
+              <div className="mt-3 max-w-prose space-y-3 text-sm leading-relaxed text-ink">
+                {longform.split("\n\n").map((p) => (
+                  <p key={p.slice(0, 40)}>{p}</p>
                 ))}
-              </ul>
+              </div>
             </section>
-          )}
-          <p className="text-xs text-subtle">
-            Version machine :{" "}
-            <a className="text-primary" href={`/feed/${job.slug}.md`}>
-              Markdown
-            </a>
-            {" · "}
-            <a className="text-primary" href="/feed.json">
-              feed.json
-            </a>
-            {" · "}
-            <a className="text-primary" href="/llms.txt">
-              llms.txt
-            </a>
-          </p>
-        </div>
+            <SeoFaq items={faqs} />
+            {relatedGuides.length > 0 && (
+              <section>
+                <h2 className="font-serif text-2xl">Guides</h2>
+                <ul className="mt-3 space-y-2">
+                  {relatedGuides.map((p) => (
+                    <li key={p.slug}>
+                      <Link to="/guides/$slug" params={{ slug: p.slug }} className="text-sm font-medium text-primary">
+                        {p.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            <div className="lg:hidden">
+              <ProcessTimeline steps={job.process} decisionDays={job.decisionDays} />
+            </div>
+            <p className="text-xs text-subtle">
+              Version machine :{" "}
+              <a className="text-primary" href={`/feed/${job.slug}.md`}>Markdown</a>
+              {" · "}
+              <a className="text-primary" href="/feed.json">feed.json</a>
+              {" · "}
+              <a className="text-primary" href="/llms.txt">llms.txt</a>
+            </p>
+          </OfferPanel>
+        )}
 
         {explain && (
           <aside className="mt-8 rounded-xl border border-border bg-surface p-5">
@@ -462,7 +511,7 @@ function JobPage() {
       <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-xl border border-border bg-surface p-5 shadow-soft">
           <Link to="/companies/$slug" params={{ slug: job.company.slug }} className="flex items-center gap-3">
-            <CompanyMark name={job.company.name} />
+            <CompanyMark name={job.company.name} slug={job.company.slug} />
             <div>
               <div className="font-medium">{job.company.name}</div>
               <div className="text-xs text-muted">{job.companyFull.tagline}</div>

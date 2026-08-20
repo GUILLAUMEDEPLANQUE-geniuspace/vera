@@ -1,5 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { AddCategoryCard } from "@/components/add-category";
 import { Term, TermLegend } from "@/components/term";
+import { catTone } from "@/lib/marks";
 import { listHubArticles, listHubCategories } from "@/lib/hub-fn";
 import { BRAND_HOST } from "@/lib/origin";
 import { itemListJsonLd, ldScript } from "@/lib/seo";
@@ -36,7 +39,21 @@ export const Route = createFileRoute("/savoirs/")({
 });
 
 function SavoirsIndex() {
-  const { cats, arts } = Route.useLoaderData();
+  const packed = Route.useLoaderData();
+  const catsQ = useQuery({
+    queryKey: ["hub-cats"],
+    queryFn: () => listHubCategories(),
+    initialData: packed.cats,
+  });
+  const artsQ = useQuery({
+    queryKey: ["hub-arts"],
+    queryFn: () => listHubArticles({ data: {} }),
+    initialData: packed.arts,
+  });
+  const cats = catsQ.data ?? packed.cats;
+  const arts = artsQ.data ?? packed.arts;
+  const featured = arts[0];
+  const rest = arts.slice(1);
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <nav className="text-xs text-muted">
@@ -61,31 +78,64 @@ function SavoirsIndex() {
       </div>
 
       <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {cats.map((c) => (
-          <li key={c.slug}>
-            <Link
-              to="/savoirs/$cat"
-              params={{ cat: c.slug }}
-              className="block h-full rounded-xl border border-border bg-surface p-5 hover:border-primary"
-            >
-              <p className="text-xs tracking-wide text-muted uppercase">{c.kicker}</p>
-              <h2 className="mt-2 font-serif text-2xl">{c.title}</h2>
-              <p className="mt-2 text-sm text-muted">{c.description}</p>
-              <p className="mt-3 text-xs text-subtle">
-                {c.articleCount} fiche{c.articleCount > 1 ? "s" : ""}
-              </p>
-            </Link>
-          </li>
-        ))}
+        {cats.map((c) => {
+          const tone = catTone(c.slug);
+          return (
+            <li key={c.slug}>
+              <Link
+                to="/savoirs/$cat"
+                params={{ cat: c.slug }}
+                className="block h-full overflow-hidden rounded-2xl border border-border bg-surface hover:border-primary"
+              >
+                <span className="block h-1.5" style={{ background: tone.bg }} />
+                <span className="block p-5">
+                  <p className="text-xs tracking-wide uppercase" style={{ color: tone.bg }}>
+                    {c.kicker}
+                  </p>
+                  <h2 className="mt-2 font-serif text-2xl">{c.title}</h2>
+                  <p className="mt-2 text-sm text-muted">{c.description}</p>
+                  <p className="mt-3 text-xs text-subtle">
+                    {c.articleCount} fiche{c.articleCount > 1 ? "s" : ""}
+                  </p>
+                </span>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
 
-      <h2 className="mt-16 font-serif text-3xl">Fiches récentes — Proof Score d’abord</h2>
-      <ul className="mt-6 space-y-6">
-        {arts.map((a) => (
-          <li key={a.slug} className="border-t border-border pt-5">
+      <div className="mt-10">
+        <AddCategoryCard />
+      </div>
+
+      {featured && (
+        <article className="mt-16 overflow-hidden rounded-2xl border border-border bg-surface">
+          <div className="h-2" style={{ background: catTone(featured.catSlug).bg }} />
+          <div className="p-6 sm:p-8">
             <p className="text-xs tracking-wide text-muted uppercase">
-              {a.catTitle} · {a.minutes} min · <Term k="proof">Proof Score</Term> {a.proofScore} · {a.replyCount}{" "}
-              réponse{a.replyCount > 1 ? "s" : ""}
+              À la une · {featured.catTitle} · {featured.minutes} min · Proof {featured.proofScore}
+            </p>
+            <Link
+              to="/savoirs/$cat/$slug"
+              params={{ cat: featured.catSlug, slug: featured.slug }}
+              className="mt-2 block font-serif text-3xl hover:text-primary sm:text-4xl"
+            >
+              {featured.title}
+            </Link>
+            <p className="mt-3 max-w-2xl text-muted">{featured.excerpt}</p>
+            <p className="mt-3 text-xs text-subtle">
+              {featured.authorName} · {featured.authorRole === "house" ? "maison" : featured.authorRole === "candidate" ? "candidat" : "Vera"}
+            </p>
+          </div>
+        </article>
+      )}
+
+      <h2 className="mt-16 font-serif text-3xl">Fil — maisons et candidats</h2>
+      <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+        {rest.map((a) => (
+          <li key={a.slug} className="rounded-2xl border border-border bg-surface p-5">
+            <p className="text-xs tracking-wide uppercase" style={{ color: catTone(a.catSlug).bg }}>
+              {a.catTitle} · {a.minutes} min · Proof {a.proofScore}
             </p>
             <Link
               to="/savoirs/$cat/$slug"
@@ -94,10 +144,9 @@ function SavoirsIndex() {
             >
               {a.title}
             </Link>
-            <p className="mt-1 max-w-2xl text-sm text-muted">{a.excerpt}</p>
+            <p className="mt-1 text-sm text-muted">{a.excerpt}</p>
             <p className="mt-2 text-xs text-subtle">
-              {a.authorName} · {a.authorRole === "house" ? "maison" : a.authorRole === "candidate" ? "candidat" : "Vera"} ·{" "}
-              {a.skillTags.join(" · ")}
+              {a.authorName} · {a.authorRole === "house" ? "maison" : a.authorRole === "candidate" ? "candidat" : "Vera"}
             </p>
           </li>
         ))}

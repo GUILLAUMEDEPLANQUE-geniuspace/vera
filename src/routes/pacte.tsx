@@ -68,7 +68,7 @@ function PactePage() {
                   className="flex items-center gap-4 px-4 py-4 sm:px-5"
                 >
                   <span className="w-6 font-serif text-xl tabular-nums text-subtle">{i + 1}</span>
-                  <CompanyMark name={h.name} className="size-10" />
+                  <CompanyMark name={h.name} slug={h.slug} className="size-11" />
                   <div className="min-w-0 flex-1">
                     <div className="font-medium">{h.name}</div>
                     <p className="text-xs text-muted">

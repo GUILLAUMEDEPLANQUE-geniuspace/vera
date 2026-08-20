@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { WeekSlice } from "@/lib/offer";
 import { cn } from "@/lib/utils";
 
-const TONES = ["var(--color-primary)", "var(--color-good)", "var(--color-warn)", "var(--color-muted)"];
+import { CHART } from "@/lib/marks";
 
 export function WeekRing({ slices }: { slices: WeekSlice[] }) {
   const [active, setActive] = useState(slices[0]?.id);
@@ -38,7 +38,7 @@ export function WeekRing({ slices }: { slices: WeekSlice[] }) {
                 cy="50"
                 r={r}
                 fill="none"
-                stroke={TONES[i % TONES.length]}
+                stroke={CHART[i % CHART.length]}
                 strokeWidth={s.id === current.id ? 12 : 8}
                 strokeDasharray={dash}
                 strokeDashoffset={offset}
@@ -67,7 +67,7 @@ export function WeekRing({ slices }: { slices: WeekSlice[] }) {
               >
                 <span
                   className="mt-1 size-2.5 shrink-0 rounded-full"
-                  style={{ background: TONES[i % TONES.length] }}
+                  style={{ background: CHART[i % CHART.length] }}
                 />
                 <span>
                   <span className="block text-sm font-medium text-ink">

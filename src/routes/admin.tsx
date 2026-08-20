@@ -71,8 +71,15 @@ function AdminInner() {
           L’espace maison gère les offres et les refus. Cette console est pour l’opérateur Vera — pipeline global, journal, factures PPQC.
         </p>
         <p className="mt-4 text-sm text-subtle">
-          Démo lab : la phrase d’opérateur est « l’honneur est public ». Ce n’est pas un modèle de sécurité production.
+          Démo lab : la phrase d’opérateur est <strong className="text-ink">l’honneur est public</strong>. Ce n’est pas
+          un modèle de sécurité production.
         </p>
+        <ol className="mt-4 list-decimal space-y-1 pl-5 text-sm text-muted">
+          <li>Créer un compte (Connexion, email)</li>
+          <li>Revenir ici</li>
+          <li>Saisir la phrase — ou coller en un clic</li>
+          <li>Créer des catégories Savoirs, champs, fiches, Drive</li>
+        </ol>
         <form
           className="mt-6 space-y-3"
           onSubmit={(e) => {
@@ -84,7 +91,16 @@ function AdminInner() {
             <Label>Phrase d’opérateur</Label>
             <Input value={phrase} onChange={(e) => setPhrase(e.target.value)} placeholder="l’honneur est public" />
           </div>
-          <Button type="submit" disabled={claim.isPending}>Entrer</Button>
+          <div className="flex flex-wrap gap-2">
+            <Button type="submit" disabled={claim.isPending}>Entrer</Button>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setPhrase("l’honneur est public")}
+            >
+              Coller la phrase démo
+            </Button>
+          </div>
         </form>
         <p className="mt-6 text-sm">
           <Link to="/me/maison" className="text-primary">Espace maison</Link>
