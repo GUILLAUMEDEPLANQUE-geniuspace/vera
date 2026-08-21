@@ -27,7 +27,7 @@ export function EvalGridPanel({
       <h2 className="mt-2 font-serif text-2xl">{grid.title}</h2>
       <p className="mt-2 text-sm text-muted">{grid.intro}</p>
       <p className="mt-3 font-serif text-3xl tabular-nums text-primary">{result.score}/100</p>
-      <p className="text-xs text-muted">Score live. Les maisons le voient avec le brief.</p>
+      <p className="text-xs text-muted">Score live. Les entreprises le voient avec le brief.</p>
       <div className="mt-5 space-y-5">
         {grid.fields.map((f) => (
           <fieldset key={f.id}>

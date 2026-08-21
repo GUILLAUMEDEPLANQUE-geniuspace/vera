@@ -68,7 +68,7 @@ function AdminInner() {
         <p className="text-xs tracking-wide text-primary uppercase">Console</p>
         <h1 className="mt-2 font-serif text-4xl">Pas ouverte à tout le monde</h1>
         <p className="mt-3 text-muted">
-          L’espace maison gère les offres et les refus. Cette console est pour l’opérateur Vera — pipeline global, journal, factures PPQC.
+          L’espace entreprise gère les offres et les refus. Cette console est pour l’opérateur Vera — pipeline global, journal, factures PPQC.
         </p>
         <p className="mt-4 text-sm text-subtle">
           Démo lab : la phrase d’opérateur est <strong className="text-ink">l’honneur est public</strong>. Ce n’est pas
@@ -78,7 +78,7 @@ function AdminInner() {
           <li>Créer un compte (Connexion, email)</li>
           <li>Revenir ici</li>
           <li>Saisir la phrase — ou coller en un clic</li>
-          <li>Créer des catégories Savoirs, champs, fiches, Drive</li>
+          <li>Créer des catégories de fiches, champs, fichiers</li>
         </ol>
         <form
           className="mt-6 space-y-3"
@@ -103,7 +103,7 @@ function AdminInner() {
           </div>
         </form>
         <p className="mt-6 text-sm">
-          <Link to="/me/maison" className="text-primary">Espace maison</Link>
+          <Link to="/me/maison" className="text-primary">Espace entreprise</Link>
           {" · "}
           <Link to="/me" className="text-primary">Profil</Link>
         </p>
@@ -116,12 +116,12 @@ function AdminInner() {
       <p className="text-xs tracking-wide text-primary uppercase">Console Vera</p>
       <h1 className="mt-2 font-serif text-4xl">Opérateur</h1>
       <p className="mt-2 max-w-xl text-muted">
-        Pipeline, journal, factures <Term k="ppqc">PPQC</Term>, catégories <Term k="savoirs">Savoirs</Term>,{" "}
-        <Term k="drive">Drive</Term>.
+        Pipeline, journal, factures <Term k="ppqc">PPQC</Term>, catégories <Term k="savoirs">Fiches</Term>,{" "}
+        <Term k="drive">Fichiers</Term>.
       </p>
       <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
         <Stat k="Offres" v={p?.jobs} />
-        <Stat k="Maisons" v={p?.companies} />
+        <Stat k="Entreprises" v={p?.companies} />
         <Stat k="Candidatures" v={p?.applications} />
         <Stat k="Qualifiés" v={p?.qualified} />
         <Stat k="Notes" v={p?.articles} />
@@ -129,7 +129,7 @@ function AdminInner() {
         <Stat k="PPQC payé" v={p?.invoicesPaid} />
       </dl>
       <div className="mt-6 flex flex-wrap gap-3 text-sm">
-        <Link to="/me/maison" className="text-primary">Espace maison</Link>
+        <Link to="/me/maison" className="text-primary">Espace entreprise</Link>
         <Link to="/ppqc" className="text-primary">PPQC</Link>
         <Link to="/tension" className="text-primary">Tension</Link>
         <Link to="/post" className="text-primary">Publier</Link>

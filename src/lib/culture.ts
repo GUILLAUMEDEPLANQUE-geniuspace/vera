@@ -39,7 +39,7 @@ export const HOUSE_CULTURE: Record<string, CultureProfile> = {
     weekStyle: "Remote Europe. On-call rare, payé.",
     intercultural: 91,
     essay:
-      "Sable est une maison écrite. Lisbonne est un fuseau, pas un siège. Un Français, un Portugais et un Allemand peuvent tenir une RFC sans se voir. Ceux qui ont besoin de « sentir l’équipe » s’ennuient.",
+      "Sable est une entreprise écrite. Lisbonne est un fuseau, pas un siège. Un Français, un Portugais et un Allemand peuvent tenir une RFC sans se voir. Ceux qui ont besoin de « sentir l’équipe » s’ennuient.",
   },
   mireille: {
     axes: { directness: 64, hierarchy: 58, tempo: 48, writing: 66, risk: 38 },
@@ -80,11 +80,11 @@ export const HOUSE_CULTURE: Record<string, CultureProfile> = {
   "maison-vale": {
     axes: { directness: 48, hierarchy: 82, tempo: 50, writing: 40, risk: 22 },
     languages: ["Français", "Italien", "Anglais"],
-    management: "Maison familiale. Les saisons commandent. Le digital rentre après dix ans d’agences.",
+    management: "Entreprise familiale. Les saisons commandent. Le digital rentre après dix ans d’agences.",
     weekStyle: "Présentiel Paris. Semaines de collection protégées.",
     intercultural: 58,
     essay:
-      "Vale n’est pas un scale-up. On y parle matière et saison. Un profil anglo-saxon « radical candor » se casse les dents. Un Italien de la maison, non. Le mépris du savoir-faire est le seul vrai interdit.",
+      "Vale n’est pas un scale-up. On y parle matière et saison. Un profil anglo-saxon « radical candor » se casse les dents. Un Italien de l’entreprise, non. Le mépris du savoir-faire est le seul vrai interdit.",
   },
   northline: {
     axes: { directness: 75, hierarchy: 48, tempo: 80, writing: 58, risk: 50 },

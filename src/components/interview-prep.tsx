@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { interviewPrep } from "@/lib/ai-fn";
 
 const PRESETS = [
-  "Prépare-moi la question d’ouverture, calée sur le style de cette maison.",
+  "Prépare-moi la question d’ouverture, calée sur le style de cette entreprise.",
   "Quel piège interculturel dois-je éviter ici ?",
   "Aide-moi à raconter un échec sans me saborder, dans cette culture.",
 ];
@@ -26,7 +26,7 @@ export function InterviewPrep({ jobId, signedIn }: { jobId: number; signedIn: bo
   return (
     <section id="prep" className="rounded-xl border border-border bg-surface p-5 sm:p-6">
       <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">Entretien</p>
-      <h2 className="mt-2 font-serif text-2xl">Préparation adaptée à la maison</h2>
+      <h2 className="mt-2 font-serif text-2xl">Préparation adaptée à l’entreprise</h2>
       <p className="mt-2 text-sm text-muted">
         Lettre, piège interculturel, réponse type. L’assistant ne tourne pas tout seul — vous demandez.
       </p>

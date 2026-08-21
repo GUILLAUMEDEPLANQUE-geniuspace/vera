@@ -139,7 +139,7 @@ function GuidePage() {
                   )}
                   {r.companySlug && (
                     <Link to="/companies/$slug" params={{ slug: r.companySlug }} className="text-primary">
-                      Maison
+                      Entreprise
                     </Link>
                   )}
                   {r.citySlug && (
@@ -167,7 +167,7 @@ function GuidePage() {
 
       {pillar.relatedCompanies.length > 0 && (
         <section className="mt-10">
-          <h2 className="font-serif text-2xl">Maisons</h2>
+          <h2 className="font-serif text-2xl">Entreprises</h2>
           <ul className="mt-3 flex flex-wrap gap-3 text-sm">
             {pillar.relatedCompanies.map((slug) => (
               <li key={slug}>

@@ -105,14 +105,30 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
-            <Link to="/europe" className="hover:text-ink">Europe</Link>
-            <Link to="/preuve" className="hover:text-ink">{en ? "Trial" : "Épreuve"}</Link>
-            <Link to="/passport" className="hover:text-ink">{en ? "Passport" : "Passeport"}</Link>
-            <Link to="/marches" className="hover:text-ink">{en ? "Markets" : "Marchés"}</Link>
-            <Link to="/apprendre" className="hover:text-ink">{en ? "Learn" : "Apprendre"}</Link>
-            <Link to="/pacte" className="hover:text-ink">Pacte</Link>
-            <Link to="/jobs" className="hover:text-ink">{en ? "Jobs" : "Emplois"}</Link>
-            <Link to="/me" className="hover:text-ink">{en ? "My space" : "Mon espace"}</Link>
+            <Link to="/europe" className="hover:text-ink">
+              Europe
+            </Link>
+            <Link to="/preuve" className="hover:text-ink">
+              {en ? "Trial" : "Épreuve"}
+            </Link>
+            <Link to="/passport" className="hover:text-ink">
+              {en ? "Passport" : "Passeport"}
+            </Link>
+            <Link to="/marches" className="hover:text-ink">
+              {en ? "Markets" : "Marchés"}
+            </Link>
+            <Link to="/apprendre" className="hover:text-ink">
+              {en ? "Learn" : "Apprendre"}
+            </Link>
+            <Link to="/pacte" className="hover:text-ink">
+              Pacte
+            </Link>
+            <Link to="/jobs" className="hover:text-ink">
+              {en ? "Jobs" : "Emplois"}
+            </Link>
+            <Link to="/me" className="hover:text-ink">
+              {en ? "My space" : "Mon espace"}
+            </Link>
           </div>
         </div>
       </footer>

@@ -73,11 +73,11 @@ export const Route = createFileRoute("/journal/$slug")({
         <p className="mt-10 text-sm">
           {a.authorKind === "company" ? (
             <Link to="/companies/$slug" params={{ slug: a.authorSlug }} className="text-primary">
-              Maison {a.authorName}
+              Entreprise {a.authorName}
             </Link>
           ) : (
             <Link to="/talents/$slug" params={{ slug: a.authorSlug }} className="text-primary">
-              Carnet de {a.authorName}
+              Preuves de {a.authorName}
             </Link>
           )}
         </p>

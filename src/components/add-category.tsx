@@ -77,7 +77,7 @@ function CategoryForm() {
       }}
     >
       <p className="text-xs tracking-wide text-primary uppercase">Opérateur</p>
-      <h2 className="mt-1 font-serif text-2xl">Nouvelle catégorie Savoirs</h2>
+      <h2 className="mt-1 font-serif text-2xl">Nouvelle catégorie de fiches</h2>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div className="space-y-1.5">
           <Label>Slug</Label>

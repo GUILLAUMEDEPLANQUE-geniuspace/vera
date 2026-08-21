@@ -129,7 +129,7 @@ function BriefInner({ name }: { name: string }) {
         Le <Term k="brief">Brief</Term>
       </h1>
       <p className="mt-3 max-w-2xl text-muted">
-        Une page. Ce que {name} a livré, ce qu’il refuse, ce qu’il veut. C’est ce que les maisons lisent — pas un CV
+        Une page. Ce que {name} a livré, ce qu’il refuse, ce qu’il veut. C’est ce que les entreprises lisent — pas un CV
         chronologique.
       </p>
       <div className="mt-4 flex flex-wrap gap-2 text-sm">

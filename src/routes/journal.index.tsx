@@ -10,11 +10,11 @@ export const Route = createFileRoute("/journal/")({
   loader: () => listArticles(),
   head: ({ loaderData }) => ({
     meta: [
-      { title: "Journal — blogs maisons et carnets candidats | Vera" },
+      { title: "Journal — blogs entreprises et carnets candidats | Vera" },
       {
         name: "description",
         content:
-          "Maisons et candidats publient des articles, notes et fichiers. Preuve de compétence, pas un LinkedIn.",
+          "Entreprises et candidats publient des articles, notes et fichiers. Preuve de compétence, pas un LinkedIn.",
       },
       { name: "robots", content: "index,follow" },
     ],
@@ -35,21 +35,21 @@ export const Route = createFileRoute("/journal/")({
       () => (who === "all" ? arts : arts.filter((a) => a.authorKind === who)),
       [arts, who],
     );
-    const houses = arts.filter((a) => a.authorKind === "company").length;
+    const companies = arts.filter((a) => a.authorKind === "company").length;
     const people = arts.filter((a) => a.authorKind === "candidate").length;
     return (
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
         <p className="text-xs tracking-wide text-primary uppercase">Journal</p>
-        <h1 className="mt-2 font-serif text-4xl sm:text-5xl">Blogs des maisons. Carnets des candidats.</h1>
+        <h1 className="mt-2 font-serif text-4xl sm:text-5xl">Blogs des entreprises. Preuves des candidats.</h1>
         <p className="mt-3 text-lg text-muted">
-          Les maisons écrivent le geste. Les candidats tiennent un carnet. Les fichiers sont des schémas, pas des
+          Les entreprises écrivent le geste. Les candidats tiennent leurs preuves. Les fichiers sont des schémas, pas des
           plaquettes.
         </p>
         <div className="mt-8 flex gap-1 rounded-full border border-border bg-surface p-1">
           {(
             [
               { id: "all" as const, label: `Tout · ${arts.length}` },
-              { id: "company" as const, label: `Maisons · ${houses}` },
+              { id: "company" as const, label: `Entreprises · ${companies}` },
               { id: "candidate" as const, label: `Candidats · ${people}` },
             ]
           ).map((t) => (
@@ -73,7 +73,7 @@ export const Route = createFileRoute("/journal/")({
                 <CompanyMark name={a.authorName} slug={a.authorSlug} />
                 <div className="min-w-0 flex-1">
                   <p className="text-xs tracking-wide text-muted uppercase">
-                    {a.authorKind === "company" ? "Blog maison" : a.authorKind === "candidate" ? "Carnet candidat" : a.kind}{" "}
+                    {a.authorKind === "company" ? "Blog entreprise" : a.authorKind === "candidate" ? "Preuves candidat" : a.kind}{" "}
                     · {a.authorName} · {a.kind}
                   </p>
                   <Link to="/journal/$slug" params={{ slug: a.slug }} className="mt-1 block font-serif text-2xl hover:text-primary">

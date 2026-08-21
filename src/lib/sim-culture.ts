@@ -94,7 +94,7 @@ export function cultureSim(slug: string, culture: CultureProfile): { brief: stri
               id: "a",
               text: "Vous prenez le call. L’humain d’abord.",
               ok: false,
-              why: "Mercredi est mort. L’humain, ici, écrit. Vous venez de casser la maison.",
+              why: "Mercredi est mort. L’humain, ici, écrit. Vous venez de casser l’entreprise.",
             },
             {
               id: "b",

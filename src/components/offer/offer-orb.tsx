@@ -2,7 +2,7 @@ import { BookOpen, Building2, GraduationCap, PenLine, Zap } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export type OfferTabId = "lire" | "epreuve" | "maison" | "former" | "agir";
+export type OfferTabId = "lire" | "epreuve" | "entreprise" | "former" | "agir";
 
 export const OFFER_TABS: {
   id: OfferTabId;
@@ -12,8 +12,8 @@ export const OFFER_TABS: {
 }[] = [
   { id: "lire", label: "Lire", hint: "Poste, salaire, honnêteté", icon: BookOpen },
   { id: "epreuve", label: "Épreuve", hint: "Simulation et grille", icon: Zap },
-  { id: "maison", label: "Maison", hint: "Culture, semaine, outils", icon: Building2 },
-  { id: "former", label: "Former", hint: "Savoirs, Drive, freins", icon: GraduationCap },
+  { id: "entreprise", label: "Entreprise", hint: "Culture, semaine, outils", icon: Building2 },
+  { id: "former", label: "Former", hint: "Fiches, fichiers, freins", icon: GraduationCap },
   { id: "agir", label: "Agir", hint: "Postuler et pacte", icon: PenLine },
 ];
 

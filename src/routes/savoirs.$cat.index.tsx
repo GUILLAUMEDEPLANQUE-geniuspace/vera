@@ -14,11 +14,11 @@ export const Route = createFileRoute("/savoirs/$cat/")({
     return { cat, arts };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Savoirs | Vera" }] };
+    if (!loaderData) return { meta: [{ title: "Fiches | Vera" }] };
     const { cat } = loaderData;
     return {
       meta: [
-        { title: cat.seoTitle ?? `${cat.title} | Vera Savoirs` },
+        { title: cat.seoTitle ?? `${cat.title} | Vera` },
         { name: "description", content: (cat.seoDescription ?? cat.description).slice(0, 170) },
         { name: "robots", content: "index,follow" },
       ],
@@ -38,7 +38,7 @@ function CatPage() {
         </Link>
         {" · "}
         <Link to="/savoirs" className="hover:text-ink">
-          Savoirs
+          Fiches
         </Link>
         {" · "}
         {cat.title}
@@ -55,7 +55,7 @@ function CatPage() {
         {arts.map((a) => (
           <li key={a.slug}>
             <p className="text-xs tracking-wide text-muted uppercase">
-              {a.minutes} min · <Term k="proof">Proof Score</Term> {a.proofScore}
+              {a.minutes} min · <Term k="proof">Score de preuve</Term> {a.proofScore}
             </p>
             <Link
               to="/savoirs/$cat/$slug"

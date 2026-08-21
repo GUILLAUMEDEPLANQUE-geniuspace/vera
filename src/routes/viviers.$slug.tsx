@@ -19,7 +19,7 @@ export const Route = createFileRoute("/viviers/$slug")({
   },
   head: ({ loaderData, params }) => {
     const v = loaderData?.vivier ?? vivierOf(params.slug);
-    if (!v) return { meta: [{ title: "Vivier | Vera" }] };
+    if (!v) return { meta: [{ title: "Profil | Vera" }] };
     const url = `${BRAND_HOST}/viviers/${v.slug}`;
     return {
       meta: [
@@ -53,8 +53,8 @@ export const Route = createFileRoute("/viviers/$slug")({
     if (!vivier) {
       return (
         <div className="mx-auto max-w-3xl px-4 py-24 text-center">
-          <h1 className="font-serif text-4xl">Vivier introuvable</h1>
-          <Link to="/viviers" className="mt-4 inline-block text-primary">Tous les viviers</Link>
+          <h1 className="font-serif text-4xl">Profil introuvable</h1>
+          <Link to="/viviers" className="mt-4 inline-block text-primary">Tous les profils</Link>
         </div>
       );
     }
@@ -64,7 +64,7 @@ export const Route = createFileRoute("/viviers/$slug")({
         <nav className="text-xs text-muted">
           <Link to="/" className="hover:text-ink">Vera</Link>
           {" · "}
-          <Link to="/viviers" className="hover:text-ink">Viviers</Link>
+          <Link to="/viviers" className="hover:text-ink">Profils</Link>
           {` · ${vivier.name}`}
         </nav>
         <p className="mt-4 text-xs tracking-wide text-primary uppercase">{vivier.kicker}</p>
@@ -77,7 +77,7 @@ export const Route = createFileRoute("/viviers/$slug")({
           <section className="mt-10">
             <h2 className="font-serif text-2xl">Matrice des freins — écrite</h2>
             <p className="mt-2 text-sm text-muted">
-              Candidat coche. Maison lève. Try & Buy 5 jours payés, pas une PMSMP gratuite.
+              Candidat coche. Entreprise lève. Try & Buy 5 jours payés, pas une PMSMP gratuite.
             </p>
             <BarrierMatrix />
             {tryBuyJobs.length > 0 && (
@@ -100,9 +100,9 @@ export const Route = createFileRoute("/viviers/$slug")({
 
         {vivier.pool === "senior-fractional" && (
           <section className="mt-10">
-            <h2 className="font-serif text-2xl">Calendrier multi-maisons</h2>
+            <h2 className="font-serif text-2xl">Calendrier plusieurs entreprises</h2>
             <p className="mt-2 text-sm text-muted">
-              Un jour, une maison. Mardi Fos et jeudi Lyon, oui. Deux mardis, non.
+              Un jour, une entreprise. Mardi Fos et jeudi Lyon, oui. Deux mardis, non.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {slots.map((s) => (

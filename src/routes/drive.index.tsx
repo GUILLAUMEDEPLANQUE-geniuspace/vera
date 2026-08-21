@@ -8,7 +8,7 @@ export const Route = createFileRoute("/drive/")({
   loader: () => listDriveAssets({ data: {} }),
   head: () => ({
     meta: [
-      { title: "GeniusDrive — fichiers et visites liés aux offres | Vera" },
+      { title: "Fichiers — visites et modes opératoires liés aux offres | Vera" },
       {
         name: "description",
         content:
@@ -32,10 +32,10 @@ function DriveIndex() {
         Drive
       </nav>
       <h1 className="mt-3 font-serif text-4xl sm:text-5xl">
-        <Term k="drive">GeniusDrive</Term>
+        <Term k="drive">Fichiers</Term>
       </h1>
       <p className="mt-3 text-lg text-muted">
-        Fichiers et visites liés aux offres et aux <Term k="savoirs">Savoirs</Term>. Lecteur intégré, vidéo découpée
+        Fichiers et visites liés aux offres et aux <Term k="savoirs">fiches</Term>. Lecteur intégré, vidéo découpée
         en chunks, transcript de preuve. Ce n’est pas un cloud.
       </p>
       <div className="mt-3">

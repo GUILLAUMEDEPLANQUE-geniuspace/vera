@@ -21,23 +21,23 @@ function Gate() {
   const { user, isPending } = useCurrentUserState();
   if (isPending) return <div className="mx-auto max-w-3xl px-4 py-16"><div className="h-64 animate-pulse rounded-xl bg-paper" /></div>;
   if (!user) return <RedirectToSignIn />;
-  return <Maison name={user.displayName ?? user.primaryEmail ?? "Maison"} />;
+  return <Entreprise name={user.displayName ?? user.primaryEmail ?? "Entreprise"} />;
 }
 
-function Maison({ name }: { name: string }) {
+function Entreprise({ name }: { name: string }) {
   const qc = useQueryClient();
   const jobs = useQuery({ queryKey: ["my-jobs"], queryFn: () => myPostedJobs() });
   const apps = useQuery({ queryKey: ["my-apps"], queryFn: () => myHouseApplicants() });
   const arts = useQuery({ queryKey: ["my-arts"], queryFn: () => listMyArticles() });
   const inv = useQuery({ queryKey: ["invoices"], queryFn: () => listMyInvoices() });
-  const houses = useQuery({ queryKey: ["houses-pick"], queryFn: () => listCompanies() });
+  const companies = useQuery({ queryKey: ["companies-pick"], queryFn: () => listCompanies() });
   const [reason, setReason] = useState("grid-low");
   const [note, setNote] = useState("");
   const [houseSlug, setHouseSlug] = useState("");
   const claim = useMutation({
     mutationFn: () => claimRole({ data: { role: "house", houseSlug } }),
     onSuccess: async () => {
-      toast.success("Maison liée");
+      toast.success("Entreprise liée");
       await qc.invalidateQueries({ queryKey: ["my-jobs"] });
       await qc.invalidateQueries({ queryKey: ["my-apps"] });
     },
@@ -101,7 +101,7 @@ function Maison({ name }: { name: string }) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <p className="text-xs tracking-wide text-primary uppercase">Maison</p>
+      <p className="text-xs tracking-wide text-primary uppercase">Entreprise</p>
       <h1 className="mt-2 font-serif text-4xl">Espace recruteur</h1>
       <p className="mt-2 text-muted">
         Offres, candidats qualifiés (PPQC), journal, refus avec diagnostic. Publication{" "}
@@ -113,13 +113,13 @@ function Maison({ name }: { name: string }) {
           value={houseSlug}
           onChange={(e) => setHouseSlug(e.target.value)}
         >
-          <option value="">Lier une maison seedée</option>
-          {(houses.data ?? []).map((h) => (
+          <option value="">Lier une entreprise seedée</option>
+          {(companies.data ?? []).map((h) => (
             <option key={h.slug} value={h.slug}>{h.name}</option>
           ))}
         </select>
         <Button type="button" variant="secondary" disabled={!houseSlug || claim.isPending} onClick={() => claim.mutate()}>
-          Recruter pour cette maison
+          Recruter pour cette entreprise
         </Button>
       </div>
 

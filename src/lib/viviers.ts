@@ -12,24 +12,24 @@ export type Vivier = {
 export const VIVIERS: Vivier[] = [
   {
     slug: "seniors-fractional",
-    name: "Seniors fractional",
-    title: "Seniors fractional — 4 à 20 h / semaine, multi-maisons | Vera",
+    name: "Seniors à la journée",
+    title: "Seniors à la journée — 4 à 20 h / semaine, plusieurs entreprises | Vera",
     kicker: "L’expertise volante",
     pool: "senior-fractional",
     description:
       "Créneaux 4–20 h, plusieurs entreprises d’un même bassin. Pas un CDD déguisé. Matching automatique, poste ergonomique, pénibilité aménagée.",
     intro: [
       "TeePy et Les Increvables existent. Ils restent des CVthèques. Vera publie des créneaux : mardi atelier Fos, jeudi revue Lyon, 8 h, tarif écrit, astreinte non.",
-      "Les maisons paient au PPQC : un senior qui a tenu l’épreuve, pas un profil « disponible ». Le binôme inverse (senior technique + junior méthodes) est une offre à part.",
+      "Les entreprises paient au PPQC : un senior qui a tenu l’épreuve, pas un profil « disponible ». Le binôme inverse (senior technique + junior méthodes) est une offre à part.",
     ],
     faqs: [
       {
         q: "C’est de l’intérim senior ?",
-        a: "Non. Créneaux récurrents, tarif publié, plusieurs maisons si le fuseau tient. L’honneur du pacte s’applique.",
+        a: "Non. Créneaux récurrents, tarif publié, plusieurs entreprises si le fuseau tient. L’honneur du pacte s’applique.",
       },
       {
         q: "La pénibilité est-elle aménagée ?",
-        a: "Les offres labellisées le disent : pas de 3×8, pas de charge non assistée, jours figés. Sinon ce n’est pas un vivier senior.",
+        a: "Les offres labellisées le disent : pas de 3×8, pas de charge non assistée, jours figés. Sinon ce n’est pas un bassin senior.",
       },
     ],
   },
@@ -47,7 +47,7 @@ export const VIVIERS: Vivier[] = [
     faqs: [
       {
         q: "Je peux candidater seul ?",
-        a: "Vous levez la main. La maison cherche l’autre moitié. Le score de grille le dit.",
+        a: "Vous levez la main. L’entreprise cherche l’autre moitié. Le score de grille le dit.",
       },
     ],
   },
@@ -58,7 +58,7 @@ export const VIVIERS: Vivier[] = [
     kicker: "La matrice des freins",
     pool: "rsa",
     description:
-      "Immersion PMSMP / Try & Buy 2–5 jours payés. Mobilité, garde d’enfants, chèque équipement : la maison coche, Vera affiche. Pas un slogan insertion.",
+      "Immersion PMSMP / Try & Buy 2–5 jours payés. Mobilité, garde d’enfants, chèque équipement : l’entreprise coche, Vera affiche. Pas un slogan insertion.",
     intro: [
       "Les Conseils départementaux cherchent un opérateur qui lève les freins sans dossier de 40 pages. Vera : une matrice (trajet, garde, outillage, logement transitoire) et un Try & Buy rémunéré.",
       "France Travail a Immersion Facilitée. On le rend lisible : dates, salaire d’immersion, qui encadre, qui paie le chèque chaussures.",
@@ -70,25 +70,25 @@ export const VIVIERS: Vivier[] = [
       },
       {
         q: "Qui paie les freins ?",
-        a: "Maison + département + OPCO selon la ligne. C’est dans l’offre, pas dans un avenant oublié.",
+        a: "Entreprise + département + OPCO selon la ligne. C’est dans l’offre, pas dans un avenant oublié.",
       },
     ],
   },
   {
     slug: "slashers",
-    name: "Slashers / multi-statut",
-    title: "Slashers — emploi partiel + auto-entreprise | Vera",
+    name: "Multi-activité",
+    title: "Multi-activité — emploi partiel + auto-entreprise | Vera",
     kicker: "Le planning tient",
     pool: "slasher",
     description:
       "Mi-temps salarié + jours auto-entrepreneur. Le planning est dans l’offre. Pas un « on s’arrange ».",
     intro: [
-      "Un électricien qui pose le jeudi-vendredi en indépendant et tient un mi-temps Kora. Vera refuse les maisons qui « verront plus tard le statut ».",
+      "Un électricien qui pose le jeudi-vendredi en indépendant et tient un mi-temps Kora. Vera refuse les entreprises qui « verront plus tard le statut ».",
     ],
     faqs: [
       {
         q: "C’est du salariat déguisé ?",
-        a: "Non. Jours écrits, facturation séparée, pacte sur les deux statuts. Si la maison veut 5 jours salariés, ce n’est pas un slasher.",
+        a: "Non. Jours écrits, facturation séparée, pacte sur les deux statuts. Si l’entreprise veut 5 jours salariés, ce n’est pas un slasher.",
       },
     ],
   },

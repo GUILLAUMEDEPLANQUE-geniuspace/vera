@@ -24,6 +24,12 @@ export const HOUSE_PACT: Record<
   "alpes-chantier": { slaDays: 9, honorScore: 87, honorAnswered: 14, honorDue: 16 },
   "midi-soin": { slaDays: 8, honorScore: 89, honorAnswered: 19, honorDue: 21 },
   "finistere-routes": { slaDays: 10, honorScore: 83, honorAnswered: 27, honorDue: 32 },
+  "aether-ops": { slaDays: 7, honorScore: 96, honorAnswered: 28, honorDue: 29 },
+  "nimbus-eu": { slaDays: 7, honorScore: 95, honorAnswered: 41, honorDue: 43 },
+  "willem-soc": { slaDays: 8, honorScore: 92, honorAnswered: 22, honorDue: 24 },
+  "lumen-nordic": { slaDays: 10, honorScore: 90, honorAnswered: 17, honorDue: 19 },
+  "emc-munich": { slaDays: 9, honorScore: 94, honorAnswered: 12, honorDue: 13 },
+  "fhir-berlin": { slaDays: 12, honorScore: 89, honorAnswered: 15, honorDue: 17 },
   ...VOLUME_PACT,
 };
 

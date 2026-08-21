@@ -11,7 +11,7 @@ export const Route = createFileRoute("/pacte")({
 });
 
 function PactePage() {
-  const houses = Route.useLoaderData();
+  const companies = Route.useLoaderData();
 
   return (
     <div>
@@ -24,7 +24,7 @@ function PactePage() {
             ou ça se voit.
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted">
-            Publier sur Vera, c’est signer un <Term k="pacte">Pacte</Term> : une date de réponse, écrite. Si la maison
+            Publier sur Vera, c’est signer un <Term k="pacte">Pacte</Term> : une date de réponse, écrite. Si l’entreprise
             manque, son <Term k="honneur">honneur</Term> baisse. Public. Les professionnels viennent ici pour ça — pas
             pour une autre liste d’offres.
           </p>
@@ -52,7 +52,7 @@ function PactePage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <h2 className="font-serif text-3xl">Ligue d’honneur</h2>
+              <h2 className="font-serif text-3xl">Qui répond à l’heure</h2>
               <p className="mt-1 text-sm text-muted">Classement public. On ne vend pas une meilleure place.</p>
             </div>
             <Link to="/jobs" search={{ pacte: "solide" }} className="text-sm font-medium text-primary">
@@ -60,7 +60,7 @@ function PactePage() {
             </Link>
           </div>
           <ol className="mt-8 divide-y divide-border rounded-xl border border-border bg-bg">
-            {houses.map((h, i) => (
+            {companies.map((h, i) => (
               <li key={h.slug}>
                 <Link
                   to="/companies/$slug"
@@ -92,7 +92,7 @@ function PactePage() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <h2 className="font-serif text-3xl">Le Brief, pas le CV</h2>
         <p className="mt-3 max-w-2xl text-muted">
-          Une page : ce que vous avez livré, ce que vous refusez, la suite. Les maisons sur Vera reçoivent ça — pas un
+          Une page : ce que vous avez livré, ce que vous refusez, la suite. Les entreprises sur Vera reçoivent ça — pas un
           PDF de quatre pages et une photo. Les professionnels sérieux n’ont plus à se déguiser. Les recruteurs
           sérieux n’ont plus à trier du bruit.
         </p>

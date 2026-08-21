@@ -70,7 +70,7 @@ export function TermBang({ term }: { term: GlossaryTerm }) {
               <span className="mt-1 block text-xs leading-relaxed text-muted">{term.candidate}</span>
             </span>
             <span className="block">
-              <span className="block text-[10px] tracking-wide text-muted uppercase">Maison</span>
+              <span className="block text-[10px] tracking-wide text-muted uppercase">Entreprise</span>
               <span className="mt-1 block text-xs leading-relaxed text-muted">{term.house}</span>
             </span>
           </span>
@@ -88,7 +88,7 @@ export function TermLegend({ keys }: { keys?: string[] }) {
       <span className="term-bang mx-0.5 inline-grid align-middle" aria-hidden>
         !
       </span>{" "}
-      explique le mot — usage candidat et maison.{" "}
+      explique le mot — usage candidat et entreprise.{" "}
       {items.map((t) => t.label).join(" · ")}
       {" · "}
       <a href="/lexique" className="text-primary">

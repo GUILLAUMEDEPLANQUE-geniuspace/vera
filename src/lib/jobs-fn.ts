@@ -7,6 +7,7 @@ import { parseOffer } from "./offer";
 import { packForJob } from "./offer-data";
 import { parseProcess } from "./process";
 import { ensureSeeded } from "./seed";
+import { MARKETS } from "./markets";
 import type { HonorHouse, JobDetail, JobFilters, JobListItem, MarketPulse, Profile } from "./types";
 import { briefScore, type Brief, type ShippedItem } from "./types";
 import { computeVerdict } from "./verdict";
@@ -93,6 +94,7 @@ export const listJobs = createServerFn({ method: "POST" })
     const collection = data.collection || "";
     const pacte = data.pacte || "";
     const pool = data.pool || "";
+    const country = data.country || "";
 
     const all = await sql.query<JobRow>(
       `select ${JOB_SELECT}
@@ -116,6 +118,19 @@ export const listJobs = createServerFn({ method: "POST" })
     if (seniority) jobs = jobs.filter((j) => j.seniority === seniority);
     if (collection) jobs = jobs.filter((j) => j.collection === collection);
     if (pool) jobs = jobs.filter((j) => j.pool === pool);
+    if (country) {
+      const needle = country.toLowerCase();
+      const market = MARKETS.find(
+        (m) => m.nameEn.toLowerCase() === needle || m.name.toLowerCase() === needle || m.code.toLowerCase() === needle,
+      );
+      const aliases = market
+        ? [market.name, market.nameEn, market.code, ...market.cities]
+        : [country];
+      jobs = jobs.filter((j) => {
+        const hay = `${j.country} ${j.city} ${j.location}`.toLowerCase();
+        return aliases.some((a) => hay.includes(a.toLowerCase())) || (needle === "remote" && j.remoteType === "remote");
+      });
+    }
     if (pacte === "solide") jobs = jobs.filter((j) => j.company.honorScore >= 85 && j.ghostRisk !== "high");
 
     const sort = data.sort ?? "signal";

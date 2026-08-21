@@ -102,18 +102,18 @@ function MeInner({ name }: { name: string }) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <p className="text-xs tracking-wide text-primary uppercase">Espace</p>
+      <p className="text-xs tracking-wide text-primary uppercase">Mon espace</p>
       <h1 className="mt-2 font-serif text-4xl">{name}</h1>
       <p className="mt-2 text-muted">
-        Le signal de chaque offre se calcule ici. Le brief, lui, est ce que les maisons lisent.
+        Le signal de chaque offre se calcule ici. Le brief, lui, est ce que les entreprises lisent.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link to="/me/carnet" className="text-sm font-medium text-primary">
-          Carnet
+          Mes preuves
         </Link>
         <span className="text-subtle">·</span>
         <Link to="/me/maison" className="text-sm font-medium text-primary">
-          Maison
+          Entreprise
         </Link>
         <span className="text-subtle">·</span>
         <Link to="/me/creneaux" className="text-sm font-medium text-primary">
@@ -260,7 +260,7 @@ function MeInner({ name }: { name: string }) {
           <Textarea value={form.bio} onChange={(e) => setForm({ ...form, bio: e.target.value })} />
         </Field>
         <fieldset className="space-y-3 rounded-xl border border-border p-4">
-          <legend className="px-1 text-sm font-medium">Slasheur / viviers</legend>
+          <legend className="px-1 text-sm font-medium">Multi-activité / bassins</legend>
           <label className="flex items-start gap-3 text-sm">
             <input
               type="checkbox"
@@ -268,7 +268,7 @@ function MeInner({ name }: { name: string }) {
               checked={Boolean(form.slasher)}
               onChange={(e) => setForm({ ...form, slasher: e.target.checked })}
             />
-            <span>Mode slasheur — mi-temps salarié + jours auto-entrepreneur, planning écrit.</span>
+            <span>Multi-activité — mi-temps salarié + jours auto-entrepreneur, planning écrit.</span>
           </label>
           <Field label="Heures / semaine visées">
             <Input
@@ -302,7 +302,7 @@ function MeInner({ name }: { name: string }) {
         <fieldset className="space-y-3 rounded-xl border border-border p-4">
           <legend className="px-1 text-sm font-medium">Freins périphériques (RSA et autour)</legend>
           <p className="text-xs text-muted">
-            Ce que vous avez, pas un slogan. Les maisons cochent ce qu’elles lèvent. Le Try & Buy n’ouvre que si ça match.
+            Ce que vous avez, pas un slogan. Les entreprises cochent ce qu’elles lèvent. Le Try & Buy n’ouvre que si ça match.
           </p>
           {BARRIERS.map((b) => {
             const on = (form.barriers ?? []).includes(b.id);
@@ -366,19 +366,19 @@ function RoleStrip({ role }: { role: AppRole }) {
       await qc.invalidateQueries({ queryKey: ["profile"] });
     },
   });
-  const label = role === "operator" ? "Opérateur" : role === "house" ? "Maison" : "Candidat";
+  const label = role === "operator" ? "Opérateur" : role === "house" ? "Entreprise" : "Candidat";
   return (
     <aside className="mt-6 rounded-xl border border-border bg-surface p-5">
       <p className="text-xs tracking-wide text-muted uppercase">Rôle actuel · {label}</p>
       <p className="mt-2 text-sm text-muted">
-        Candidat : carnet, épreuve, créneaux. Maison : pipeline et refus avec diagnostic. Opérateur : console globale — pas ouverte par défaut.
+        Candidat : preuves, épreuve, créneaux. Entreprise : pipeline et refus avec diagnostic. Opérateur : console globale — pas ouverte par défaut.
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <Button type="button" size="sm" variant={role === "candidate" ? "primary" : "secondary"} onClick={() => claim.mutate("candidate")}>
           Candidat
         </Button>
         <Button type="button" size="sm" variant={role === "house" ? "primary" : "secondary"} onClick={() => claim.mutate("house")}>
-          Maison
+          Entreprise
         </Button>
       </div>
       {role !== "operator" && (

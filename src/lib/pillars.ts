@@ -94,7 +94,7 @@ export const HARD_COMMERCIAL_2026: RankedRole[] = [
   {
     rank: 9,
     title: "Export Maghreb–Afrique industrie",
-    why: "Darija ou arabe de chantier, consignation, pièces. Relève forme. Les maisons qui cherchent « Afrique » sans langue restent vides.",
+    why: "Darija ou arabe de chantier, consignation, pièces. Relève forme. Les entreprises qui cherchent « Afrique » sans langue restent vides.",
     family: "terrain",
     companySlug: "releve",
     citySlug: "fos-sur-mer",
@@ -161,7 +161,7 @@ export const HARD_COMMERCIAL_2026: RankedRole[] = [
   {
     rank: 19,
     title: "Business developer Golfe / Qatar",
-    why: "Face, intermédiaire, ramadan, anglais de contrat. Adjacent à l’Asie. Les maisons le postent « international » et collectent du bruit.",
+    why: "Face, intermédiaire, ramadan, anglais de contrat. Adjacent à l’Asie. Les entreprises le postent « international » et collectent du bruit.",
     family: "asie",
   },
   {
@@ -190,8 +190,8 @@ export const HARD_COMMERCIAL_2026: RankedRole[] = [
   },
   {
     rank: 23,
-    title: "Commercial luxe Asie — maison familiale",
-    why: "Vale : matière, saison, pas radical candor. Un profil anglo-saxon se casse les dents. Italien de la maison, mandarin de salon — deux métiers.",
+    title: "Commercial luxe Asie — entreprise familiale",
+    why: "Vale : matière, saison, pas radical candor. Un profil anglo-saxon se casse les dents. Italien de l’entreprise, mandarin de salon — deux métiers.",
     family: "asie",
     companySlug: "maison-vale",
     citySlug: "paris",
@@ -278,7 +278,7 @@ export const PILLARS: Pillar[] = [
       {
         h: "Mandarin, guanxi, face — la grille qui change le sourcing",
         p: [
-          "Le CV « 10 ans en Asie » ne veut rien dire. Vera impose une grille publique : niveau de mandarin de négociation, trois portes guanxi nommées, style quand le yes veut dire j’ai entendu, fuseau tenu. Les maisons qui cachent ces critères collectent du bruit. Celles qui les publient voient arriver moins de dossiers, et les bons.",
+          "Le CV « 10 ans en Asie » ne veut rien dire. Vera impose une grille publique : niveau de mandarin de négociation, trois portes guanxi nommées, style quand le yes veut dire j’ai entendu, fuseau tenu. Les entreprises qui cachent ces critères collectent du bruit. Celles qui les publient voient arriver moins de dossiers, et les bons.",
           "Northline ouvre le corridor Asie–Europe. Ce n’est pas un afterwork Singapour. C’est un silence japonais, un maybe de Shanghai, un appel à 7 h CET. La page entreprise cartographie ça : score interculturel, langues, axes de culture. Google indexe la fiche. Les agents IA aussi, via le Markdown machine-readable.",
         ],
       },
@@ -293,7 +293,7 @@ export const PILLARS: Pillar[] = [
         h: "Comment on a classé",
         p: [
           "Rareté des compétences (mandarin de négo, habilitations, FHIR, GNC), conversion vues → candidatures tenables, géographie onsite, séniorité. Un inbound SaaS parisien n’entre pas. Un AE Fos qui dîne avec le chef d’équipe, si.",
-          "Chaque ligne pointe vers une offre, une fiche métier ou une maison Vera quand elle existe. Le classement est une page pilier : titre, FAQ, ItemList schema, pas une porte dérobée de mots-clés.",
+          "Chaque ligne pointe vers une offre, une fiche métier ou une entreprise Vera quand elle existe. Le classement est une page pilier : titre, FAQ, ItemList schema, pas une porte dérobée de mots-clés.",
         ],
       },
     ],
@@ -317,14 +317,14 @@ export const PILLARS: Pillar[] = [
       {
         h: "La pénurie a une adresse",
         p: [
-          "Fos-sur-Mer, un technicien de maintenance avec CACES et consignation : rareté haute, conversion basse, salaire au-dessus du P50 PACA si la maison n’est pas idiote. Relève paie 34–40 k€, prime bruit écrite, astreinte 1/6. Les fiches « 28 k€ selon profil » restent vides — et Vera les situe sous la médiane, en rouge.",
+          "Fos-sur-Mer, un technicien de maintenance avec CACES et consignation : rareté haute, conversion basse, salaire au-dessus du P50 PACA si l’entreprise n’est pas idiote. Relève paie 34–40 k€, prime bruit écrite, astreinte 1/6. Les fiches « 28 k€ selon profil » restent vides — et Vera les situe sous la médiane, en rouge.",
           "Lyon, auxiliaire de vie : le métier est abondant sur les CV, rare en tournées tenables. Maison Lise plafonne à cinq personnes par jour et paie les trajets. C’est ça la pénurie réelle — pas le volume Pôle emploi.",
         ],
       },
       {
         h: "Hardtech et runtime",
         p: [
-          "Un ingénieur guidage à Toulouse, un staff Go/Kafka remote Europe : viviers étroits, anglais d’arbitrage, on-call rare. Orbital et Sable tiennent un honneur haut et un process court. Les maisons qui ajoutent six tours perdent contre elles, pas contre « le marché ».",
+          "Un ingénieur guidage à Toulouse, un staff Go/Kafka remote Europe : viviers étroits, anglais d’arbitrage, on-call rare. Orbital et Sable tiennent un honneur haut et un process court. Les entreprises qui ajoutent six tours perdent contre elles, pas contre « le marché ».",
         ],
       },
       {
@@ -337,10 +337,10 @@ export const PILLARS: Pillar[] = [
   },
   {
     slug: "entretien-interculturel",
-    title: "L’entretien interculturel : ce que les maisons européennes jugent vraiment",
+    title: "L’entretien interculturel : ce que les entreprises européennes jugent vraiment",
     kicker: "Fit culturel, pas un test de nationalité",
     excerpt:
-      "Directness danoise, écriture lisboète, face asiatique, hiérarchie de maison de luxe. Vera cartographie cinq axes et fait passer un simulateur avant l’appel.",
+      "Directness danoise, écriture lisboète, face asiatique, hiérarchie de entreprise de luxe. Vera cartographie cinq axes et fait passer un simulateur avant l’appel.",
     updated: "2026-08-19",
     relatedJobs: ["designer-systeme-atelier-nord", "staff-backend-sable", "business-developer-asie-northline"],
     relatedCompanies: ["atelier-nord", "sable", "northline", "maison-vale"],
@@ -349,13 +349,13 @@ export const PILLARS: Pillar[] = [
         h: "Cinq axes, pas un « cultural fit » flou",
         p: [
           "Parole (harmonie → franc), hiérarchie, tempo, canal (réunion → écrit), risque. Atelier Nord critique tous les jours : un profil français de non-dits souffre huit jours, puis s’en souvient comme d’un luxe. Sable n’existe que par RFC. Vale se casse les dents sur le radical candor anglo-saxon.",
-          "Le matching Vera ajoute cet écart au score compétences. Un 92 skills / 40 culture est un « Posez la question », pas un Allez-y. Les maisons voient le détail. Les candidats aussi — la grille est publique.",
+          "Le matching Vera ajoute cet écart au score compétences. Un 92 skills / 40 culture est un « Posez la question », pas un Allez-y. Les entreprises voient le détail. Les candidats aussi — la grille est publique.",
         ],
       },
       {
         h: "Le simulateur",
         p: [
-          "Avant l’entretien, trois battements : un non en public, un silence asiatique, un mercredi sans réunion. Feedback immédiat, sans IA qui tourne à vide. L’assistant (Grok) n’intervient que si vous demandez une lettre ou une prep adaptée à la maison — pas au chargement de page.",
+          "Avant l’entretien, trois battements : un non en public, un silence asiatique, un mercredi sans réunion. Feedback immédiat, sans IA qui tourne à vide. L’assistant (Grok) n’intervient que si vous demandez une lettre ou une prep adaptée à l’entreprise — pas au chargement de page.",
         ],
       },
     ],
@@ -374,11 +374,11 @@ export const PILLARS: Pillar[] = [
         h: "Pourquoi Indeed est illisible pour une machine",
         p: [
           "Un agent qui postule à votre place a besoin de faits : salaire min/max, SLA de réponse, grille d’évaluation, rareté, langues. Indeed lui sert un DOM publicitaire. Vera lui sert /feed/{slug}.md et /feed.json, plus le JSON-LD JobPosting dans le <head>.",
-          "llms.txt liste les piliers, les maisons, les offres. robots.txt autorise les crawlers utiles. Le sitemap est vivant. C’est du référencement pour Google et pour les modèles — le même travail.",
+          "llms.txt liste les piliers, les entreprises, les offres. robots.txt autorise les crawlers utiles. Le sitemap est vivant. C’est du référencement pour Google et pour les modèles — le même travail.",
         ],
       },
       {
-        h: "Ce que ça change pour une maison",
+        h: "Ce que ça change pour une entreprise",
         p: [
           "Vous n’achetez plus de la visibilité au mot-clé. Vous devenez la source. Un Grok, un ATS, un chercheur qui tape « technicien maintenance Fos salaire » atterrit sur une fiche à FAQ, échelle de marché, et pacte. C’est le SEO de 2026 : être la réponse, pas l’annonce.",
         ],

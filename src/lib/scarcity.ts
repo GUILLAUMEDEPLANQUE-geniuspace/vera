@@ -62,7 +62,7 @@ export function scarcityOf(
           : "Profil fréquent";
   const why =
     band === "penurie"
-      ? "Peu de candidats tenables, compétences rares, conversion faible. Les maisons sérieuses paient au-dessus du P75 et répondent vite — ou perdent."
+      ? "Peu de candidats tenables, compétences rares, conversion faible. Les entreprises sérieuses paient au-dessus du P75 et répondent vite — ou perdent."
       : band === "rare"
         ? "Le vivier est étroit. Un process long ou un salaire sous médiane tue l’offre."
         : band === "tendu"

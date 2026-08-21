@@ -16,10 +16,10 @@ export const Route = createFileRoute("/lieux/$city")({
     const [jobs, companies] = await Promise.all([listJobs({ data: {} }), listCompanies()]);
     const slug = geo?.slug ?? sem?.slug ?? eu?.slug ?? params.city;
     const split = geo ? jobsForCity(jobs, geo) : { local: jobs.filter((j) => citySlug(j.city) === slug), bassin: [], remote: jobs.filter((j) => j.remoteType === "remote") };
-    const houses = companies.filter(
+    const localCompanies = companies.filter(
       (c) => citySlug(c.hqCity) === slug || split.local.some((j) => j.company.slug === c.slug),
     );
-    return { geo, place, sem, eu, ...split, houses };
+    return { geo, place, sem, eu, ...split, companies: localCompanies };
   },
   head: ({ loaderData, params }) => {
     const geo = loaderData?.geo ?? cityOf(params.city);
@@ -72,7 +72,7 @@ export const Route = createFileRoute("/lieux/$city")({
 });
 
 function CityPage() {
-  const { geo, place, sem, eu, local, bassin, remote, houses } = Route.useLoaderData();
+  const { geo, place, sem, eu, local, bassin, remote, companies } = Route.useLoaderData();
   const name = geo?.name ?? sem?.name ?? eu?.name;
   if (!name) {
     return (
@@ -112,9 +112,9 @@ function CityPage() {
       {intro.map((p) => (
         <p key={p.slice(0, 40)} className="mt-4 text-base leading-relaxed">{p}</p>
       ))}
-      {houses.length > 0 && (
+      {companies.length > 0 && (
         <ul className="mt-6 space-y-1 text-sm">
-          {houses.map((h) => (
+          {companies.map((h) => (
             <li key={h.slug}>
               <Link to="/companies/$slug" params={{ slug: h.slug }} className="text-primary">{h.name}</Link>
               <span className="text-muted"> · honneur {h.honorScore}</span>

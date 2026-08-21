@@ -40,7 +40,7 @@ export function TaskSimPanel({
           <p className={cn("font-serif text-4xl tabular-nums", out.ok ? "text-good" : "text-bad")}>{out.score}</p>
           <p className="mt-2 text-sm leading-relaxed text-muted">
             {out.ok
-              ? "Geste tenu. Le score part avec la candidature — c’est ce que la maison paie en PPQC."
+              ? "Geste tenu. Le score part avec la candidature — c’est ce que l’entreprise paie en PPQC."
               : "Pas un trou noir. Le score suit. Voici le diagnostic et le micro-apprentissage."}
           </p>
           {!out.ok && lessons.length > 0 && (

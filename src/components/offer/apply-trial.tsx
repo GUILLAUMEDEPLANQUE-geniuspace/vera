@@ -92,7 +92,7 @@ export function ApplyTrial({
 
       {step === "lire" && (
         <div className="mt-4 space-y-3">
-          <p className="text-sm text-muted">Avez-vous lu le difficile ? Les maisons voient le score.</p>
+          <p className="text-sm text-muted">Avez-vous lu le difficile ? Les entreprises voient le score.</p>
           {pack.gates.map((g, i) => (
             <fieldset key={g.q} className="space-y-2">
               <legend className="text-sm font-medium text-ink">{g.q}</legend>

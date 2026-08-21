@@ -1,4 +1,4 @@
-/** Distinct editorial marks per maison — hashed, not random hex in JSX. */
+/** Distinct editorial marks per entreprise — hashed, not random hex in JSX. */
 
 export type MarkTone = {
   bg: string;

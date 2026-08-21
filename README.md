@@ -1,6 +1,6 @@
 # Vera
 
-Jobboard éditorial français — compétences d’abord, transparence, simulations métier, viviers, PPQC, **Savoirs** (hub de connaissance) et **Drive**.
+Jobboard éditorial français — compétences d’abord, transparence, simulations métier, viviers, PPQC, **Savoirs**, **Drive**, **Europe**, **Preuve** et **Passport**.
 
 Dépôt : [github.com/GUILLAUMEDEPLANQUE-geniuspace/vera](https://github.com/GUILLAUMEDEPLANQUE-geniuspace/vera)
 
@@ -29,6 +29,9 @@ Sans `DATABASE_URL`, Vera tourne sur **PGLite** (Postgres en mémoire) et se see
 | Lexique | Tous les termes (Talent, Pacte, Brief, Verdict, PPQC…) |
 | Admin | Catégories, champs, articles, assets Drive |
 | Viviers | RSA, seniors fractionnels, slashers |
+| Europe | Bureaux EU, marchés, friction, FR·EN |
+| Preuve | Arène de preuve (essai métier, lockout, agents) |
+| Passport | Passeport talent (ledger de preuves) |
 
 Operator (admin plateforme) : phrase de claim dans le profil `lhonneur-est-public`.
 

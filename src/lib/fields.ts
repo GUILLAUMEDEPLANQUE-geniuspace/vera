@@ -32,7 +32,7 @@ export const FAMILIES: { id: string; label: string }[] = [
 const GRIDS: Record<string, EvalGrid> = {
   asie: {
     family: "asie",
-    title: "Grille Asie — ce que la maison mesure vraiment",
+    title: "Grille Asie — ce que l’entreprise mesure vraiment",
     intro:
       "Pas un CV « 10 ans d’Asie ». Mandarin réel, guanxi nommé, style de négo, fuseau. Le scoring est public.",
     fields: [
@@ -159,7 +159,7 @@ const GRIDS: Record<string, EvalGrid> = {
         kind: "choice",
         weight: 24,
         options: ["8–10 personnes", "6–7", "5, pas plus", "Moins, cas lourds"],
-        hint: "Chez Lise le plafond est 5. Si vous en voulez 9, ce n’est pas la maison.",
+        hint: "Chez Lise le plafond est 5. Si vous en voulez 9, ce n’est pas l’entreprise.",
       },
       {
         id: "refus",

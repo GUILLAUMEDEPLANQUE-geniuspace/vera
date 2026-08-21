@@ -148,7 +148,7 @@ export const COMPANIES: SeedCompany[] = [
     name: "Maison Vale",
     tagline: "Le luxe, sans le mépris.",
     about:
-      "Maison familiale devenue groupe. Vale réinternalise sa production numérique après dix ans d’agences. On y parle encore de matière, de saison, et de salaires.",
+      "Entreprise familiale devenue groupe. Vale réinternalise sa production numérique après dix ans d’agences. On y parle encore de matière, de saison, et de salaires.",
     industry: "Luxe",
     sizeBand: "1000+",
     hqCity: "Paris",
@@ -764,7 +764,7 @@ export const JOBS: SeedJob[] = [
     companySlug: "maison-vale",
     slug: "directeur-digital-vale",
     title: "Directeur digital",
-    team: "Maison",
+    team: "Direction",
     city: "Paris",
     country: "France",
     remoteType: "onsite",
@@ -782,7 +782,7 @@ export const JOBS: SeedJob[] = [
     ],
     requirements: ["Direction digitale luxe ou retail", "Recrutement d’équipe", "Français natif"],
     nice: ["Italien", "Expérience ERP retail"],
-    benefits: ["Intéressement groupe", "Remises maison", "Comité de direction"],
+    benefits: ["Intéressement groupe", "Remises salariés", "Comité de direction"],
     skills: ["Leadership", "E-commerce", "Luxe", "Recrutement"],
     daysAgo: 18,
     applicants: 11,
@@ -804,7 +804,7 @@ export const JOBS: SeedJob[] = [
     salaryMax: 58000,
     equity: false,
     description:
-      "Vous tenez la voix numérique de la maison : checkout, SAV, newsletter. On veut moins de « exclusif », plus de clarté. Le français d’abord, l’anglais ensuite.",
+      "Vous tenez la voix numérique de l’entreprise : checkout, SAV, newsletter. On veut moins de « exclusif », plus de clarté. Le français d’abord, l’anglais ensuite.",
     responsibilities: [
       "Écrire tous les microcopy critiques",
       "Tenir le guide de voix",
@@ -812,7 +812,7 @@ export const JOBS: SeedJob[] = [
     ],
     requirements: ["Écriture produit", "Français d’édition", "Goût du détail"],
     nice: ["Italien", "Accessibilité éditoriale"],
-    benefits: ["Remises", "RTT", "Bibliothèque maison"],
+    benefits: ["Remises", "RTT", "Bibliothèque interne"],
     skills: ["UX writing", "Édition", "Français", "Accessibilité"],
     daysAgo: 5,
     applicants: 20,
@@ -1193,7 +1193,7 @@ export const JOBS: SeedJob[] = [
     salaryMax: 40000,
     equity: false,
     description:
-      "Vous tenez la presse et le quai. Pannes, rondes, consignations. En trois ans, le poste mène à chef d’équipe — CACES et BR payés par la maison. Ce n’est pas un job d’intérim déguisé.",
+      "Vous tenez la presse et le quai. Pannes, rondes, consignations. En trois ans, le poste mène à chef d’équipe — CACES et BR payés par l’entreprise. Ce n’est pas un job d’intérim déguisé.",
     responsibilities: [
       "Rondes et pannes sur la ligne 2",
       "Consignation et préparation des kits atelier",
@@ -1231,7 +1231,7 @@ export const JOBS: SeedJob[] = [
     ],
     requirements: ["Électricien chantier ou industrie", "Habilitation B1V min. (B2V/BR financée)", "Travail en hauteur"],
     nice: ["IRVE", "CACES nacelle"],
-    benefits: ["Habilitations maison", "Prime chaleur 200 €", "Véhicule chantier", "Mutuelle 60 % famille"],
+    benefits: ["Habilitations internes", "Prime chaleur 200 €", "Véhicule chantier", "Mutuelle 60 % famille"],
     skills: ["Électricité", "Onduleurs", "Chantier", "Habilitation"],
     daysAgo: 1,
     applicants: 11,

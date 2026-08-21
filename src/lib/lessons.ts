@@ -77,7 +77,7 @@ export const LESSONS: Lesson[] = [
     minutes: 4,
     body: [
       "Un 40/100 sur la grille n’est pas un mystère ATS. Les critères sont sur l’offre. Relisez, entraînez le geste, renvoyez.",
-      "Les maisons voient le score. Mentir sur un critère booléen baisse plus que l’avouer.",
+      "Les entreprises voient le score. Mentir sur un critère booléen baisse plus que l’avouer.",
     ],
     drill: "Reprenez la grille de l’offre. Un critère < 3/5 → leçon métier liée.",
   },
@@ -91,7 +91,7 @@ export const LESSONS: Lesson[] = [
       "L’immersion Vera est payée, encadrée, avec chèque équipement le jour 1. Une PMSMP gratuite n’entre pas.",
       "Le frein non levé (trajet, garde) se dit avant J1. Après, c’est un abandon, pas un échec métier.",
     ],
-    drill: "Cochez vos freins au profil. Candidatez seulement si la maison les couvre.",
+    drill: "Cochez vos freins au profil. Candidatez seulement si l’entreprise les couvre.",
   },
   {
     slug: "creneau-tenir",
@@ -103,7 +103,43 @@ export const LESSONS: Lesson[] = [
       "Mardi Fos 8 h et jeudi Lyon 8 h, ça tient si le train existe. Deux mardis, non.",
       "Vous tenez le créneau ou vous le rendez 7 jours avant. Le pacte s’applique aux heures, pas seulement aux dossiers.",
     ],
-    drill: "Ouvrez le calendrier. Un overlap = 0. Deux maisons, deux jours distincts.",
+    drill: "Ouvrez le calendrier. Un overlap = 0. Deux entreprises, deux jours distincts.",
+  },
+  {
+    slug: "agents-garde-fous",
+    title: "Guardrails before the demo",
+    kicker: "Agents",
+    miss: "demo-first",
+    minutes: 8,
+    body: [
+      "An agent that « just emails the customer » without an allow-list is not a product. It is an incident waiting for a screenshot.",
+      "Vera order: tool allow-list → traces (name, args, result, policy) → golden set → human confirm above risk. A prettier prompt is not a control.",
+    ],
+    drill: "Replay the agents arena. Score ≥ 70. A free-form SMTP tool = 0.",
+  },
+  {
+    slug: "evals-golden-set",
+    title: "A golden set is not a vibe",
+    kicker: "Evals",
+    miss: "prompt-magic",
+    minutes: 7,
+    body: [
+      "If you cannot fail the model on purpose, you do not have an eval. You have a demo.",
+      "Hold 30 golden cases, a drift alert, a token budget. The prompt is a test fixture.",
+    ],
+    drill: "Write three cases that must fail. If none fail, the set is theatre.",
+  },
+  {
+    slug: "ai-act-risque",
+    title: "Classify the system before the slide",
+    kicker: "AI Act",
+    miss: "unclassified",
+    minutes: 8,
+    body: [
+      "High-risk is a legal class, not a marketing mood. Residual risk is written, or the system does not ship.",
+      "ISO 42001 evidence lives next to the code. An RSE slide is not a notified-body pack.",
+    ],
+    drill: "Pick one system you know. Minimal / limited / high-risk. Write the residual risk in five lines.",
   },
 ];
 
@@ -127,5 +163,8 @@ export const REJECT_REASONS: { id: string; label: string }[] = [
   { id: "grid-low", label: "Grille publique trop basse" },
   { id: "immersion", label: "Immersion / freins non levés" },
   { id: "slot-clash", label: "Créneau fractional impossible" },
+  { id: "demo-first", label: "Agent shipped without guardrails" },
+  { id: "prompt-magic", label: "Prompt treated as a control" },
+  { id: "unclassified", label: "AI Act class missing" },
   { id: "autre", label: "Autre, noté" },
 ];

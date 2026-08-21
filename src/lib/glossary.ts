@@ -19,9 +19,9 @@ export const GLOSSARY: GlossaryTerm[] = [
     key: "pacte",
     label: "Pacte",
     definition:
-      "Engagement public de réponse sous N jours. Un retard baisse l’honneur de la maison, visible par tous.",
+      "Engagement public de réponse sous N jours. Un retard baisse l’honneur de l’entreprise, visible par tous.",
     candidate: "Vous savez quand une réponse doit arriver. Le silence n’est plus une stratégie.",
-    house: "Les maisons sérieuses viennent pour ce filtre. Les autres restent sur LinkedIn.",
+    house: "Les entreprises sérieuses viennent pour ce filtre. Les autres restent sur LinkedIn.",
   },
   {
     key: "brief",
@@ -35,7 +35,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     label: "PPQC",
     definition:
       "Pay-Per-Qualified-Candidate : publication gratuite. Facture seulement si l’épreuve est tenue et la grille ≥ 55. Prix indexé sur la tension géographique.",
-    candidate: "Vous n’êtes pas une vue. La maison paie un qualifié, pas un clic.",
+    candidate: "Vous n’êtes pas une vue. L’entreprise paie un qualifié, pas un clic.",
     house: "Vous ne payez pas le volume. Vous payez un dossier qui a tenu l’épreuve.",
   },
   {
@@ -55,11 +55,11 @@ export const GLOSSARY: GlossaryTerm[] = [
   },
   {
     key: "vivier",
-    label: "Vivier",
+    label: "Profils oubliés",
     definition:
-      "Bassin de gens que Indeed ignore : RSA + freins, seniors fractional, slashers, binômes, reprise. Pas un vivier CRM.",
-    candidate: "Vous n’êtes pas « hors format ». Le vivier nomme le frein et ce que la maison lève.",
-    house: "Vous recrutez un geste tenu, pas un CV conforme. Le vivier évite le trop-plein d’ATS.",
+      "Bassin de gens que Indeed ignore : RSA + freins, seniors à la journée, multi-activité, binômes, reprise. Pas un vivier CRM.",
+    candidate: "Vous n’êtes pas « hors format ». Le bassin nomme le frein et ce que l’entreprise lève.",
+    house: "Vous recrutez un geste tenu, pas un CV conforme. Le bassin évite le trop-plein d’ATS.",
   },
   {
     key: "epreuve",
@@ -84,18 +84,18 @@ export const GLOSSARY: GlossaryTerm[] = [
     house: "Chaque retard est public. Les commerciaux RH ne peuvent plus le cacher.",
   },
   {
-    key: "maison",
-    label: "Maison",
+    key: "entreprise",
+    label: "Entreprise",
     definition: "L’entreprise côté Vera. Pas une marque : un honneur, un pacte, des grilles, un lieu.",
-    candidate: "Vous postulez chez une maison, pas dans un ATS anonyme.",
-    house: "Votre page maison porte l’honneur. Les offres en héritent.",
+    candidate: "Vous postulez chez une entreprise, pas dans un ATS anonyme.",
+    house: "Votre page entreprise porte l’honneur. Les offres en héritent.",
   },
   {
     key: "carnet",
-    label: "Carnet",
+    label: "Preuves",
     definition: "Preuves de geste (fichiers, notes, scores d’épreuve). Pas un portfolio Instagram.",
     candidate: "Déposez une preuve réelle : photo de consignation, relevé, compte-rendu.",
-    house: "Vous lisez une preuve, pas une déclaration. Le carnet suit le Brief.",
+    house: "Vous lisez une preuve, pas une déclaration. Les preuves suivent le Brief.",
   },
   {
     key: "grille",
@@ -121,30 +121,30 @@ export const GLOSSARY: GlossaryTerm[] = [
   {
     key: "creneau",
     label: "Créneau",
-    definition: "Jour/heure d’un senior fractional : un jour, une maison, un siège. Calendrier multi-maisons.",
-    candidate: "Vous tenez plusieurs maisons sans mentir sur le temps plein.",
+    definition: "Jour/heure d’un senior fractional : un jour, une entreprise, un siège. Calendrier plusieurs entreprises.",
+    candidate: "Vous tenez plusieurs entreprises sans mentir sur le temps plein.",
     house: "Vous achetez un jour de senior, pas un CDI fantôme.",
   },
   {
     key: "fractional",
-    label: "Fractional",
-    definition: "Senior qui tient plusieurs maisons par créneaux. Pas un freelance au noir.",
+    label: "Senior à la journée",
+    definition: "Senior qui tient plusieurs entreprises par créneaux. Pas un freelance au noir.",
     candidate: "Votre calendrier est le produit. Vera le rend lisible.",
     house: "Vous n’avez pas besoin d’un ETP. Vous avez besoin du mardi.",
   },
   {
     key: "slasher",
-    label: "Slasher",
+    label: "Multi-activité",
     definition: "Plusieurs activités tenues (soin + artisanat, code + formation). Le volume d’heures est écrit.",
-    candidate: "Déclarez les heures. Le slasher n’est plus un défaut, c’est un format.",
+    candidate: "Déclarez les heures. La multi-activité n’est plus un défaut, c’est un format.",
     house: "Vous savez ce que vous achetez : 2 jours, pas un fantasme de dispo.",
   },
   {
     key: "rsa",
     label: "RSA / freins",
     definition:
-      "Vivier des gens que le marché ignore : transport, garde, habillement, premier mois. La maison lève par écrit.",
-    candidate: "Cochez le frein. Si la maison le lève, le Verdict change.",
+      "Bassin des gens que le marché ignore : transport, garde, habillement, premier mois. L’entreprise lève par écrit.",
+    candidate: "Cochez le frein. Si l’entreprise le lève, le Verdict change.",
     house: "Lever un frein (navette, avance, crèche) ouvre un bassin que Indeed ne voit pas.",
   },
   {
@@ -164,23 +164,23 @@ export const GLOSSARY: GlossaryTerm[] = [
   },
   {
     key: "savoirs",
-    label: "Savoirs",
+    label: "Fiches",
     definition:
-      "Hub de connaissance Vera (GeniusKnowledges) : fiches métier, droit, compta, marché, robotique. Liées aux offres. Forum tenu, pas un réseau social.",
-    candidate: "Si l’épreuve manque, le Savoir préforme. 8 min, puis vous rejouez.",
+      "Hub de connaissance Vera : fiches métier, droit, compta, marché, robotique. Liées aux offres. Forum tenu, pas un réseau social.",
+    candidate: "Si l’épreuve manque, la fiche prépare le geste. 8 min, puis vous rejouez.",
     house: "Publiez le geste, pas la marque. Les fiches attirent les tenus, pas les curieux.",
   },
   {
     key: "drive",
-    label: "GeniusDrive",
+    label: "Fichiers",
     definition:
-      "Fichiers et vidéos liés aux offres et aux Savoirs. Lecteur intégré, vidéo en chunks (HTTP Range), preuves hashables.",
+      "Fichiers et vidéos liés aux offres et aux fiches. Lecteur intégré, vidéo en chunks, preuves hashables.",
     candidate: "Vous lisez le schéma, la visite, le mode opératoire — sans télécharger un ZIP mort.",
     house: "Le Drive n’est pas un cloud. C’est la preuve à côté du poste.",
   },
   {
     key: "proof",
-    label: "Proof Score",
+    label: "Score de preuve",
     definition:
       "Solidité des preuves d’une fiche, d’un fichier, d’une candidature. Déclarer ≠ prouver.",
     candidate: "Une photo de consignation vaut plus qu’un adjectif.",
@@ -188,21 +188,21 @@ export const GLOSSARY: GlossaryTerm[] = [
   },
   {
     key: "ledger",
-    label: "Evidence Ledger",
+    label: "Registre des preuves",
     definition: "Registre des preuves : source, date, confiance, incertitude. Auditable.",
     candidate: "Votre geste a une date et une source. Ce n’est plus une anecdote.",
     house: "Les recommandations deviennent auditables — utile au CSE, à l’ISO, au client.",
   },
   {
     key: "sprint",
-    label: "Proof Sprint",
+    label: "Sprint de preuve",
     definition: "Cycle court (jours) pour transformer une hypothèse en preuve : compétence, risque, besoin.",
     candidate: "Un sprint de 5 jours peut valider un geste que 4 ans de CV n’ont pas montré.",
     house: "Validez un risque culturel ou un skill en jours, pas en 6 entretiens.",
   },
   {
     key: "fit",
-    label: "Cultural Fit",
+    label: "Fit culturel",
     definition:
       "Alignement des codes (décision, preuve, hiérarchie, silence) — France, Chine, Japon, USA. Ne remplace pas le geste.",
     candidate: "Le fit explique le malentendu, il ne juge pas votre valeur.",
@@ -210,11 +210,27 @@ export const GLOSSARY: GlossaryTerm[] = [
   },
   {
     key: "preform",
-    label: "Préformer",
+    label: "Module",
     definition:
-      "Chemin Savoirs ouvert quand il manque un geste pour l’offre. Module court, puis épreuve rejouée. Pas un LMS déguisé.",
+      "Chemin de fiches ouvert quand il manque un geste pour l’offre. Module court, puis épreuve rejouée. Pas un LMS déguisé.",
     candidate: "Postuler à la robotique sans automate : 12 min de fiche, puis l’épreuve. Pas un « on verra ».",
     house: "Vous élargissez le bassin sans baisser la barre. Le qualifié arrive formé au geste.",
+  },
+  {
+    key: "passport",
+    label: "Passeport",
+    definition:
+      "Registre portable de preuves : épreuves tenues, modules, scores, traces. Export JSON style Open Badge — pas un PDF LinkedIn.",
+    candidate: "Vous emportez le geste. Un recruteur hors Vera peut vérifier l’URL d’évidence.",
+    house: "Vous lisez un registre, pas un CV généré. Le passeport arrive avec l’épreuve.",
+  },
+  {
+    key: "desk",
+    label: "Europe",
+    definition:
+      "Couche internationale de Vera : remote ±2h, bandes salariales UE, épreuves créditées (AI Act, FHIR, FinOps), pas une traduction du siège français.",
+    candidate: "Même boucle : épreuve, module, retry. Langue et norme du bassin, pas un QCM US.",
+    house: "Vous publiez en anglais si le fuseau tient. Le pacte reste daté.",
   },
 ];
 

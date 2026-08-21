@@ -215,7 +215,7 @@ export function companyJsonLd(
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Vera", item: origin },
-        { "@type": "ListItem", position: 2, name: "Maisons", item: `${origin}/companies` },
+        { "@type": "ListItem", position: 2, name: "Entreprises", item: `${origin}/companies` },
         { "@type": "ListItem", position: 3, name: c.name, item: url },
       ],
     },
@@ -277,7 +277,7 @@ export function companyFaqs(
 
 export function companyLongform(c: Company, culture: CultureProfile, jobCount: number): string {
   return [
-    `${c.name} n’est pas une page carrière. C’est une maison Vera : honneur ${c.honorScore}/100, pacte ${c.responseSlaDays} jours, ${jobCount} offre${jobCount > 1 ? "s" : ""} à salaire publié à ${c.hqCity}.`,
+    `${c.name} n’est pas une page carrière. C’est une entreprise Vera : honneur ${c.honorScore}/100, pacte ${c.responseSlaDays} jours, ${jobCount} offre${jobCount > 1 ? "s" : ""} à salaire publié à ${c.hqCity}.`,
     c.about,
     culture.essay,
     `Management : ${culture.management} Semaine : ${culture.weekStyle} Langues : ${culture.languages.join(", ")}. Score interculturel ${culture.intercultural}/100. Les axes (parole, hiérarchie, tempo, écrit, risque) sont publics — le matching les ajoute au score compétences.`,

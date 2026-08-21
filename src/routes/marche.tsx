@@ -47,7 +47,7 @@ function MarchePage() {
       <h1 className="mt-3 font-serif text-4xl sm:text-5xl">Marché</h1>
       <p className="mt-3 max-w-2xl text-lg text-muted">
         Autour de l’offre : coaching interculturel, assessment métier, formation, audit de pacte. Pas des pubs
-        Indeed. Des maisons qui tiennent déjà un honneur.
+        Indeed. Des entreprises qui tiennent déjà un honneur.
       </p>
       <div className="mt-10 grid gap-4 md:grid-cols-2">
         {SERVICES.map((s) => (

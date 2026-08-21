@@ -53,7 +53,7 @@ export function DriveReader({ asset }: { asset: DriveAsset }) {
   return (
     <div className="rounded-xl border border-border bg-surface p-4 sm:p-6">
       <p className="text-xs tracking-wide text-primary uppercase">
-        <Term k="drive">GeniusDrive</Term>
+        <Term k="drive">Fichiers</Term>
       </p>
       <h1 className="mt-2 font-serif text-3xl sm:text-4xl">{asset.title}</h1>
       <p className="mt-2 text-sm text-muted">

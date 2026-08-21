@@ -58,7 +58,7 @@ export const SEM_CITIES: SemCity[] = [
     faqs: [
       {
         q: "Peut-on trouver une auxiliaire de vie à Lyon sans se faire brûler ?",
-        a: "Oui si la maison plafonne. Maison Lise : 5 personnes/jour, trajets payés, 13e mois. La grille soin est publique.",
+        a: "Oui si l’entreprise plafonne. Maison Lise : 5 personnes/jour, trajets payés, 13e mois. La grille soin est publique.",
       },
     ],
   },
@@ -76,7 +76,7 @@ export const SEM_CITIES: SemCity[] = [
     faqs: [
       {
         q: "Les chantiers ENR à Marseille paient-ils la chaleur ?",
-        a: "Kora : 200 € bruts/mois juin–septembre, véhicule, B2V/BR maison. Vera refuse les primes « selon profil ».",
+        a: "Kora : 200 € bruts/mois juin–septembre, véhicule, B2V/BR pris en charge. Vera refuse les primes « selon profil ».",
       },
     ],
   },
@@ -214,7 +214,7 @@ export const SEM_METIERS: SemMetier[] = [
       t.includes("maintenance") || s.some((x) => /caces|hydraulique|consignation/i.test(x)),
     intro: [
       "Le mot « technicien de maintenance » sur Indeed ramène 4 000 fiches à 28 k€ selon profil. Sur Vera : une échelle de marché, une carte de carrière (chef d’équipe en 3–6 ans), une épreuve presse, une grille habilitations.",
-      "Pénurie réelle à Fos. Les maisons qui paient sous le P25 restent vides — et le Scarcity Score le dit.",
+      "Pénurie réelle à Fos. Les entreprises qui paient sous le P25 restent vides — et le Scarcity Score le dit.",
     ],
     faqs: [
       {
@@ -223,7 +223,7 @@ export const SEM_METIERS: SemMetier[] = [
       },
       {
         q: "Faut-il déjà le CACES ?",
-        a: "Relève : CACES 3 ou à passer sous 90 jours, maison. La grille demande les dates, pas un « à voir ».",
+        a: "Relève : CACES 3 ou à passer sous 90 jours, pris en charge. La grille demande les dates, pas un « à voir ».",
       },
     ],
   },

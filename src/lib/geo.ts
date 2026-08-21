@@ -280,12 +280,17 @@ const REGION_BY_SLUG = new Map(REGIONS.map((r) => [r.slug, r]));
 const CITY_BY_SLUG = new Map(CITIES.map((c) => [c.slug, c]));
 const CITY_BY_NAME = new Map(CITIES.map((c) => [slugify(c.name), c]));
 
-export const EU_CITIES: { slug: string; name: string; country: string }[] = [
-  { slug: "lisbonne", name: "Lisbonne", country: "Portugal" },
+export const EU_CITIES: { slug: string; name: string; country: string; aliases?: string[] }[] = [
+  { slug: "lisbonne", name: "Lisbonne", country: "Portugal", aliases: ["lisbon"] },
   { slug: "amsterdam", name: "Amsterdam", country: "Pays-Bas" },
-  { slug: "copenhague", name: "Copenhague", country: "Danemark" },
-  { slug: "bruxelles", name: "Bruxelles", country: "Belgique" },
-  { slug: "londres", name: "Londres", country: "Royaume-Uni" },
+  { slug: "copenhague", name: "Copenhague", country: "Danemark", aliases: ["copenhagen"] },
+  { slug: "bruxelles", name: "Bruxelles", country: "Belgique", aliases: ["brussels"] },
+  { slug: "londres", name: "Londres", country: "Royaume-Uni", aliases: ["london"] },
+  { slug: "berlin", name: "Berlin", country: "Allemagne" },
+  { slug: "munich", name: "Munich", country: "Allemagne", aliases: ["munchen", "muenchen"] },
+  { slug: "stockholm", name: "Stockholm", country: "Suède" },
+  { slug: "dublin", name: "Dublin", country: "Irlande" },
+  { slug: "utrecht", name: "Utrecht", country: "Pays-Bas" },
 ];
 
 export function regionOf(slug: string): GeoRegion | undefined {
@@ -407,7 +412,9 @@ export function detectPlace(q: string): { rest: string; city?: GeoCity; dept?: G
   if (dept) return { rest: raw, dept };
   const city = CITIES.find((c) => lower.includes(c.slug) || lower.includes(slugify(c.name)));
   if (city) return { rest: raw, city };
-  const eu = EU_CITIES.find((c) => lower.includes(c.slug));
+  const eu = EU_CITIES.find(
+    (c) => lower.includes(c.slug) || lower.includes(slugify(c.name)) || c.aliases?.some((a) => lower.includes(a)),
+  );
   if (eu) return { rest: raw, eu };
   return { rest: raw };
 }

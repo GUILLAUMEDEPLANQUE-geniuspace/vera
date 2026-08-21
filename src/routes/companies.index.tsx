@@ -12,7 +12,7 @@ export const Route = createFileRoute("/companies/")({
     const companies = loaderData ?? [];
     return {
       meta: [
-        { title: "Maisons — honneur, culture, offres | Vera" },
+        { title: "Entreprises — honneur, culture, offres | Vera" },
         {
           name: "description",
           content:
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/companies/")({
       scripts: [
         ldScript(
           itemListJsonLd(
-            "Maisons Vera",
+            "Entreprises Vera",
             companies.map((c) => ({ name: c.name, url: `${BRAND_HOST}/companies/${c.slug}` })),
           ),
         ),
@@ -39,7 +39,7 @@ function CompaniesPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="font-serif text-4xl sm:text-5xl">Maisons</h1>
+      <h1 className="font-serif text-4xl sm:text-5xl">Entreprises</h1>
       <p className="mt-2 max-w-xl text-muted">
         Classées par honneur — le respect des dates, pas la brochure RH.{" "}
         <Link to="/pacte" className="text-primary">

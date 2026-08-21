@@ -15,7 +15,7 @@ const PROMPTS = [
   "Prépare-moi la question « parlez-moi d’un désaccord avec un PM ».",
   "Quelles sont les trois questions que je dois poser à la fin ?",
   "Aide-moi à raconter un échec sans me saborder.",
-  "Prépare-moi l’entretien interculturel de cette maison : silence, face, non public.",
+  "Prépare-moi l’entretien interculturel de cette entreprise : silence, face, non public.",
 ];
 
 function CoachPage() {

@@ -83,7 +83,7 @@ const FLAGSHIP: Record<string, OfferPack> = {
       hard: "Oui : 3×8 possibles, graisse, bruit, parfois la pluie sur le quai. Un samedi d’astreinte toutes les six semaines. Ce n’est pas un open space.",
       good: "Chaque panne a une fin. Vous voyez la ligne redémarrer. Personne ne vous demande un stand-up. Les outils sont à vous, pas à une app de ticketing.",
       exceptional:
-        "Relève renouvelle le parc d’outillage tous les trois ans. CACES et habilitations à la charge de la maison. Prime de compétence écrite, pas « selon profil ».",
+        "Relève renouvelle le parc d’outillage tous les trois ans. CACES et habilitations à la charge de l’entreprise. Prime de compétence écrite, pas « selon profil ».",
     },
     benefits: [
       { label: "Mutuelle", why: "70 % vous + famille, contrat Alan — pas une « mutuelle » vague." },
@@ -246,7 +246,7 @@ const FLAGSHIP: Record<string, OfferPack> = {
         "Kora paie l’habilitation B2V/BR et le renouvellement. Prime chaleur 200 € / mois de juin à septembre. Véhicule de chantier, pas votre Clio.",
     },
     benefits: [
-      { label: "Habilitations", why: "B2V, BR, travail en hauteur : maison, temps de travail, renouvellement inclus." },
+      { label: "Habilitations", why: "B2V, BR, travail en hauteur : entreprise, temps de travail, renouvellement inclus." },
       { label: "Prime chaleur", why: "200 € bruts / mois, juin–septembre, écrite." },
       { label: "Véhicule", why: "Utilitaire de chantier. Pas d’usure de votre voiture perso." },
       { label: "Mutuelle", why: "60 % famille. Optique vraie, pas un forfait poster." },
@@ -287,7 +287,7 @@ const FLAGSHIP: Record<string, OfferPack> = {
         years: "4 ans chez Kora",
         question: "Le plus dur ?",
         answer:
-          "Août. 38 °C sur l’acier. On s’arrête à 13h, on reprend à 16h. La maison l’écrit. Ceux qui disent « on pousse » ne restent pas.",
+          "Août. 38 °C sur l’acier. On s’arrête à 13h, on reprend à 16h. L’entreprise l’écrit. Ceux qui disent « on pousse » ne restent pas.",
         portrait: "/offer/nadia.jpg",
       },
       {
@@ -434,7 +434,7 @@ const FLAGSHIP: Record<string, OfferPack> = {
     },
     benefits: [
       { label: "Salaire", why: "26–30 k€ + 13e mois. Au-dessus de la médiane Lyon pour le métier." },
-      { label: "Trajets", why: "Temps de trajet payé, pas « entre deux » offert à la maison." },
+      { label: "Trajets", why: "Temps de trajet payé, pas « entre deux » offert à l’entreprise." },
       { label: "Mutuelle", why: "80 % vous + famille." },
       { label: "Tournées", why: "5 personnes / jour, plafond. Au-delà, on refuse le plan." },
       { label: "Astreinte émotionnelle", why: "Supervision mensuelle obligatoire, payée, avec une psychologue." },
@@ -1191,7 +1191,7 @@ function synthesizeHonesty(job: JobLike): Honesty {
   const industry = industryOf(job);
   if (job.slug.includes("relais") || job.collection === "medias") {
     return {
-      hard: "Cette maison a gelé. L’annonce tourne encore. Vera la signale : vous perdriez votre temps.",
+      hard: "Cette entreprise a gelé. L’annonce tourne encore. Vera la signale : vous perdriez votre temps.",
       good: "Relais paie et publie les salaires — quand elle embauche vraiment.",
       exceptional: "Rien d’exceptionnel tant que le pacte est rompu. Passez.",
     };

@@ -6,11 +6,11 @@ import { BRAND_HOST } from "@/lib/origin";
 export const Route = createFileRoute("/lexique")({
   head: () => ({
     meta: [
-      { title: "Lexique Vera — Verdict, Pacte, Brief, PPQC, Savoirs, Drive" },
+      { title: "Lexique Vera — Verdict, Pacte, Brief, Épreuve, Fiches" },
       {
         name: "description",
         content:
-          "Tous les mots Vera, expliqués pour le candidat et pour la maison : Verdict, Pacte, Brief, PPQC, vivier, épreuve, GeniusDrive, Savoirs.",
+          "Tous les mots Vera, expliqués pour le candidat et pour l’entreprise : Verdict, Pacte, Brief, épreuve, fiches, fichiers.",
       },
     ],
     links: [{ rel: "canonical", href: `${BRAND_HOST}/lexique` }],
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/lexique")({
           <span className="term-bang inline-grid align-middle" aria-hidden>
             !
           </span>{" "}
-          dans le produit. Ici, la fiche complète : définition, usage candidat, usage maison.
+          dans le produit. Ici, la fiche complète : définition, usage candidat, usage entreprise.
         </p>
         <ul className="mt-10 space-y-10">
           {GLOSSARY.map((t) => (
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/lexique")({
                   <dd className="mt-1 text-sm text-muted">{t.candidate}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs tracking-wide text-muted uppercase">Maison</dt>
+                  <dt className="text-xs tracking-wide text-muted uppercase">Entreprise</dt>
                   <dd className="mt-1 text-sm text-muted">{t.house}</dd>
                 </div>
               </dl>

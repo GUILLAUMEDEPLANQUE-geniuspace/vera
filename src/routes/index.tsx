@@ -8,7 +8,8 @@ import { SearchBar } from "@/components/search-bar";
 import { Badge } from "@/components/ui/badge";
 import { COLLECTIONS } from "@/lib/constants";
 import { formatSalary } from "@/lib/format";
-import { CITIES, DEPTS, REGIONS } from "@/lib/geo";
+import { CITIES, DEPTS, EU_CITIES, REGIONS } from "@/lib/geo";
+import { useLocale } from "@/lib/locale";
 import { getFeatured, getHonorLeague, getMarketPulse } from "@/lib/jobs-fn";
 import { BRAND_HOST } from "@/lib/origin";
 import { honorCaption, honorTone } from "@/lib/pact";
@@ -51,31 +52,66 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { pulse: p, featured, league } = Route.useLoaderData();
+  const [locale] = useLocale();
+  const en = locale === "en";
 
   return (
     <div>
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-          <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">Jobboard indépendant</p>
+          <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">
+            {en ? "Independent job board" : "Jobboard indépendant"}
+          </p>
           <h1 className="mt-4 max-w-3xl font-serif text-5xl leading-[0.95] text-ink sm:text-7xl">
-            L’emploi,
-            <br />
-            enfin lisible.
+            {en ? (
+              <>
+                Work,
+                <br />
+                finally readable.
+              </>
+            ) : (
+              <>
+                L’emploi,
+                <br />
+                enfin lisible.
+              </>
+            )}
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted">
-            Vera dit aux professionnels quand passer leur chemin. <Term k="verdict">Verdict</Term> avant candidature,{" "}
-            <Term k="pacte">pacte</Term> de réponse public, <Term k="brief">brief</Term> à la place du CV. Indeed n’a
-            aucun intérêt à faire ça.
+            {en ? (
+              <>
+                Vera tells professionals when to walk away. <Term k="verdict">Verdict</Term> before you apply, a public{" "}
+                <Term k="pacte">pact</Term>, a <Term k="brief">brief</Term> instead of a CV. Indeed has no reason to do
+                this.
+              </>
+            ) : (
+              <>
+                Vera dit aux professionnels quand passer leur chemin. <Term k="verdict">Verdict</Term> avant candidature,{" "}
+                <Term k="pacte">pacte</Term> de réponse public, <Term k="brief">brief</Term> à la place du CV. Indeed n’a
+                aucun intérêt à faire ça.
+              </>
+            )}
           </p>
           <div className="mt-8 max-w-2xl">
             <SearchBar />
           </div>
+          <div className="mt-4 flex flex-wrap gap-4 text-sm">
+            <Link to="/preuve" className="font-medium text-primary">
+              {en ? "Sit a trial first" : "Passer une épreuve d’abord"}
+            </Link>
+            <Link to="/europe" className="text-muted hover:text-ink">
+              {en ? "Europe" : "Europe"}
+            </Link>
+            <Link to="/passport" className="text-muted hover:text-ink">
+              {en ? "Passport" : "Passeport"}
+            </Link>
+          </div>
           <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
-            <Stat label="Offres actives" value={String(p.activeJobs)} />
-            <Stat label="Salaires publiés" value={`${p.salaryPublishedPct}\u00a0%`} />
-            <Stat label="Ghost signalés" value={String(p.ghostFlagged)} />
+            <Stat label={en ? "Live roles" : "Offres actives"} value={String(p.activeJobs)} />
+            <Stat label={en ? "Salary published" : "Salaires publiés"} value={`${p.salaryPublishedPct}\u00a0%`} />
+            <Stat label={en ? "Ghost flagged" : "Ghost signalés"} value={String(p.ghostFlagged)} />
             <Stat
-              label="Médiane haute"
+              label={en ? "High median" : "Médiane haute"}
               value={p.medianSalary ? formatSalary(p.medianSalary, p.medianSalary) : "—"}
             />
           </dl>
@@ -86,17 +122,17 @@ function Home() {
         <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-3 sm:px-6">
           <LabCard
             kicker="Journal"
-            title="Blogs maisons & carnets"
+            title="Blogs entreprises & journaux"
             body="Relève, Northline, Kora écrivent le geste. Malik et Hélène tiennent un carnet. Pas un LinkedIn."
             to="/journal"
             cta="Lire le journal"
           />
           <LabCard
-            kicker="Savoirs"
+            kicker="Fiches"
             title="Catégories que vous créez"
             body="Marché, droit, robotique — et les vôtres. L’opérateur ajoute un rayon en trente secondes."
             to="/savoirs"
-            cta="Ouvrir les savoirs"
+            cta="Ouvrir les fiches"
           />
           <LabCard
             kicker="Admin"
@@ -132,9 +168,9 @@ function Home() {
                   Le <Term k="pacte">Pacte</Term>
                 </>
               }
-              body="L’entreprise s’engage à une date. Si elle manque, son honneur baisse — public, pas négociable. Les maisons sérieuses viennent pour le filtre. Les autres restent sur LinkedIn."
+              body="L’entreprise s’engage à une date. Si elle manque, son honneur baisse — public, pas négociable. Les entreprises sérieuses viennent pour le filtre. Les autres restent sur LinkedIn."
               to="/pacte"
-              cta="Voir la ligue"
+              cta="Voir le classement"
             />
             <Principle
               kicker="03"
@@ -156,10 +192,59 @@ function Home() {
                   L’<Term k="epreuve">épreuve</Term> avant le CV
                 </>
               }
-              body="Micro-simulation 2–3 min : diagnostic électrique, scénario de soin, planning chantier. Score public. Les coordonnées après, pas avant."
-              to="/jobs"
-              cta="Voir une épreuve"
+              body={
+                en
+                  ? "6-minute craft trial. Miss → tagged 8-minute module → retry. Coordinates after, not before. The passport only stamps a hold."
+                  : "Épreuve métier 6 min. Échec → module tagué de 8 min → retry. Les coordonnées après, pas avant. Le passeport ne tamponne qu’un tenu."
+              }
+              to="/preuve"
+              cta={en ? "Sit a trial" : "Passer une épreuve"}
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-primary text-primary-fg">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <p className="text-xs font-medium tracking-[0.18em] text-primary-fg/70 uppercase">
+            {en ? "Europe" : "Europe"}
+          </p>
+          <h2 className="mt-2 max-w-2xl font-serif text-3xl sm:text-4xl">
+            {en
+              ? "Proof before the degree — outside France too."
+              : "La preuve avant le titre — aussi hors de France."}
+          </h2>
+          <p className="mt-3 max-w-xl text-primary-fg/80">
+            {en ? (
+              <>
+                Remote ±2h, EU salary bands, credited trial, a module if you miss, an exportable{" "}
+                <Term k="passport">Talent Passport</Term>. Not a translation: named standards (AI Act, FHIR, LOTO) and
+                craft reviewers.
+              </>
+            ) : (
+              <>
+                Remote ±2h, bandes salariales UE, épreuve créditée, module si ça rate,{" "}
+                <Term k="passport">Passeport</Term> exportable. Pas une traduction : des normes (AI Act, FHIR, LOTO)
+                et des relecteurs métier.
+              </>
+            )}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/europe"
+              className="inline-flex h-12 items-center rounded-lg bg-bg px-5 text-sm font-medium text-ink"
+            >
+              {en ? "Open Europe" : "Voir l’Europe"}
+            </Link>
+            <Link
+              to="/preuve"
+              className="inline-flex h-12 items-center rounded-lg border border-primary-fg/25 px-5 text-sm font-medium text-primary-fg"
+            >
+              {en ? "Sit a trial" : "Passer une épreuve"}
+            </Link>
+            <Link to="/marches" className="inline-flex h-12 items-center px-2 text-sm text-primary-fg/80">
+              {en ? "What travels, what blocks" : "Ce qui voyage, ce qui freine"}
+            </Link>
           </div>
         </div>
       </section>
@@ -205,21 +290,21 @@ function Home() {
 
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">GeniusKnowledges</p>
+          <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">Fiches métier</p>
           <h2 className="mt-2 max-w-2xl font-serif text-3xl sm:text-4xl">
-            <Term k="savoirs">Savoirs</Term> : le métier s’écrit, puis mène à l’offre.
+            <Term k="savoirs">Fiches</Term> : le métier s’écrit, puis mène à l’offre.
           </h2>
           <p className="mt-3 max-w-xl text-muted">
             Robotique, droit, compta, terrain, fit culturel. Si le geste manque, vous{" "}
-            <Term k="preform">préformez</Term> 8 min, puis vous tenez l’
-            <Term k="epreuve">épreuve</Term>. Le <Term k="drive">Drive</Term> porte la visite et le mode opératoire.
+            <Term k="preform">suivez un module</Term> 8 min, puis vous tenez l’
+            <Term k="epreuve">épreuve</Term>. Les <Term k="drive">fichiers</Term> portent la visite et le mode opératoire.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link to="/savoirs" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-              Entrer dans Savoirs <ArrowRight className="size-3.5" />
+              Entrer dans les fiches <ArrowRight className="size-3.5" />
             </Link>
             <Link to="/drive" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-              Ouvrir le Drive <ArrowRight className="size-3.5" />
+              Ouvrir les fichiers <ArrowRight className="size-3.5" />
             </Link>
             <Link to="/lexique" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
               Lexique <ArrowRight className="size-3.5" />
@@ -290,6 +375,17 @@ function Home() {
                     </Link>
                   </li>
                 ))}
+                {EU_CITIES.map((c) => (
+                  <li key={c.slug}>
+                    <Link
+                      to="/lieux/$city"
+                      params={{ city: c.slug }}
+                      className="inline-flex h-10 items-center rounded-full border border-border px-3 text-sm hover:border-primary"
+                    >
+                      {c.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
               <div className="mt-4 flex flex-wrap gap-4 text-sm font-medium">
                 <Link to="/lieux" className="inline-flex items-center gap-1 text-primary">
@@ -336,9 +432,9 @@ function Home() {
       <section className="border-t border-border bg-surface/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">Ce qu’Indeed n’active pas</p>
-          <h2 className="mt-2 font-serif text-3xl">Viviers, PPQC, preuves</h2>
+          <h2 className="mt-2 font-serif text-3xl">Seniors, RSA, reprise</h2>
           <p className="mt-2 max-w-xl text-sm text-muted">
-            Seniors fractional, binômes, RSA, slashers, reprise. Publication gratuite, paiement sur candidat qualifié.
+            Seniors à la journée, binômes, RSA, multi-activité, reprise. Publication gratuite, paiement sur candidat qualifié.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {VIVIERS.map((v) => (
@@ -358,7 +454,7 @@ function Home() {
               className="rounded-xl border border-primary bg-primary p-5 text-primary-fg transition-transform duration-200 hover:-translate-y-0.5"
             >
               <p className="text-xs tracking-wide text-primary-fg/70 uppercase">Modèle</p>
-              <h3 className="mt-2 font-serif text-xl">PPQC + geo-tension</h3>
+              <h3 className="mt-2 font-serif text-xl">Paiement au qualifié</h3>
               <p className="mt-2 text-sm leading-relaxed text-primary-fg/80">
                 Gratuit à publier. Vous payez un candidat qui a tenu l’épreuve, au prix du bassin.
               </p>
@@ -413,8 +509,8 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <div className="flex items-end justify-between">
             <div>
-              <h2 className="font-serif text-3xl">Ligue d’honneur</h2>
-              <p className="mt-1 text-sm text-muted">Qui tient sa date. Classement public.</p>
+              <h2 className="font-serif text-3xl">Qui répond à l’heure</h2>
+              <p className="mt-1 text-sm text-muted">Classement public des entreprises. On ne vend pas une meilleure place.</p>
             </div>
             <Link to="/pacte" className="text-sm font-medium text-primary">
               Tout le pacte
@@ -506,7 +602,7 @@ function Principle({
   title: string;
   titleNode?: ReactNode;
   body: string;
-  to: "/jobs" | "/pacte" | "/me/brief" | "/savoirs";
+  to: "/jobs" | "/pacte" | "/me/brief" | "/savoirs" | "/preuve";
   cta: string;
 }) {
   return (

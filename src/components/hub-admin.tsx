@@ -114,7 +114,7 @@ export function HubAdmin() {
       <div>
         <p className="text-xs tracking-wide text-primary uppercase">Hub</p>
         <h2 className="mt-1 font-serif text-2xl">
-          <Term k="savoirs">Savoirs</Term> & <Term k="drive">GeniusDrive</Term>
+          <Term k="savoirs">Fiches</Term> & <Term k="drive">Fichiers</Term>
         </h2>
         <p className="mt-2 max-w-xl text-sm text-muted">
           Catégories, champs libres, fiches, fichiers en chunks. C’est ici que le marché, le droit et la robotique
@@ -217,7 +217,7 @@ export function HubAdmin() {
       </section>
 
       <section>
-        <h3 className="font-serif text-xl">Fiche Savoirs</h3>
+        <h3 className="font-serif text-xl">Fiche métier</h3>
         <form
           className="mt-4 grid gap-3"
           onSubmit={(e) => {
@@ -272,7 +272,7 @@ export function HubAdmin() {
       <section>
         <h3 className="font-serif text-xl">Upload Drive (chunks)</h3>
         <p className="mt-1 text-sm text-muted">
-          Taille de chunk par défaut 256 Ko. Vidéo / PDF / texte. Liez à une offre (slug) ou une fiche Savoirs.
+          Taille de chunk par défaut 256 Ko. Vidéo / PDF / texte. Liez à une offre (slug) ou une fiche.
         </p>
         <form
           className="mt-4 grid gap-3"
@@ -288,9 +288,9 @@ export function HubAdmin() {
               value={up.entityType}
               onChange={(e) => setUp({ ...up, entityType: e.target.value })}
             >
-              <option value="knowledge">fiche Savoirs</option>
+              <option value="knowledge">fiche</option>
               <option value="job">offre</option>
-              <option value="company">maison</option>
+              <option value="company">entreprise</option>
             </select>
             <Input
               placeholder="slug de la fiche / offre"

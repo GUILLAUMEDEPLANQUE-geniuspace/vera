@@ -40,9 +40,9 @@ function Creneaux() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <p className="text-xs tracking-wide text-primary uppercase">Senior fractional</p>
-      <h1 className="mt-2 font-serif text-4xl">Calendrier multi-maisons</h1>
+      <h1 className="mt-2 font-serif text-4xl">Calendrier plusieurs entreprises</h1>
       <p className="mt-2 max-w-xl text-muted">
-        Un jour, une maison. Mardi Fos et jeudi Lyon, oui. Deux mardis, non. Le pacte s’applique aux heures.
+        Un jour, une entreprise. Mardi Fos et jeudi Lyon, oui. Deux mardis, non. Le pacte s’applique aux heures.
       </p>
       {mine.length > 0 && (
         <ul className="mt-6 space-y-2 text-sm">

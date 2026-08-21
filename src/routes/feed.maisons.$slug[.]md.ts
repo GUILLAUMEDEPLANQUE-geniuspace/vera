@@ -15,7 +15,7 @@ export const Route = createFileRoute("/feed/maisons/$slug.md")({
         );
         const slug = raw.replace(/\.md$/, "");
         const data = await getCompany({ data: slug });
-        if (!data) return new Response("Maison introuvable\n", { status: 404 });
+        if (!data) return new Response("Entreprise introuvable\n", { status: 404 });
         const origin = requestOrigin(request);
         const culture = cultureOf(data.company.slug);
         const md = companyMarkdown(data.company, data.jobs, origin, culture);

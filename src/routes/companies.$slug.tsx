@@ -31,7 +31,7 @@ export const Route = createFileRoute("/companies/$slug")({
   },
   head: ({ loaderData }) => {
     const data = loaderData;
-    if (!data) return { meta: [{ title: "Maison | Vera" }] };
+    if (!data) return { meta: [{ title: "Entreprise | Vera" }] };
     const { company, jobs } = data;
     const origin = BRAND_HOST;
     const culture = cultureOf(company.slug);
@@ -80,7 +80,7 @@ function CompanyPage() {
   if (!data) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-24 text-center">
-        <h1 className="font-serif text-4xl">Maison introuvable</h1>
+        <h1 className="font-serif text-4xl">Entreprise introuvable</h1>
         <Link to="/companies" className="mt-4 inline-block text-primary">
           Toutes les entreprises
         </Link>
@@ -105,7 +105,7 @@ function CompanyPage() {
         </Link>
         {" · "}
         <Link to="/companies" className="hover:text-ink">
-          Maisons
+          Entreprises
         </Link>
         {city && (
           <>
@@ -138,7 +138,7 @@ function CompanyPage() {
         <p className="mt-3 max-w-xl text-sm text-muted">
           {company.honorDue === 0
             ? "Nouveau pacte : aucun dossier clos pour l’instant. L’honneur commencera au premier délai."
-            : `${company.honorAnswered} réponses à l’heure sur ${company.honorDue} dossiers clos. Si la maison manque une date, ce chiffre baisse.`}
+            : `${company.honorAnswered} réponses à l’heure sur ${company.honorDue} dossiers clos. Si l’entreprise manque une date, ce chiffre baisse.`}
         </p>
         <Link to="/pacte" className="mt-3 inline-block text-sm font-medium text-primary">
           Comment le pacte fonctionne
@@ -154,7 +154,7 @@ function CompanyPage() {
 
       {articles.length > 0 && (
         <section className="mt-12">
-          <p className="text-xs tracking-wide text-primary uppercase">Journal de la maison</p>
+          <p className="text-xs tracking-wide text-primary uppercase">Journal de l’entreprise</p>
           <h2 className="mt-1 font-serif text-3xl">Blog — preuves, pas plaquette</h2>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2">
             {articles.map((a) => (
@@ -168,7 +168,7 @@ function CompanyPage() {
             ))}
           </ul>
           <Link to="/journal" className="mt-4 inline-block text-sm font-medium text-primary">
-            Tous les blogs maisons et carnets
+            Tous les blogs entreprises et carnets
           </Link>
         </section>
       )}
@@ -219,7 +219,7 @@ function CompanyPage() {
 
       {services.length > 0 && (
         <section className="mt-14">
-          <h2 className="font-serif text-2xl">Services autour de cette maison</h2>
+          <h2 className="font-serif text-2xl">Services autour de cette entreprise</h2>
           <ul className="mt-4 space-y-3">
             {services.map((s) => (
               <li key={s.slug}>

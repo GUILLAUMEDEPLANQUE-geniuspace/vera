@@ -15,6 +15,7 @@ import { Route as ApprendreRouteImport } from './routes/apprendre'
 import { Route as CoachRouteImport } from './routes/coach'
 import { Route as CompaniesRouteImport } from './routes/companies'
 import { Route as DriveRouteImport } from './routes/drive'
+import { Route as EuropeRouteImport } from './routes/europe'
 import { Route as FeedDotjsonRouteImport } from './routes/feed[.]json'
 import { Route as GuidesRouteImport } from './routes/guides'
 import { Route as JobsRouteImport } from './routes/jobs'
@@ -24,11 +25,14 @@ import { Route as LieuxRouteImport } from './routes/lieux'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MarcheRouteImport } from './routes/marche'
+import { Route as MarchesRouteImport } from './routes/marches'
 import { Route as MeRouteImport } from './routes/me'
 import { Route as MetiersRouteImport } from './routes/metiers'
 import { Route as PacteRouteImport } from './routes/pacte'
+import { Route as PassportRouteImport } from './routes/passport'
 import { Route as PostRouteImport } from './routes/post'
 import { Route as PpqcRouteImport } from './routes/ppqc'
+import { Route as PreuveRouteImport } from './routes/preuve'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SavoirsRouteImport } from './routes/savoirs'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -105,6 +109,11 @@ const DriveRoute = DriveRouteImport.update({
   path: '/drive',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EuropeRoute = EuropeRouteImport.update({
+  id: '/europe',
+  path: '/europe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeedDotjsonRoute = FeedDotjsonRouteImport.update({
   id: '/feed.json',
   path: '/feed.json',
@@ -150,6 +159,11 @@ const MarcheRoute = MarcheRouteImport.update({
   path: '/marche',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarchesRoute = MarchesRouteImport.update({
+  id: '/marches',
+  path: '/marches',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MeRoute = MeRouteImport.update({
   id: '/me',
   path: '/me',
@@ -165,6 +179,11 @@ const PacteRoute = PacteRouteImport.update({
   path: '/pacte',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PassportRoute = PassportRouteImport.update({
+  id: '/passport',
+  path: '/passport',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PostRoute = PostRouteImport.update({
   id: '/post',
   path: '/post',
@@ -173,6 +192,11 @@ const PostRoute = PostRouteImport.update({
 const PpqcRoute = PpqcRouteImport.update({
   id: '/ppqc',
   path: '/ppqc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreuveRoute = PreuveRouteImport.update({
+  id: '/preuve',
+  path: '/preuve',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
@@ -408,6 +432,7 @@ export interface FileRoutesByFullPath {
   '/coach': typeof CoachRoute
   '/companies': typeof CompaniesRouteWithChildren
   '/drive': typeof DriveRouteWithChildren
+  '/europe': typeof EuropeRoute
   '/feed.json': typeof FeedDotjsonRoute
   '/guides': typeof GuidesRouteWithChildren
   '/jobs': typeof JobsRouteWithChildren
@@ -417,11 +442,14 @@ export interface FileRoutesByFullPath {
   '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/marche': typeof MarcheRoute
+  '/marches': typeof MarchesRoute
   '/me': typeof MeRouteWithChildren
   '/metiers': typeof MetiersRouteWithChildren
   '/pacte': typeof PacteRoute
+  '/passport': typeof PassportRoute
   '/post': typeof PostRoute
   '/ppqc': typeof PpqcRoute
+  '/preuve': typeof PreuveRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/savoirs': typeof SavoirsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -472,14 +500,18 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/coach': typeof CoachRoute
+  '/europe': typeof EuropeRoute
   '/feed.json': typeof FeedDotjsonRoute
   '/lexique': typeof LexiqueRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/marche': typeof MarcheRoute
+  '/marches': typeof MarchesRoute
   '/pacte': typeof PacteRoute
+  '/passport': typeof PassportRoute
   '/post': typeof PostRoute
   '/ppqc': typeof PpqcRoute
+  '/preuve': typeof PreuveRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tension': typeof TensionRoute
@@ -529,6 +561,7 @@ export interface FileRoutesById {
   '/coach': typeof CoachRoute
   '/companies': typeof CompaniesRouteWithChildren
   '/drive': typeof DriveRouteWithChildren
+  '/europe': typeof EuropeRoute
   '/feed.json': typeof FeedDotjsonRoute
   '/guides': typeof GuidesRouteWithChildren
   '/jobs': typeof JobsRouteWithChildren
@@ -538,11 +571,14 @@ export interface FileRoutesById {
   '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/marche': typeof MarcheRoute
+  '/marches': typeof MarchesRoute
   '/me': typeof MeRouteWithChildren
   '/metiers': typeof MetiersRouteWithChildren
   '/pacte': typeof PacteRoute
+  '/passport': typeof PassportRoute
   '/post': typeof PostRoute
   '/ppqc': typeof PpqcRoute
+  '/preuve': typeof PreuveRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/savoirs': typeof SavoirsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -598,6 +634,7 @@ export interface FileRouteTypes {
     | '/coach'
     | '/companies'
     | '/drive'
+    | '/europe'
     | '/feed.json'
     | '/guides'
     | '/jobs'
@@ -607,11 +644,14 @@ export interface FileRouteTypes {
     | '/llms.txt'
     | '/login'
     | '/marche'
+    | '/marches'
     | '/me'
     | '/metiers'
     | '/pacte'
+    | '/passport'
     | '/post'
     | '/ppqc'
+    | '/preuve'
     | '/robots.txt'
     | '/savoirs'
     | '/sitemap.xml'
@@ -662,14 +702,18 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/coach'
+    | '/europe'
     | '/feed.json'
     | '/lexique'
     | '/llms.txt'
     | '/login'
     | '/marche'
+    | '/marches'
     | '/pacte'
+    | '/passport'
     | '/post'
     | '/ppqc'
+    | '/preuve'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/tension'
@@ -718,6 +762,7 @@ export interface FileRouteTypes {
     | '/coach'
     | '/companies'
     | '/drive'
+    | '/europe'
     | '/feed.json'
     | '/guides'
     | '/jobs'
@@ -727,11 +772,14 @@ export interface FileRouteTypes {
     | '/llms.txt'
     | '/login'
     | '/marche'
+    | '/marches'
     | '/me'
     | '/metiers'
     | '/pacte'
+    | '/passport'
     | '/post'
     | '/ppqc'
+    | '/preuve'
     | '/robots.txt'
     | '/savoirs'
     | '/sitemap.xml'
@@ -786,6 +834,7 @@ export interface RootRouteChildren {
   CoachRoute: typeof CoachRoute
   CompaniesRoute: typeof CompaniesRouteWithChildren
   DriveRoute: typeof DriveRouteWithChildren
+  EuropeRoute: typeof EuropeRoute
   FeedDotjsonRoute: typeof FeedDotjsonRoute
   GuidesRoute: typeof GuidesRouteWithChildren
   JobsRoute: typeof JobsRouteWithChildren
@@ -795,11 +844,14 @@ export interface RootRouteChildren {
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   LoginRoute: typeof LoginRoute
   MarcheRoute: typeof MarcheRoute
+  MarchesRoute: typeof MarchesRoute
   MeRoute: typeof MeRouteWithChildren
   MetiersRoute: typeof MetiersRouteWithChildren
   PacteRoute: typeof PacteRoute
+  PassportRoute: typeof PassportRoute
   PostRoute: typeof PostRoute
   PpqcRoute: typeof PpqcRoute
+  PreuveRoute: typeof PreuveRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SavoirsRoute: typeof SavoirsRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -854,6 +906,13 @@ declare module '@tanstack/react-router' {
       path: '/drive'
       fullPath: '/drive'
       preLoaderRoute: typeof DriveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/europe': {
+      id: '/europe'
+      path: '/europe'
+      fullPath: '/europe'
+      preLoaderRoute: typeof EuropeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/feed.json': {
@@ -919,6 +978,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarcheRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marches': {
+      id: '/marches'
+      path: '/marches'
+      fullPath: '/marches'
+      preLoaderRoute: typeof MarchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/me': {
       id: '/me'
       path: '/me'
@@ -940,6 +1006,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PacteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/passport': {
+      id: '/passport'
+      path: '/passport'
+      fullPath: '/passport'
+      preLoaderRoute: typeof PassportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/post': {
       id: '/post'
       path: '/post'
@@ -952,6 +1025,13 @@ declare module '@tanstack/react-router' {
       path: '/ppqc'
       fullPath: '/ppqc'
       preLoaderRoute: typeof PpqcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preuve': {
+      id: '/preuve'
+      path: '/preuve'
+      fullPath: '/preuve'
+      preLoaderRoute: typeof PreuveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -1475,6 +1555,7 @@ const rootRouteChildren: RootRouteChildren = {
   CoachRoute: CoachRoute,
   CompaniesRoute: CompaniesRouteWithChildren,
   DriveRoute: DriveRouteWithChildren,
+  EuropeRoute: EuropeRoute,
   FeedDotjsonRoute: FeedDotjsonRoute,
   GuidesRoute: GuidesRouteWithChildren,
   JobsRoute: JobsRouteWithChildren,
@@ -1484,11 +1565,14 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsDottxtRoute: LlmsDottxtRoute,
   LoginRoute: LoginRoute,
   MarcheRoute: MarcheRoute,
+  MarchesRoute: MarchesRoute,
   MeRoute: MeRouteWithChildren,
   MetiersRoute: MetiersRouteWithChildren,
   PacteRoute: PacteRoute,
+  PassportRoute: PassportRoute,
   PostRoute: PostRoute,
   PpqcRoute: PpqcRoute,
+  PreuveRoute: PreuveRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SavoirsRoute: SavoirsRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

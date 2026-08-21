@@ -18,9 +18,9 @@ const CATS: Cat[] = [
     title: "Marché de l’emploi",
     kicker: "Observatoire",
     description:
-      "Tension, salaires, pénurie réelle. Les maisons et les candidats écrivent ce que le marché fait, pas ce que LinkedIn raconte.",
+      "Tension, salaires, pénurie réelle. Les entreprises et les candidats écrivent ce que le marché fait, pas ce que LinkedIn raconte.",
     sort: 10,
-    seoTitle: "Marché de l’emploi 2026 — tension, salaires, pénurie | Vera Savoirs",
+    seoTitle: "Marché de l’emploi 2026 — tension, salaires, pénurie | Vera",
     seoDescription:
       "Fiches marché : tension territoriale, pénurie commerciale, salaires publiés. Liées aux offres Vera.",
     fields: [
@@ -34,7 +34,7 @@ const CATS: Cat[] = [
     kicker: "Geste",
     description: "Le geste avant le titre. Consignation, tournée, négo, automate. Chaque fiche ouvre des offres.",
     sort: 20,
-    seoTitle: "Métiers et gestes — fiches liées aux offres | Vera Savoirs",
+    seoTitle: "Métiers et gestes — fiches liées aux offres | Vera",
     seoDescription: "Fiches métier Vera : consignation, soin, commercial, robotique. Préformer avant de postuler.",
     fields: [
       { key: "famille", label: "Famille", type: "select", options: ["terrain", "soin", "commercial", "industrie", "bureau"] },
@@ -44,13 +44,13 @@ const CATS: Cat[] = [
   {
     slug: "robotique",
     title: "Robotique & industrie",
-    kicker: "Préformer",
+    kicker: "Module",
     description:
       "Automates, cellules, consignations robot. Si l’offre demande un geste que vous n’avez pas encore, la fiche est le chemin — pas un silence.",
     sort: 30,
-    seoTitle: "Robotique industrielle — préformer avant l’offre | Vera Savoirs",
+    seoTitle: "Robotique industrielle — module avant l’offre | Vera",
     seoDescription:
-      "Préformation robotique : cellules, consignation, GMAO. Liée aux offres maintenance et industrie.",
+      "Module robotique : cellules, consignation, GMAO. Liée aux offres maintenance et industrie.",
     fields: [
       { key: "cellule", label: "Type de cellule", type: "select", options: ["pick & place", "soudage", "palletisation", "AGV", "autre"] },
       { key: "norme", label: "Norme / consigne", type: "text" },
@@ -62,7 +62,7 @@ const CATS: Cat[] = [
     kicker: "Cadre",
     description: "CDI, CDD, freelance, essai, non-concurrence, CSE. Écrit pour tenir, pas pour faire peur.",
     sort: 40,
-    seoTitle: "Droit du travail pour candidats et maisons | Vera Savoirs",
+    seoTitle: "Droit du travail pour candidats et entreprises | Vera",
     seoDescription: "CDI, essai, freelance, non-concurrence. Fiches liées aux contrats des offres Vera.",
     fields: [{ key: "texte", label: "Texte / article", type: "text" }],
   },
@@ -72,17 +72,17 @@ const CATS: Cat[] = [
     kicker: "Chiffre",
     description: "Lire un brut, charges, bulletins, seuil. Pour décider, pas pour souffrir Excel.",
     sort: 50,
-    seoTitle: "Compta et paie — lire un salaire publié | Vera Savoirs",
+    seoTitle: "Compta et paie — lire un salaire publié | Vera",
     seoDescription: "Brut, net, charges, bulletins. Pour lire les salaires Vera, pas pour un cours d’expert-comptable.",
     fields: [{ key: "poste", label: "Poste du bulletin", type: "text" }],
   },
   {
     slug: "creation",
     title: "Création d’entreprise",
-    kicker: "Maison",
+    kicker: "Création",
     description: "SASU pendant un CDI, portage, micro, premières factures. Le slasher et le fractional commencent ici.",
     sort: 60,
-    seoTitle: "Créer une activité pendant l’emploi | Vera Savoirs",
+    seoTitle: "Créer une activité pendant l’emploi | Vera",
     seoDescription: "SASU, micro, portage. Pour les slashers et les seniors fractional Vera.",
     fields: [{ key: "forme", label: "Forme", type: "select", options: ["SASU", "micro", "portage", "EURL", "autre"] }],
   },
@@ -92,7 +92,7 @@ const CATS: Cat[] = [
     kicker: "Codes",
     description: "Guanxi, nemawashi, comité français. Le fit n’est pas un test de personnalité : c’est un code de preuve.",
     sort: 70,
-    seoTitle: "Fit culturel France / Chine / Japon | Vera Savoirs",
+    seoTitle: "Fit culturel France / Chine / Japon | Vera",
     seoDescription: "Codes de décision et de preuve. Lié aux offres internationales Vera.",
     fields: [{ key: "zone", label: "Zone", type: "select", options: ["France", "Chine", "Japon", "USA", "mixte"] }],
   },
@@ -102,7 +102,7 @@ const CATS: Cat[] = [
     kicker: "Chantier",
     description: "PAC, ombrières, tournée, domicile. Les fiches que Indeed ne peut pas vendre : trop précises.",
     sort: 80,
-    seoTitle: "Métiers de terrain — fiches opératoires | Vera Savoirs",
+    seoTitle: "Métiers de terrain — fiches opératoires | Vera",
     seoDescription: "Consignation, PAC, tournée, domicile. Préformer un geste de terrain avant l’épreuve Vera.",
     fields: [{ key: "energie", label: "Énergie / lieu", type: "text" }],
   },
@@ -128,11 +128,11 @@ const ARTS: Art[] = [
     slug: "tension-commerciale-2026",
     cat: "marche",
     title: "Pénurie commerciale Europe 2026 : le titre ne dit rien",
-    excerpt: "Les maisons paient des vues. Les tenus ne postulent plus. La tension est un geste, pas un intitulé.",
+    excerpt: "Les entreprises paient des vues. Les tenus ne postulent plus. La tension est un geste, pas un intitulé.",
     body: [
       "Les jobboards vendent du volume. Un « business developer » à Paris et un « chef de secteur » à Arras n’ont pas le même geste, ni la même pénurie. Vera affiche la tension par bassin et le Talent Scarcity Score sur l’offre.",
-      "Si le salaire publié est sous la médiane du lieu, le Verdict dit Passez. Ce n’est pas de l’arrogance : c’est le marché. Les maisons qui tiennent le pacte (réponse sous N jours) voient arriver les tenus. Les autres restent sur Indeed.",
-      "Pour un candidat : lisez la tension, le pacte, la grille. Pour une maison : publiez le salaire et le geste, pas un slogan. Le PPQC monte avec la tension — recruter à Fos n’est pas recruter à Boulogne.",
+      "Si le salaire publié est sous la médiane du lieu, le Verdict dit Passez. Ce n’est pas de l’arrogance : c’est le marché. Les entreprises qui tiennent le pacte (réponse sous N jours) voient arriver les tenus. Les autres restent sur Indeed.",
+      "Pour un candidat : lisez la tension, le pacte, la grille. Pour une entreprise : publiez le salaire et le geste, pas un slogan. Le PPQC monte avec la tension — recruter à Fos n’est pas recruter à Boulogne.",
     ],
     skills: ["Vente", "Négociation", "CRM"],
     jobs: ["business-developer-asie-northline"],
@@ -150,7 +150,7 @@ const ARTS: Art[] = [
     body: [
       "Ordre Vera : identifier les énergies → séparer → cadenas perso → essai de remise en marche → mesure à zéro. Inverser deux étapes, c’est un accident, pas une coquille.",
       "Les offres maintenance Relève (Fos) et électricien Kora demandent ce geste. Si vous n’avez jamais cadenassé, lisez ceci, regardez la visite Drive, puis tenez l’épreuve lockout. Un 55 ouvre Apprendre. Un 80 ouvre le dossier.",
-      "Maison : écrivez l’ordre dans l’offre. Candidat : un cadenas partagé = 0. Ce n’est pas un détail RH.",
+      "Entreprise : écrivez l’ordre dans l’offre. Candidat : un cadenas partagé = 0. Ce n’est pas un détail RH.",
     ],
     skills: ["Consignation", "Mécanique", "Hydraulique", "GMAO", "Électricité"],
     jobs: ["technicien-maintenance-releve", "electricien-ombrieres-kora"],
@@ -167,8 +167,8 @@ const ARTS: Art[] = [
     excerpt: "Postuler en robotique sans avoir tenu une cellule : 12 minutes ici, puis l’épreuve. Pas un silence.",
     body: [
       "Une cellule pick & place n’est pas un jouet. Avant le teach : zone, barrières, mode manuel, consignation de l’armoire, validation du POUVOIR. Le pendantant n’excuse pas un oubli de LOTO.",
-      "Si l’offre Relève ou un poste automate vous demande « robotique » et que vous venez de la mécanique générale : cette fiche est le chemin. Vous préformez le vocabulaire (cellule, enseigner, vitesse collabo, GMAO) puis vous tenez l’épreuve machine.",
-      "Maison : attachez au Drive le mode opératoire et une visite de 40 s. Candidat : après lecture, rejouez l’épreuve. Le Proof Score de cette fiche est haut parce que l’ordre est écrit, pas raconté.",
+      "Si l’offre Relève ou un poste automate vous demande « robotique » et que vous venez de la mécanique générale : cette fiche est le chemin. Vous apprenez le vocabulaire (cellule, enseigner, vitesse collabo, GMAO) puis vous tenez l’épreuve machine.",
+      "Entreprise : attachez au Drive le mode opératoire et une visite de 40 s. Candidat : après lecture, rejouez l’épreuve. Le score de preuve de cette fiche est haut parce que l’ordre est écrit, pas raconté.",
     ],
     skills: ["Consignation", "GMAO", "Mécanique", "Embarqué", "C"],
     jobs: ["technicien-maintenance-releve"],
@@ -185,7 +185,7 @@ const ARTS: Art[] = [
     excerpt: "L’essai n’est pas une période d’observation gratuite. Le Try & Buy Vera est payé, nommé, borné.",
     body: [
       "Code du travail : l’essai se renouvelle dans les conditions du contrat. Le silence n’est pas un accord. Un Try & Buy Vera (jours × tarif, superviseur) n’est pas un essai : c’est une mission courte payée, avant CDI.",
-      "Candidat : si la maison propose un essai de 4 mois « pour voir » sans pacte de réponse, le Verdict baisse. Maison : nommez l’essai, le renouvellement, le Try & Buy. Les ghost jobs vivent du flou.",
+      "Candidat : si l’entreprise propose un essai de 4 mois « pour voir » sans pacte de réponse, le Verdict baisse. Entreprise : nommez l’essai, le renouvellement, le Try & Buy. Les ghost jobs vivent du flou.",
     ],
     skills: ["Conformité", "Procédures"],
     jobs: [],
@@ -201,8 +201,8 @@ const ARTS: Art[] = [
     title: "Lire un brut Vera : médiane, charges, ce qui reste",
     excerpt: "Un salaire publié n’est pas un net. Voici comment le poser contre la médiane du lieu.",
     body: [
-      "Vera refuse les « selon profil ». Le brut annuel est sur la fiche, la médiane du secteur aussi. Charges salariales ≈ 22 %, patronales davantage : le coût maison n’est pas votre net.",
-      "Si le brut est sous la médiane du bassin et que la tension est haute, le Verdict dit Demandez ou Passez. Maison : un brut honnête coûte moins cher qu’un ghost. Candidat : le PPQC n’est pas pris sur votre salaire.",
+      "Vera refuse les « selon profil ». Le brut annuel est sur la fiche, la médiane du secteur aussi. Charges salariales ≈ 22 %, patronales davantage : le coût employeur n’est pas votre net.",
+      "Si le brut est sous la médiane du bassin et que la tension est haute, le Verdict dit Demandez ou Passez. Entreprise : un brut honnête coûte moins cher qu’un ghost. Candidat : le PPQC n’est pas pris sur votre salaire.",
     ],
     skills: ["SQL", "Finance"],
     jobs: [],
@@ -219,7 +219,7 @@ const ARTS: Art[] = [
     excerpt: "Clause d’exclusivité, déontologie, premières factures. Le fractional commence par un cadre.",
     body: [
       "Beaucoup de seniors tiennent un jour ailleurs. Sans cadre, c’est un licenciement. Avec une SASU, une clause lue, un créneau Vera : c’est un format.",
-      "Lisez le contrat. L’exclusivité n’est pas toujours là. Le créneau (mardi 9–17, une maison) rend le temps lisible. Maison : achetez un jour, pas un ETP fantôme.",
+      "Lisez le contrat. L’exclusivité n’est pas toujours là. Le créneau (mardi 9–17, une entreprise) rend le temps lisible. Entreprise : achetez un jour, pas un ETP fantôme.",
     ],
     skills: ["Leadership", "Product operations"],
     jobs: [],
@@ -253,7 +253,7 @@ const ARTS: Art[] = [
     excerpt: "Accepter une sixième « pour dépanner », c’est signer l’arrêt à six mois. Le plafond s’écrit.",
     body: [
       "L’offre Maison Lise (Lyon) tient un plafond. Le geste : dire le nombre, proposer un report, alerter la coordinatrice. Pas « on verra ce soir ».",
-      "Si l’épreuve soin vous met sous 55, le module Apprendre est 5 min. Cette fiche est le pourquoi. Maison : un plafond écrit attire les tenus. Un « on s’adapte » attire le turnover.",
+      "Si l’épreuve soin vous met sous 55, le module Apprendre est 5 min. Cette fiche est le pourquoi. Entreprise : un plafond écrit attire les tenus. Un « on s’adapte » attire le turnover.",
     ],
     skills: ["Soin", "Présence", "Transmission", "Manutention"],
     jobs: ["aide-domicile-lise"],
@@ -270,7 +270,7 @@ const ARTS: Art[] = [
     excerpt: "Phase présente, pas de retour, disjoncteur fermé : dérivation, pas un fusible à changer.",
     body: [
       "On sonde deux points dont le bornier. Diagnostiquer sans sonde, c’est de la chance. Vera note la chance à 55, pas à 100.",
-      "Fiche liée à l’offre Kora (ombrières). Préformez le diagnostic, puis tenez l’épreuve circuit. Maison : attachez le schéma au Drive. Candidat : la visite vidéo ne remplace pas la sonde.",
+      "Fiche liée à l’offre Kora (ombrières). Préparez le diagnostic, puis tenez l’épreuve circuit. Entreprise : attachez le schéma au Drive. Candidat : la visite vidéo ne remplace pas la sonde.",
     ],
     skills: ["Électricité", "Onduleurs", "Chantier", "Habilitation"],
     jobs: ["electricien-ombrieres-kora"],
@@ -287,7 +287,7 @@ const ARTS: Art[] = [
     excerpt: "Une PAC qui « ne chauffe plus » n’est pas une vanne au hasard. Trois lectures, puis un geste.",
     body: [
       "Pression, sondes, tarif heures creuses. Le mauvais ordre casse un détendeur. Le bon ordre tient 8 minutes.",
-      "Si l’épreuve machine rate sur skip-measure, cette fiche + le module Apprendre. Maison : le mode opératoire va dans le Drive, pas dans un PDF perdu.",
+      "Si l’épreuve machine rate sur skip-measure, cette fiche + le module Apprendre. Entreprise : le mode opératoire va dans le Drive, pas dans un PDF perdu.",
     ],
     skills: ["Mécanique", "Hydraulique", "GMAO"],
     jobs: ["technicien-maintenance-releve"],
@@ -508,7 +508,11 @@ export async function seedHub(sql: Sql): Promise<void> {
     await sql`
       insert into glossary_terms (term_key, label, definition, candidate_use, company_use)
       values (${t.key}, ${t.label}, ${t.definition}, ${t.candidate}, ${t.house})
-      on conflict (term_key) do nothing
+      on conflict (term_key) do update set
+        label = excluded.label,
+        definition = excluded.definition,
+        candidate_use = excluded.candidate_use,
+        company_use = excluded.company_use
     `;
   }
 
@@ -518,6 +522,14 @@ export async function seedHub(sql: Sql): Promise<void> {
       await sql`
         insert into knowledge_categories (slug, title, kicker, description, sort_order, seo_title, seo_description)
         values (${c.slug}, ${c.title}, ${c.kicker}, ${c.description}, ${c.sort}, ${c.seoTitle}, ${c.seoDescription})
+      `;
+    }
+  } else {
+    for (const c of CATS) {
+      await sql`
+        update knowledge_categories
+        set kicker = ${c.kicker}, description = ${c.description}, seo_title = ${c.seoTitle}, seo_description = ${c.seoDescription}
+        where slug = ${c.slug}
       `;
     }
   }
@@ -555,6 +567,14 @@ export async function seedHub(sql: Sql): Promise<void> {
           ${JSON.stringify(a.skills)}, ${JSON.stringify(a.jobs)}, ${JSON.stringify(a.fields)},
           ${a.role}, ${a.author}, ${a.proof}, ${a.minutes}, ${true}
         )
+      `;
+    }
+  } else {
+    for (const a of ARTS) {
+      await sql`
+        update knowledge_articles
+        set excerpt = ${a.excerpt}, body = ${a.body.join("\n\n")}
+        where slug = ${a.slug}
       `;
     }
   }

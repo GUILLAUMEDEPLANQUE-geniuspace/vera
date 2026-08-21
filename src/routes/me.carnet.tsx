@@ -56,7 +56,7 @@ function Carnet({ name }: { name: string }) {
       });
     },
     onSuccess: async () => {
-      toast.success("Carnet mis à jour");
+      toast.success("Preuves mises à jour");
       setTitle("");
       setExcerpt("");
       setBody("");
@@ -70,13 +70,13 @@ function Carnet({ name }: { name: string }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <p className="text-xs tracking-wide text-primary uppercase">Candidat</p>
-      <h1 className="mt-2 font-serif text-4xl">Carnet de preuves</h1>
+      <h1 className="mt-2 font-serif text-4xl">Mes preuves</h1>
       <p className="mt-2 text-muted">
         Ça remplace le CV chronologique. Badges d’épreuve, notes, fichiers. Public une fois publié.
       </p>
       <p className="mt-2 text-sm">
         <Link to="/talents/$slug" params={{ slug: name.toLowerCase().replace(/\s+/g, "-") }} className="text-primary">
-          Voir le carnet public
+          Voir le profil public
         </Link>
         {" · "}
         <Link to="/journal" className="text-primary">

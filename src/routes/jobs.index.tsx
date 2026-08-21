@@ -4,6 +4,8 @@ import { SearchBar } from "@/components/search-bar";
 import { Badge } from "@/components/ui/badge";
 import { COLLECTIONS } from "@/lib/constants";
 import { listJobs } from "@/lib/jobs-fn";
+import { useLocale } from "@/lib/locale";
+import { MARKETS } from "@/lib/markets";
 import { BRAND_HOST } from "@/lib/origin";
 import { itemListJsonLd, ldScript } from "@/lib/seo";
 import type { ContractType, JobFilters, RemoteType, Seniority } from "@/lib/types";
@@ -18,6 +20,7 @@ type JobsSearch = {
   collection?: string;
   pacte?: "solide";
   pool?: string;
+  country?: string;
   sort?: JobFilters["sort"];
 };
 
@@ -30,6 +33,7 @@ export const Route = createFileRoute("/jobs/")({
     collection: typeof raw.collection === "string" ? raw.collection : undefined,
     pacte: raw.pacte === "solide" ? "solide" : undefined,
     pool: typeof raw.pool === "string" ? raw.pool : undefined,
+    country: typeof raw.country === "string" ? raw.country : undefined,
     sort:
       raw.sort === "recent" || raw.sort === "salary" || raw.sort === "signal" || raw.sort === "honneur"
         ? raw.sort
@@ -45,6 +49,7 @@ export const Route = createFileRoute("/jobs/")({
       collection: deps.collection,
       pacte: deps.pacte ?? "",
       pool: deps.pool,
+      country: deps.country,
       sort: deps.sort ?? "signal",
     };
     return listJobs({ data: filters });
@@ -92,6 +97,8 @@ function JobsPage() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
   const jobs = Route.useLoaderData();
+  const [locale] = useLocale();
+  const en = locale === "en";
 
   function patch(next: Partial<JobsSearch>) {
     void navigate({
@@ -171,6 +178,15 @@ function JobsPage() {
             onClick={() => patch({ pool: v.pool === search.pool ? undefined : v.pool })}
           >
             <Badge tone={v.pool === search.pool ? "primary" : "default"}>{v.name}</Badge>
+          </button>
+        ))}
+        {MARKETS.filter((m) => m.code !== "GB" && m.code !== "ES").map((m) => (
+          <button
+            key={m.code}
+            type="button"
+            onClick={() => patch({ country: m.nameEn === search.country ? undefined : m.nameEn })}
+          >
+            <Badge tone={m.nameEn === search.country ? "primary" : "default"}>{en ? m.nameEn : m.name}</Badge>
           </button>
         ))}
       </div>

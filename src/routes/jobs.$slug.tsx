@@ -383,8 +383,8 @@ function JobPage() {
           </OfferPanel>
         )}
 
-        {tab === "maison" && (
-          <OfferPanel tab="maison">
+        {tab === "entreprise" && (
+          <OfferPanel tab="entreprise">
             <WeekRing slices={job.offer.week} />
             <CareerMap nodes={job.offer.career} />
             {job.offer.workplace && <WorkplaceTour workplace={job.offer.workplace} />}
@@ -403,7 +403,7 @@ function JobPage() {
             {(driveQ.data ?? []).length > 0 && (
               <section>
                 <h2 className="font-serif text-2xl">
-                  <Term k="drive">GeniusDrive</Term> de l’offre
+                  <Term k="drive">Fichiers</Term> de l’offre
                 </h2>
                 <ul className="mt-4 grid gap-3">
                   {(driveQ.data ?? []).map((d) => (
@@ -417,7 +417,7 @@ function JobPage() {
             {(job.barriers.length > 0 || job.tryBuy) && (
               <section className="rounded-xl border border-border bg-surface p-5">
                 <p className="text-xs tracking-wide text-primary uppercase">Freins périphériques</p>
-                <h2 className="mt-1 font-serif text-2xl">Ce que la maison lève — écrit</h2>
+                <h2 className="mt-1 font-serif text-2xl">Ce que l’entreprise lève — écrit</h2>
                 {job.tryBuy && (
                   <p className="mt-3 text-sm leading-relaxed">
                     <Term k="trybuy">Try & Buy</Term> {job.tryBuy.days} jours · {job.tryBuy.dailyPay} € / jour · {job.tryBuy.supervisor}. {job.tryBuy.startNote}
@@ -437,14 +437,14 @@ function JobPage() {
                 <p className="mt-3 text-sm">
                   <Link to="/me" className="text-primary">Cocher vos freins au profil</Link>
                   {" · "}
-                  <Link to="/viviers/$slug" params={{ slug: "rsa-freins" }} className="text-primary">Vivier RSA</Link>
+                  <Link to="/viviers/$slug" params={{ slug: "rsa-freins" }} className="text-primary">RSA & freins</Link>
                 </p>
               </section>
             )}
             {job.slots.length > 0 && (
               <section className="rounded-xl border border-border bg-surface p-5">
-                <p className="text-xs tracking-wide text-primary uppercase">Senior fractional</p>
-                <h2 className="mt-1 font-serif text-2xl">Créneaux — un jour, une maison</h2>
+                <p className="text-xs tracking-wide text-primary uppercase">Senior à la journée</p>
+                <h2 className="mt-1 font-serif text-2xl">Créneaux — un jour, une entreprise</h2>
                 <ul className="mt-3 space-y-2 text-sm">
                   {job.slots.map((s, i) => (
                     <li key={`${s.weekday}-${s.startHour}-${i}`}>
@@ -617,7 +617,7 @@ function JobPage() {
                   <Link to="/me/brief" className="text-primary">
                     L’écrire
                   </Link>{" "}
-                  — les maisons le lisent avant la lettre.
+                  — les entreprises le lisent avant la lettre.
                 </>
               )}
             </p>
@@ -656,7 +656,7 @@ function Block({ title, items }: { title: string; items: string[] }) {
 function BarrierFitNote({ need, cover }: { need: string[]; cover: string[] }) {
   const fit = barrierFit(need, cover);
   if (fit.open.length === 0) {
-    return <p className="mt-3 text-sm text-good">Vos freins sont couverts par cette maison. Le Try & Buy peut tenir.</p>;
+    return <p className="mt-3 text-sm text-good">Vos freins sont couverts par cette entreprise. Le Try & Buy peut tenir.</p>;
   }
   const labels = BARRIERS.filter((b) => fit.open.includes(b.id)).map((b) => b.label);
   return (

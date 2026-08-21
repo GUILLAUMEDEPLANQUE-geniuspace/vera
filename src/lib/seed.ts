@@ -3,12 +3,13 @@ import type { Sql } from "./db";
 import { packForJob } from "./offer-data";
 import { HOUSE_PACT } from "./pact";
 import { decisionDaysFor, hoursOf, processForJob } from "./process";
+import { INTL_COMPANIES, INTL_JOBS } from "./intl-seed";
 import { COMPANIES, JOBS } from "./seed-data";
 import { GEO_COMPANIES, GEO_JOBS } from "./seed-geo";
-import { VOLUME_COMPANIES, VOLUME_JOBS, VOLUME_PACT } from "./seed-volume";
+import { VOLUME_COMPANIES, VOLUME_JOBS } from "./seed-volume";
 
-const ALL_COMPANIES = [...COMPANIES, ...GEO_COMPANIES, ...VOLUME_COMPANIES];
-const ALL_JOBS = [...JOBS, ...GEO_JOBS, ...VOLUME_JOBS];
+const ALL_COMPANIES = [...COMPANIES, ...GEO_COMPANIES, ...VOLUME_COMPANIES, ...INTL_COMPANIES];
+const ALL_JOBS = [...JOBS, ...GEO_JOBS, ...VOLUME_JOBS, ...INTL_JOBS];
 
 async function ensureMoatSchema(sql: Sql): Promise<void> {
   await sql.query(
@@ -152,6 +153,34 @@ async function ensureMoatSchema(sql: Sql): Promise<void> {
       created_at timestamptz not null default now()
     )
   `);
+  await sql.query(`
+    create table if not exists skill_ledger (
+      id serial primary key,
+      user_id text not null,
+      arena_id text not null,
+      skill_tag text not null,
+      title text not null,
+      score int not null,
+      passed boolean not null default false,
+      attempt_no int not null default 1,
+      evidence text not null default '',
+      created_at timestamptz not null default now()
+    )
+  `);
+  await sql.query(`create index if not exists skill_ledger_user_idx on skill_ledger (user_id, created_at desc)`);
+  await sql.query(`
+    create table if not exists arena_attempts (
+      id serial primary key,
+      user_id text not null,
+      arena_id text not null,
+      score int not null,
+      passed boolean not null default false,
+      missed_json text not null default '[]',
+      attempt_no int not null default 1,
+      created_at timestamptz not null default now()
+    )
+  `);
+  await sql.query(`create index if not exists arena_attempts_user_idx on arena_attempts (user_id, arena_id)`);
 }
 
 async function insertHousesAndJobs(sql: Sql): Promise<void> {
@@ -174,7 +203,9 @@ async function insertHousesAndJobs(sql: Sql): Promise<void> {
         ${c.hqCity}, ${c.hqCountry}, ${c.website}, ${c.foundedYear}, ${c.cultureScore},
         ${c.hiringVelocity}, ${JSON.stringify(c.values)}
       )
-      on conflict (slug) do nothing
+      on conflict (slug) do update set
+        about = excluded.about,
+        values_json = excluded.values_json
     `;
   }
 
@@ -204,7 +235,11 @@ async function insertHousesAndJobs(sql: Sql): Promise<void> {
         ${JSON.stringify(j.barriers ?? [])}, ${j.tryBuy ? JSON.stringify(j.tryBuy) : null},
         ${JSON.stringify(j.slots ?? [])}
       )
-      on conflict (slug) do nothing
+      on conflict (slug) do update set
+        team = excluded.team,
+        description = excluded.description,
+        benefits_json = excluded.benefits_json,
+        requirements_json = excluded.requirements_json
     `;
   }
 
@@ -256,8 +291,7 @@ async function insertHousesAndJobs(sql: Sql): Promise<void> {
     `;
   }
 
-  const [{ an }] = await sql<{ an: number }>`select count(*)::int as an from articles`;
-  if (an === 0) {
+  {
     const idBy = new Map((await sql<{ id: number; slug: string }>`select id, slug from companies`).map((r) => [r.slug, r.id]));
     const seedArts: {
       slug: string;
@@ -277,7 +311,7 @@ async function insertHousesAndJobs(sql: Sql): Promise<void> {
         slug: "consignation-fos-ce-que-le-lundi-enseigne",
         title: "Consignation à Fos : ce que le premier lundi enseigne",
         excerpt: "Un cadenas perso, une ligne arrêtée, un junior qui regarde. Relève écrit le geste.",
-        body: "La consignation n’est pas un module e-learning. C’est un lundi à 5 h 40, une presse, un cadenas qui n’est pas celui du collègue. Chez Relève on arrête la ligne pour former — c’est écrit, c’est payé. Les maisons qui « formeront sur le tas » n’ont pas de page ici.\n\nLe dossier PDF de 40 pages Pôle emploi ne dit pas ça. Une épreuve machine de trois minutes, si.",
+        body: "La consignation n’est pas un module e-learning. C’est un lundi à 5 h 40, une presse, un cadenas qui n’est pas celui du collègue. Chez Relève on arrête la ligne pour former — c’est écrit, c’est payé. Les entreprises qui « formeront sur le tas » n’ont pas de page ici.\n\nLe dossier PDF de 40 pages Pôle emploi ne dit pas ça. Une épreuve machine de trois minutes, si.",
         kind: "article",
         tags: ["maintenance", "Fos", "consignation"],
         authorKind: "company",
@@ -325,9 +359,9 @@ async function insertHousesAndJobs(sql: Sql): Promise<void> {
       },
       {
         slug: "carnet-consignation-malik",
-        title: "Carnet : trois arrêts de ligne que j’ai tenus",
+        title: "Preuves : trois arrêts de ligne que j’ai tenus",
         excerpt: "Un technicien Fos écrit ses preuves. Ça remplace le CV chronologique.",
-        body: "2019 : presse 4, vanne bloquée, consignation à deux. 2022 : CACES 3 passé maison. 2025 : j’ai dit non à un 3×8 non écrit. C’est le brief. Les maisons qui veulent un PDF de 4 pages ne sont pas ici.",
+        body: "2019 : presse 4, vanne bloquée, consignation à deux. 2022 : CACES 3 passé en interne. 2025 : j’ai dit non à un 3×8 non écrit. C’est le brief. Les entreprises qui veulent un PDF de 4 pages ne sont pas ici.",
         kind: "note",
         tags: ["maintenance", "brief", "Fos"],
         authorKind: "candidate",
@@ -357,7 +391,9 @@ async function insertHousesAndJobs(sql: Sql): Promise<void> {
           ${a.authorKind}, ${a.authorName}, ${a.authorSlug},
           ${a.companySlug ? (idBy.get(a.companySlug) ?? null) : null}, ${true}
         )
-        on conflict (slug) do nothing
+        on conflict (slug) do update set
+          excerpt = excluded.excerpt,
+          body = excluded.body
       `;
     }
   }
@@ -435,9 +471,16 @@ async function ensureOfferBackfill(sql: Sql): Promise<void> {
 }
 
 export async function ensureSeeded(sql: Sql): Promise<void> {
-  await ensureMoatSchema(sql);
-  await insertHousesAndJobs(sql);
-  await ensureMoatBackfill(sql);
-  await ensureOfferBackfill(sql);
-  await seedHub(sql);
+  const g = globalThis as typeof globalThis & { __veraSeeded__?: Promise<void> };
+  g.__veraSeeded__ ??= (async () => {
+    await ensureMoatSchema(sql);
+    await insertHousesAndJobs(sql);
+    await ensureMoatBackfill(sql);
+    await ensureOfferBackfill(sql);
+    await seedHub(sql);
+  })().catch((err) => {
+    g.__veraSeeded__ = undefined;
+    throw err;
+  });
+  return g.__veraSeeded__;
 }

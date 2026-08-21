@@ -64,9 +64,9 @@ export const writeCoverLetter = createServerFn({ method: "POST" })
     }>`select shipped_json, refuse_json, next_chapter from briefs where user_id = ${context.userId} limit 1`;
     const p = profiles[0];
     const result = await complete(
-      "Tu es un rédacteur d’emploi francophone, sobre, précis. Pas de superlatifs, pas d’emoji, pas de « passionné ». 180 à 220 mots. Tutoiement interdit. Vousvoiement. Termine sans formule creuse. Appuie-toi d’abord sur le brief (livraisons, refus, suite), pas sur des qualités vagues. Adapte le ton à la culture de la maison : parole, hiérarchie, canal écrit vs oral, langues. Un candidat qui ignore le style de travail se fait recaler.",
+      "Tu es un rédacteur d’emploi francophone, sobre, précis. Pas de superlatifs, pas d’emoji, pas de « passionné ». 180 à 220 mots. Tutoiement interdit. Vousvoiement. Termine sans formule creuse. Appuie-toi d’abord sur le brief (livraisons, refus, suite), pas sur des qualités vagues. Adapte le ton à la culture de l’entreprise : parole, hiérarchie, canal écrit vs oral, langues. Un candidat qui ignore le style de travail se fait recaler.",
       `Écris une lettre de motivation courte pour ${job.title} chez ${job.company} (${job.city}).
-Culture maison : ${culture.essay}
+Culture entreprise : ${culture.essay}
 Management : ${culture.management}
 Semaine : ${culture.weekStyle}
 Langues : ${culture.languages.join(", ")}
@@ -113,7 +113,7 @@ export const explainMatch = createServerFn({ method: "POST" })
     }>`select headline, skills_json, seniority from profiles where user_id = ${context.userId} limit 1`;
     const p = profiles[0];
     return complete(
-      "Tu es un conseiller carrière francophone, franc, utile. 120 mots max. Pas d’emoji. Dis ce qui colle (compétences ET fit culturel), ce qui manque, et UNE question à poser en entretien — adaptée au style de la maison.",
+      "Tu es un conseiller carrière francophone, franc, utile. 120 mots max. Pas d’emoji. Dis ce qui colle (compétences ET fit culturel), ce qui manque, et UNE question à poser en entretien — adaptée au style de l’entreprise.",
       `Score Vera : ${data.match ?? "inconnu"} / 100.
 Poste : ${job.title} chez ${job.company}, séniorité ${job.seniority}, compétences ${job.skills_json}.
 Culture : ${culture.essay} Langues ${culture.languages.join(", ")}. Interculturel ${culture.intercultural}.
@@ -148,7 +148,7 @@ Axes : parole ${culture.axes.directness}, hiérarchie ${culture.axes.hierarchy},
     `;
     const p = profiles[0];
     const result = await complete(
-      "Tu es un préparateur d’entretien francophone. Concret, un peu sec. Structure : 1) ce qu’ils cherchent vraiment (compétences + culture) 2) une réponse type en 6–8 phrases, calée sur le style de la maison 3) le piège interculturel à éviter. Pas d’emoji.",
+      "Tu es un préparateur d’entretien francophone. Concret, un peu sec. Structure : 1) ce qu’ils cherchent vraiment (compétences + culture) 2) une réponse type en 6–8 phrases, calée sur le style de l’entreprise 3) le piège interculturel à éviter. Pas d’emoji.",
       `Offre : ${jobLine}
 Profil : ${p?.headline ?? ""}. ${p?.bio ?? ""}. Compétences ${p?.skills_json ?? "[]"}.
 Demande : ${data.question.slice(0, 600)}`,

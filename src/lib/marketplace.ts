@@ -33,7 +33,7 @@ export const SERVICES: Service[] = [
     vendor: "Maison Lise",
     kind: "coaching",
     price: "220 € / mois / personne",
-    blurb: "La psychologue déjà en place chez Lise, ouverte aux maisons qui plafonnent leurs tournées.",
+    blurb: "La psychologue déjà en place chez Lise, ouverte aux entreprises qui plafonnent leurs tournées.",
     forHouses: ["lise", "mireille"],
   },
   {
@@ -42,7 +42,7 @@ export const SERVICES: Service[] = [
     vendor: "Vera",
     kind: "audit",
     price: "2 400 €",
-    blurb: "On lit vos délais réels. Si l’honneur affiché ment, on le dit. Les maisons sérieuses paient pour ça.",
+    blurb: "On lit vos délais réels. Si l’honneur affiché ment, on le dit. Les entreprises sérieuses paient pour ça.",
     forHouses: [],
   },
   {
@@ -60,7 +60,7 @@ export const SERVICES: Service[] = [
     vendor: "Kora Académie",
     kind: "formation",
     price: "sur devis",
-    blurb: "Pour les maisons qui promettent « habilitation payée » et tiennent. Places ouvertes hors Kora.",
+    blurb: "Pour les entreprises qui promettent « habilitation payée » et tiennent. Places ouvertes hors Kora.",
     forHouses: ["kora", "releve"],
   },
 ];

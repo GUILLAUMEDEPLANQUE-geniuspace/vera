@@ -63,7 +63,7 @@ export const Route = createFileRoute("/apprendre/$slug")({
         <p className="mt-8 text-sm">
           <Link to="/jobs" className="text-primary">Rejouer une épreuve</Link>
           {" · "}
-          <Link to="/me/carnet" className="text-primary">Carnet</Link>
+          <Link to="/me/carnet" className="text-primary">Mes preuves</Link>
         </p>
       </article>
     );

@@ -175,6 +175,7 @@ export type JobFilters = {
   collection?: string;
   pacte?: "solide" | "";
   pool?: string;
+  country?: string;
   sort?: "signal" | "recent" | "salary" | "honneur";
 };
 

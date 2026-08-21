@@ -188,7 +188,7 @@ export const claimSlot = createServerFn({ method: "POST" })
       join slots s on s.id = sc.slot_id
       where sc.user_id = ${context.userId} and sc.status = 'held' and s.weekday = ${slot[0].weekday}
     `;
-    if ((clash[0]?.n ?? 0) > 0) return { ok: false as const, error: "Vous tenez déjà ce jour — deux maisons, deux jours." };
+    if ((clash[0]?.n ?? 0) > 0) return { ok: false as const, error: "Vous tenez déjà ce jour — deux entreprises, deux jours." };
     await sql`
       insert into slot_claims (user_id, slot_id, status) values (${context.userId}, ${slotId}, ${"held"})
       on conflict (user_id, slot_id) do update set status = ${"held"}

@@ -25,12 +25,12 @@ export const Route = createFileRoute("/savoirs/$cat/$slug")({
     return { article, related: related.slice(0, 6), drive };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Fiche | Vera Savoirs" }] };
+    if (!loaderData) return { meta: [{ title: "Fiche | Vera" }] };
     const { article } = loaderData;
     const url = `${BRAND_HOST}/savoirs/${article.catSlug}/${article.slug}`;
     return {
       meta: [
-        { title: `${article.title} | Vera Savoirs` },
+        { title: `${article.title} | Vera` },
         { name: "description", content: article.excerpt.slice(0, 170) },
         { name: "robots", content: "index,follow" },
         { property: "og:title", content: article.title },
@@ -71,7 +71,7 @@ function ArticlePage() {
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <nav className="text-xs text-muted">
         <Link to="/savoirs" className="hover:text-ink">
-          Savoirs
+          Fiches
         </Link>
         {" · "}
         <Link to="/savoirs/$cat" params={{ cat: article.catSlug }} className="hover:text-ink">
@@ -79,12 +79,12 @@ function ArticlePage() {
         </Link>
       </nav>
       <p className="mt-3 text-xs tracking-wide text-muted uppercase">
-        {article.catTitle} · {article.minutes} min · <Term k="proof">Proof Score</Term> {article.proofScore}
+        {article.catTitle} · {article.minutes} min · <Term k="proof">Score de preuve</Term> {article.proofScore}
       </p>
       <h1 className="mt-2 font-serif text-4xl sm:text-5xl">{article.title}</h1>
       <p className="mt-3 text-lg text-muted">{article.excerpt}</p>
       <p className="mt-2 text-xs text-subtle">
-        {article.authorName} · {article.authorRole === "house" ? "maison" : article.authorRole === "candidate" ? "candidat" : "Vera"}
+        {article.authorName} · {article.authorRole === "house" ? "entreprise" : article.authorRole === "candidate" ? "candidat" : "Vera"}
       </p>
 
       <div className="mt-8 max-w-prose space-y-4 text-base leading-relaxed">

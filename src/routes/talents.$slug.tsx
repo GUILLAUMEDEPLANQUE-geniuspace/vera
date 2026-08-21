@@ -26,7 +26,7 @@ export const Route = createFileRoute("/talents/$slug")({
       <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
         <nav className="text-xs text-muted">
           <Link to="/" className="hover:text-ink">Vera</Link>
-          {" · Carnets"}
+          {" · Preuves"}
         </nav>
         <h1 className="mt-4 font-serif text-4xl">{name}</h1>
         <p className="mt-2 text-muted">Portfolio d’aptitudes : ce qui a été écrit et tenu, pas un PDF.</p>

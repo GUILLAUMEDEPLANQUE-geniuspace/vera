@@ -267,7 +267,7 @@ function PostInner() {
             onChange={(e) => setPactOk(e.target.checked)}
           />
           <span>
-            Je m’engage à répondre sous {form.slaDays} jours. Un retard baisse l’honneur public de la maison. C’est le
+            Je m’engage à répondre sous {form.slaDays} jours. Un retard baisse l’honneur public de l’entreprise. C’est le
             prix d’être sur Vera.
           </span>
         </label>
@@ -294,13 +294,13 @@ function PostInner() {
             ))}
           </select>
         </Field>
-        <Field label="Vivier (optionnel)">
+        <Field label="Bassin (optionnel)">
           <select
             className="h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm"
             value={form.pool ?? ""}
             onChange={(e) => setForm({ ...form, pool: e.target.value || "" })}
           >
-            <option value="">Aucun — vivier classique</option>
+            <option value="">Aucun — recrutement classique</option>
             {VIVIERS.map((v) => (
               <option key={v.pool} value={v.pool}>
                 {v.name}
@@ -323,7 +323,7 @@ function PostInner() {
           </ul>
         </aside>
         <fieldset className="space-y-4 rounded-xl border border-border p-4">
-          <legend className="px-1 text-sm font-medium">Grille maison (public, pondéré)</legend>
+          <legend className="px-1 text-sm font-medium">Grille entreprise (public, pondéré)</legend>
           <p className="text-xs text-muted">
             Ajoutez autant de critères que le métier l’exige — mandarin, guanxi, consignation. Ils s’affichent sur
             l’offre et entrent dans le score. Pas de scoring fantôme dans un ATS.

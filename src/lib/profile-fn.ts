@@ -170,13 +170,13 @@ export const applyToJob = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const sql = await getSql();
     await ensureSeeded(sql);
-    const houses = await sql<{ sla: number }>`
+    const companies = await sql<{ sla: number }>`
       select c.response_sla_days as sla
       from jobs j join companies c on c.id = j.company_id
       where j.id = ${data.jobId}
       limit 1
     `;
-    const sla = Number(houses[0]?.sla ?? 10);
+    const sla = Number(companies[0]?.sla ?? 10);
     const attached = await briefReady(sql, context.userId);
     const prior = await sql<{ n: number }>`
       select count(*)::int as n from applications
@@ -440,7 +440,7 @@ export const postJob = createServerFn({ method: "POST" })
     const sql = await getSql();
     await ensureSeeded(sql);
     const sla = [7, 10, 14, 21].includes(data.slaDays) ? data.slaDays : 10;
-    const companySlug = slugify(data.companyName) || "maison";
+    const companySlug = slugify(data.companyName) || "entreprise";
     const existing = await sql<{ id: number }>`select id from companies where slug = ${companySlug} limit 1`;
     let companyId = existing[0]?.id;
     if (!companyId) {
@@ -450,7 +450,7 @@ export const postJob = createServerFn({ method: "POST" })
           culture_score, hiring_velocity, values_json, response_sla_days,
           honor_score, honor_answered, honor_due
         ) values (
-          ${companySlug}, ${data.companyName}, ${"Nouvelle maison sur Vera"},
+          ${companySlug}, ${data.companyName}, ${"Nouvelle entreprise sur Vera"},
           ${"Entreprise ajoutée par un recruteur sur Vera."}, ${"Autre"},
           ${"1–50"}, ${data.city}, ${data.country}, ${70}, ${"steady"}, ${"[]"},
           ${sla}, ${100}, ${0}, ${0}
@@ -478,7 +478,7 @@ export const postJob = createServerFn({ method: "POST" })
         label: custom.label.trim(),
         kind: custom.kind,
         weight: custom.weight && custom.weight > 0 ? Math.min(40, Math.round(custom.weight)) : 18,
-        hint: custom.hint?.trim() || "Critère maison, public.",
+        hint: custom.hint?.trim() || "Critère entreprise, public.",
         options: custom.kind === "choice" ? (custom.options ?? []).filter(Boolean) : undefined,
         min: custom.kind === "scale" ? 1 : undefined,
         max: custom.kind === "scale" ? 5 : undefined,

@@ -62,7 +62,7 @@ export function computeVerdict(input: {
     score -= 22;
     reasons.push({
       tone: "bad",
-      text: `Honneur ${input.honorScore}. Cette maison manque trop souvent sa date.`,
+      text: `Honneur ${input.honorScore}. Cette entreprise manque trop souvent sa date.`,
     });
   } else if (input.honorScore < 82) {
     score -= 8;

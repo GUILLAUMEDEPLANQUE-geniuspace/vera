@@ -15,7 +15,7 @@ export const Route = createFileRoute("/drive/$id")({
     if (!loaderData) return { meta: [{ title: "Drive | Vera" }] };
     return {
       meta: [
-        { title: `${loaderData.title} | GeniusDrive Vera` },
+        { title: `${loaderData.title} | Fichiers Vera` },
         { name: "description", content: loaderData.transcript?.slice(0, 170) ?? loaderData.title },
       ],
       links: [{ rel: "canonical", href: `${BRAND_HOST}/drive/${loaderData.id}` }],
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/drive/$id")({
         {asset.entityType === "knowledge" && asset.entityKey && (
           <p className="mt-6 text-sm">
             <Link to="/savoirs" className="text-primary">
-              Retour Savoirs
+              Retour fiches
             </Link>
             {" · fiche "}
             {asset.entityKey}

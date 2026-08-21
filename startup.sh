@@ -1,18 +1,27 @@
 #!/bin/sh
 set -eu
 cd /workspace
-if ! curl -sf -o /dev/null --max-time 2 http://127.0.0.1:8080/; then
-  npm run dev >>/tmp/app-startup.log 2>&1 &
-  i=0
-  while [ "$i" -lt 40 ]; do
-    if curl -sf -o /dev/null --max-time 1 http://127.0.0.1:8080/; then
-      break
-    fi
-    i=$((i + 1))
-    sleep 0.4
-  done
+LOG=/tmp/app-startup.log
+
+is_up() {
+  curl -sf -o /dev/null --max-time 3 http://127.0.0.1:8080/
+}
+
+if is_up; then
+  exit 0
 fi
-# Attach the live-preview proxy to this app (survives hibernate/revive).
-curl -sf -o /dev/null --max-time 2 -X POST http://127.0.0.1:6015/__control/target \
-  -H 'content-type: application/json' \
-  -d '{"port":8080}' || true
+
+npm run dev >>"$LOG" 2>&1 &
+
+# Preview reporter waits ~15s after this script exits. Don't exit until
+# the app actually answers, or the UI stays on "Preview stopped".
+n=0
+while [ "$n" -lt 60 ]; do
+  if is_up; then
+    exit 0
+  fi
+  n=$((n + 1))
+  sleep 1
+done
+echo "startup: preview not healthy after 60s" >>"$LOG"
+exit 1

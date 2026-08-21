@@ -14,14 +14,14 @@ export function SkillPath({
   return (
     <section className="mt-10 rounded-xl border border-border bg-surface p-5">
       <p className="text-xs tracking-wide text-primary uppercase">
-        <Term k="preform">Préformer</Term>
+        <Term k="preform">Module</Term>
         {" · "}
-        <Term k="savoirs">Savoirs</Term>
+        <Term k="savoirs">Fiches</Term>
       </p>
       <h2 className="mt-1 font-serif text-2xl">Le geste qui manque, avant de postuler</h2>
       <p className="mt-2 text-sm leading-relaxed text-muted">
         {missing.length
-          ? `Il manque encore : ${missing.slice(0, 6).join(", ")}. ${totalMinutes} min dans Savoirs, puis l’épreuve.`
+          ? `Il manque encore : ${missing.slice(0, 6).join(", ")}. ${totalMinutes} min de fiches, puis l’épreuve.`
           : `Même si le profil est proche, ces fiches tiennent le geste de l’offre. ${totalMinutes} min.`}
       </p>
       <ul className="mt-4 space-y-3">
@@ -35,7 +35,7 @@ export function SkillPath({
               {p.title}
             </Link>
             <p className="mt-1 text-xs text-muted">
-              {p.minutes} min · <Term k="proof">Proof Score</Term> {p.proofScore}
+              {p.minutes} min · <Term k="proof">Score de preuve</Term> {p.proofScore}
             </p>
             <p className="mt-1 text-sm text-muted">{p.excerpt}</p>
           </li>
@@ -43,7 +43,7 @@ export function SkillPath({
       </ul>
       <p className="mt-4 text-sm">
         <Link to="/savoirs" className="text-primary">
-          Tout le hub Savoirs
+          Toutes les fiches
         </Link>
       </p>
     </section>
