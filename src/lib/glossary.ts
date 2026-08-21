@@ -65,9 +65,9 @@ export const GLOSSARY: GlossaryTerm[] = [
     key: "epreuve",
     label: "Épreuve",
     definition:
-      "Micro-simulation métier 2–8 min (consignation, circuit, machine, soin). Score 0–100. Coordonnées après, pas avant.",
+      "Micro-simulation métier 2–8 min (consignation, circuit, machine, soin). Score 0–100. Un recruteur l’ajoute par CCK, guide étape par étape.",
     candidate: "Vous montrez un geste. Un 55 n’est pas un silence : c’est un module d’apprentissage.",
-    house: "Vous voyez qui tient, pas qui rédige. L’épreuve remplace le tri CV.",
+    house: "Vous voyez qui tient, pas qui rédige. L’épreuve se construit dans le CCK, pas dans un PDF.",
   },
   {
     key: "trybuy",
@@ -171,12 +171,20 @@ export const GLOSSARY: GlossaryTerm[] = [
     house: "Publiez le geste, pas la marque. Les fiches attirent les tenus, pas les curieux.",
   },
   {
+    key: "cck",
+    label: "CCK",
+    definition:
+      "Content Construction Kit : types (offre, parcours, journal, RDV), champs (les kinds JoomCCK : texte, médias, relations), valeurs filtrables. Une maison ajoute des champs sans ticket produit.",
+    candidate: "Vous filtrez les offres sur des champs publics (épreuve, salaire, vivier), pas sur des mots-clés vagues.",
+    house: "Vous étendez le type Offre. L’épreuve est un champ, pas un plugin à part.",
+  },
+  {
     key: "drive",
     label: "Fichiers",
     definition:
-      "Fichiers et vidéos liés aux offres et aux fiches. Lecteur intégré, vidéo en chunks, preuves hashables.",
+      "Médiathèque maison : dossiers, image, galerie, vidéo, audio, PDF. Upload recruteur, attache CCK, chunks HTTP Range, transcript. Plus qu’un gestionnaire de fichiers.",
     candidate: "Vous lisez le schéma, la visite, le mode opératoire — sans télécharger un ZIP mort.",
-    house: "Le Drive n’est pas un cloud. C’est la preuve à côté du poste.",
+    house: "Dossiers par poste, pas un FTP. Un fichier s’attache à l’offre et à l’épreuve.",
   },
   {
     key: "proof",
@@ -207,6 +215,21 @@ export const GLOSSARY: GlossaryTerm[] = [
       "Alignement des codes (décision, preuve, hiérarchie, silence) — France, Chine, Japon, USA. Ne remplace pas le geste.",
     candidate: "Le fit explique le malentendu, il ne juge pas votre valeur.",
     house: "Un commercial guanxi n’est pas un commercial nemawashi. Nommez-le.",
+  },
+  {
+    key: "academie",
+    label: "Académie",
+    definition:
+      "Espace formation de l’entreprise, branché à sa fiche Vera. Parcours salariés, modules candidats, attestations. Pas un LMS déconnecté.",
+    candidate: "Vous voyez ce que les salariés tiennent. Certains modules s’ouvrent avant de postuler.",
+    house: "Votre catalogue est public. Les scores restent internes. Un client Vera n’a plus d’académie orpheline.",
+  },
+  {
+    key: "attestation",
+    label: "Attestation",
+    definition: "Preuve qu’un parcours a été tenu (modules + quiz ≥ 70). Portable avec le passeport.",
+    candidate: "Un module tenu vaut plus qu’un adjectif sur un CV.",
+    house: "Vous lisez qui a tenu, pas qui a cliqué « suivant ».",
   },
   {
     key: "preform",

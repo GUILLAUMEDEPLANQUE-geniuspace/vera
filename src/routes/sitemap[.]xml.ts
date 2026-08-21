@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { listAcademySitemap } from "@/lib/academy-fn";
 import { CITIES, DEPTS, EU_CITIES, REGIONS } from "@/lib/geo";
 import { LESSONS } from "@/lib/lessons";
 import { listCompanies, listJobs } from "@/lib/jobs-fn";
@@ -23,12 +24,13 @@ export const Route = createFileRoute("/sitemap.xml")({
     handlers: {
       GET: async ({ request }) => {
         const origin = requestOrigin(request);
-        const [jobs, companies, articles, cats, savoirs] = await Promise.all([
+        const [jobs, companies, articles, cats, savoirs, academyUrls] = await Promise.all([
           listJobs({ data: {} }),
           listCompanies(),
           listArticles(),
           listHubCategories(),
           listHubArticles({ data: {} }),
+          listAcademySitemap(),
         ]);
         const today = new Date().toISOString().slice(0, 10);
         const urls: { loc: string; lastmod: string; changefreq: string; priority: string }[] = [
@@ -41,6 +43,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { loc: `${origin}/lieux/departements`, lastmod: today, changefreq: "weekly", priority: "0.7" },
           { loc: `${origin}/metiers`, lastmod: today, changefreq: "weekly", priority: "0.8" },
           { loc: `${origin}/viviers`, lastmod: today, changefreq: "weekly", priority: "0.7" },
+          { loc: `${origin}/academies`, lastmod: today, changefreq: "daily", priority: "0.8" },
           { loc: `${origin}/savoirs`, lastmod: today, changefreq: "daily", priority: "0.9" },
           { loc: `${origin}/drive`, lastmod: today, changefreq: "weekly", priority: "0.7" },
           { loc: `${origin}/lexique`, lastmod: today, changefreq: "monthly", priority: "0.6" },
@@ -109,10 +112,32 @@ export const Route = createFileRoute("/sitemap.xml")({
             priority: "0.8",
           });
           urls.push({
+            loc: `${origin}/companies/${c.slug}/academie`,
+            lastmod: today,
+            changefreq: "weekly",
+            priority: "0.7",
+          });
+          for (const tab of ["offres", "journal", "preuves", "equipes", "medias", "rdv"] as const) {
+            urls.push({
+              loc: `${origin}/companies/${c.slug}/${tab}`,
+              lastmod: today,
+              changefreq: "weekly",
+              priority: "0.6",
+            });
+          }
+          urls.push({
             loc: `${origin}/feed/maisons/${c.slug}.md`,
             lastmod: today,
             changefreq: "weekly",
             priority: "0.3",
+          });
+        }
+        for (const a of academyUrls) {
+          urls.push({
+            loc: `${origin}/companies/${a.company}/academie/${a.course}`,
+            lastmod: today,
+            changefreq: "weekly",
+            priority: "0.6",
           });
         }
         for (const j of jobs) {

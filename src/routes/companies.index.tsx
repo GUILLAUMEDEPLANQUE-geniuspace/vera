@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CompanyMark } from "@/components/company-mark";
 import { Badge } from "@/components/ui/badge";
+import { mediaOf } from "@/lib/company-media";
 import { listCompanies } from "@/lib/jobs-fn";
 import { honorCaption, honorTone } from "@/lib/pact";
 import { BRAND_HOST } from "@/lib/origin";
@@ -48,13 +49,17 @@ function CompaniesPage() {
         .
       </p>
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        {companies.map((c) => (
+        {companies.map((c) => {
+          const media = mediaOf(c.slug, c.industry);
+          return (
           <Link
             key={c.id}
             to="/companies/$slug"
             params={{ slug: c.slug }}
-            className="rounded-xl border border-border bg-surface p-5 transition-transform duration-200 hover:-translate-y-0.5"
+            className="overflow-hidden rounded-xl border border-border bg-surface transition-transform duration-200 hover:-translate-y-0.5"
           >
+            <img src={media.cover} alt="" className="h-36 w-full object-cover" />
+            <div className="p-5">
             <div className="flex items-start gap-4">
               <CompanyMark name={c.name} slug={c.slug} className="size-14 text-lg" />
               <div className="min-w-0 flex-1">
@@ -62,6 +67,7 @@ function CompaniesPage() {
                 <p className="mt-1 text-sm text-muted">{c.tagline}</p>
                 <p className="mt-3 text-xs text-subtle">
                   {c.industry} · {c.hqCity} · {c.sizeBand} · {c.jobCount} offre{c.jobCount > 1 ? "s" : ""}
+                  {c.courseCount ? ` · ${c.courseCount} parcours` : ""}
                 </p>
               </div>
               <div className="shrink-0 text-right">
@@ -71,8 +77,10 @@ function CompaniesPage() {
                 </Badge>
               </div>
             </div>
+            </div>
           </Link>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

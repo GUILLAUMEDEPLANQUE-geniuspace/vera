@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { listAcademies, listAcademySitemap } from "@/lib/academy-fn";
 import { CITIES, DEPTS, REGIONS } from "@/lib/geo";
 import { listCompanies, listJobs } from "@/lib/jobs-fn";
 import { listArticles } from "@/lib/journal-fn";
@@ -13,12 +14,14 @@ export const Route = createFileRoute("/llms.txt")({
     handlers: {
       GET: async ({ request }) => {
         const origin = requestOrigin(request);
-        const [jobs, companies, articles, cats, savoirs] = await Promise.all([
+        const [jobs, companies, articles, cats, savoirs, academies, academyUrls] = await Promise.all([
           listJobs({ data: {} }),
           listCompanies(),
           listArticles(),
           listHubCategories(),
           listHubArticles({ data: {} }),
+          listAcademies(),
+          listAcademySitemap(),
         ]);
         const lines = [
           `# Vera`,
@@ -77,10 +80,18 @@ export const Route = createFileRoute("/llms.txt")({
           `- Tension territoriale: ${origin}/tension`,
           `- PPQC (Pay-Per-Qualified-Candidate): ${origin}/ppqc`,
           ``,
+          `## Académies (formation salariés)`,
+          `- Hub: ${origin}/academies`,
+          ...academies.map(
+            (h) =>
+              `- [Académie ${h.name}](${origin}/companies/${h.slug}/academie): ${h.courseCount} parcours, ${h.memberCount} salariés, ${h.industry}`,
+          ),
+          `- Parcours: ${academyUrls.length} modules indexés, branchés à la fiche entreprise.`,
+          ``,
           `## Entreprises`,
           ...companies.map(
             (c) =>
-              `- [${c.name}](${origin}/companies/${c.slug}) (${origin}/feed/maisons/${c.slug}.md): ${c.industry}, ${c.hqCity}, honneur ${c.honorScore}, ${c.jobCount} offre(s)`,
+              `- [${c.name}](${origin}/companies/${c.slug}) (${origin}/feed/maisons/${c.slug}.md): ${c.industry}, ${c.hqCity}, honneur ${c.honorScore}, ${c.jobCount} offre(s) — onglets /offres /academie /journal /preuves /equipes /medias /rdv`,
           ),
           ``,
           `## Offres`,
@@ -96,7 +107,7 @@ export const Route = createFileRoute("/llms.txt")({
           `- Micro-simulation métier obligatoire avant envoi des coordonnées. Grilles publiques.`,
           `- Matching compétences + fit culturel (langues, axes). Talent Scarcity Score.`,
           `- Profils oubliés : seniors à la journée, binômes, RSA + freins, multi-activité, reprise.`,
-          `- PPQC: publication gratuite, paiement si épreuve tenue + grille ≥ 55. Prix = geo-tension.`,
+          `- Académie salariés : chaque entreprise a un catalogue public lié à sa fiche. Quiz ≥ 70, attestation.`,
           `- Marketplace: ${origin}/marche`,
         ];
         return new Response(lines.join("\n") + "\n", {

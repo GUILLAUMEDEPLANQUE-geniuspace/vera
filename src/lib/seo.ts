@@ -184,6 +184,16 @@ export function companyJsonLd(
       numberOfEmployees: { "@type": "QuantitativeValue", value: c.sizeBand },
       knowsAbout: c.industry,
       knowsLanguage: culture.languages,
+      department: {
+        "@type": "EducationalOrganization",
+        name: `Académie ${c.name}`,
+        url: `${url}/academie`,
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: `Formation ${c.name}`,
+        url: `${url}/academie`,
+      },
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: (c.honorScore / 20).toFixed(1),
@@ -334,4 +344,57 @@ export function articleJsonLd(
     educationalUse: "professional training",
     isAccessibleForFree: true,
   };
+}
+
+export function courseJsonLd(input: {
+  title: string;
+  description: string;
+  url: string;
+  provider: string;
+  minutes: number;
+  audience: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: input.title,
+    description: input.description,
+    url: input.url,
+    inLanguage: "fr-FR",
+    isAccessibleForFree: true,
+    timeRequired: `PT${input.minutes}M`,
+    educationalLevel: input.audience === "candidate" ? "pre-hire" : "professional",
+    provider: { "@type": "Organization", name: input.provider },
+    publisher: { "@type": "Organization", name: "Vera" },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      instructor: { "@type": "Organization", name: input.provider },
+    },
+  };
+}
+
+export function academyJsonLd(
+  company: { name: string; slug: string },
+  origin: string,
+  courses: { title: string; slug: string }[],
+): Record<string, unknown>[] {
+  const url = `${origin}/companies/${company.slug}/academie`;
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      name: `Académie ${company.name}`,
+      url,
+      parentOrganization: {
+        "@type": "Organization",
+        name: company.name,
+        url: `${origin}/companies/${company.slug}`,
+      },
+    },
+    itemListJsonLd(
+      `Parcours ${company.name}`,
+      courses.map((c) => ({ name: c.title, url: `${url}/${c.slug}` })),
+    ),
+  ];
 }

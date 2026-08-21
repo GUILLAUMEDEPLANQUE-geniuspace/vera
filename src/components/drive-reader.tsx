@@ -64,6 +64,9 @@ export function DriveReader({ asset }: { asset: DriveAsset }) {
       {asset.assetType === "video" && (
         <video className="mt-6 w-full rounded-lg bg-ink" src={src} controls playsInline preload="metadata" />
       )}
+      {asset.assetType === "audio" && (
+        <audio className="mt-6 w-full" src={src} controls preload="metadata" />
+      )}
       {asset.assetType === "image" && (
         <img className="mt-6 w-full rounded-lg" src={src} alt={asset.title} />
       )}

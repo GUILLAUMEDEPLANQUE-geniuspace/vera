@@ -18,10 +18,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   }, [locale]);
   const nav = [
     { to: "/jobs", label: en ? "Jobs" : "Emplois" },
-    { to: "/europe", label: "Europe" },
-    { to: "/preuve", label: en ? "Trial" : "Épreuve" },
-    { to: "/passport", label: en ? "Passport" : "Passeport" },
+    { to: "/academies", label: en ? "Academies" : "Académies" },
     { to: "/companies", label: en ? "Companies" : "Entreprises" },
+    { to: "/europe", label: "Europe" },
   ] as const;
 
   return (
@@ -71,8 +70,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <Link to="/marches" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
               {en ? "Markets" : "Marchés"}
             </Link>
-            <Link to="/apprendre" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              {en ? "Learn" : "Apprendre"}
+            <Link to="/me/formation" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
+              {en ? "My training" : "Ma formation"}
             </Link>
             <Link to="/savoirs" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
               {en ? "Guides" : "Fiches"}
@@ -117,6 +116,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <Link to="/marches" className="hover:text-ink">
               {en ? "Markets" : "Marchés"}
             </Link>
+            <Link to="/academies" className="hover:text-ink">
+              {en ? "Academies" : "Académies"}
+            </Link>
             <Link to="/apprendre" className="hover:text-ink">
               {en ? "Learn" : "Apprendre"}
             </Link>
@@ -152,6 +154,9 @@ function AuthSlot({ en }: { en: boolean }) {
         <div className="hidden items-center gap-3 sm:flex">
           <Link to="/passport" className="text-sm font-medium text-muted hover:text-ink">
             {en ? "Passport" : "Passeport"}
+          </Link>
+          <Link to="/me/formation" className="text-sm font-medium text-muted hover:text-ink">
+            {en ? "Training" : "Formation"}
           </Link>
           <Link to="/me" className="text-sm font-medium text-muted hover:text-ink">
             {en ? "My space" : "Mon espace"}

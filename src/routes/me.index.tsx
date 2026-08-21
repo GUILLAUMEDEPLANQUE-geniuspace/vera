@@ -108,12 +108,24 @@ function MeInner({ name }: { name: string }) {
         Le signal de chaque offre se calcule ici. Le brief, lui, est ce que les entreprises lisent.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
+        <Link to="/me/formation" className="text-sm font-medium text-primary">
+          Ma formation
+        </Link>
+        <span className="text-subtle">·</span>
         <Link to="/me/carnet" className="text-sm font-medium text-primary">
           Mes preuves
         </Link>
         <span className="text-subtle">·</span>
         <Link to="/me/maison" className="text-sm font-medium text-primary">
           Entreprise
+        </Link>
+        <span className="text-subtle">·</span>
+        <Link to="/me/epreuve" className="text-sm font-medium text-primary">
+          Épreuve
+        </Link>
+        <span className="text-subtle">·</span>
+        <Link to="/me/drive" className="text-sm font-medium text-primary">
+          Drive
         </Link>
         <span className="text-subtle">·</span>
         <Link to="/me/creneaux" className="text-sm font-medium text-primary">
