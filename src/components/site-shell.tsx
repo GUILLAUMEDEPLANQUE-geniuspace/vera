@@ -1,33 +1,41 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
+import { useEffect, useState } from "react";
+import { LocaleToggle } from "@/components/locale-toggle";
 import { Button } from "@/components/ui/button";
+import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
+import { useCurrentUserState } from "@/lib/auth/use-current-user";
+import { useLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
-
-const NAV = [
-  { to: "/jobs", label: "Emplois" },
-  { to: "/companies", label: "Maisons" },
-  { to: "/journal", label: "Journal" },
-  { to: "/savoirs", label: "Savoirs" },
-  { to: "/lieux", label: "Lieux" },
-] as const;
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const [locale] = useLocale();
+  const en = locale === "en";
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+  const nav = [
+    { to: "/jobs", label: en ? "Jobs" : "Emplois" },
+    { to: "/europe", label: "Europe" },
+    { to: "/preuve", label: en ? "Trial" : "Épreuve" },
+    { to: "/passport", label: en ? "Passport" : "Passeport" },
+    { to: "/companies", label: en ? "Companies" : "Entreprises" },
+  ] as const;
 
   return (
     <div className="flex min-h-dvh flex-col">
       <header className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur-sm">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          <Link to="/" className="flex items-baseline gap-2">
+        <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:gap-4 sm:px-6">
+          <Link to="/" className="flex shrink-0 items-baseline gap-2">
             <span className="font-serif text-2xl tracking-tight text-primary">Vera</span>
-            <span className="hidden text-xs tracking-wide text-muted sm:inline">L’emploi, lisible.</span>
+            <span className="hidden text-xs tracking-wide text-muted 2xl:inline">
+              {en ? "Proof before the degree." : "L’emploi, lisible."}
+            </span>
           </Link>
-          <nav className="hidden items-center gap-5 lg:flex">
-            {NAV.map((item) => (
+          <nav className="hidden min-w-0 flex-1 items-center justify-end gap-4 pr-3 lg:flex xl:gap-5">
+            {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
@@ -40,12 +48,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
-            <AuthSlot />
+          <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-0">
+            <LocaleToggle />
+            <AuthSlot en={en} />
             <button
               type="button"
               className="grid size-11 place-items-center rounded-lg lg:hidden"
-              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-label={open ? (en ? "Close menu" : "Fermer le menu") : en ? "Open menu" : "Ouvrir le menu"}
               onClick={() => setOpen((v) => !v)}
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -54,55 +63,33 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </div>
         {open && (
           <nav className="border-t border-border px-4 py-3 lg:hidden">
-            {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="block py-3 text-base text-ink"
-              >
+            {nav.map((item) => (
+              <Link key={item.to} to={item.to} onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
                 {item.label}
               </Link>
             ))}
-            <Link to="/savoirs" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Savoirs
-            </Link>
-            <Link to="/drive" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Drive
-            </Link>
-            <Link to="/lexique" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Lexique
-            </Link>
-            <Link to="/marche" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Marché
-            </Link>
-            <Link to="/pacte" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Pacte
-            </Link>
-            <Link to="/me/brief" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Brief
-            </Link>
-            <Link to="/coach" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Coach
-            </Link>
-            <Link to="/me/carnet" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Carnet
-            </Link>
-            <Link to="/me/maison" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Maison
-            </Link>
-            <Link to="/guides" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Guides
+            <Link to="/marches" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
+              {en ? "Markets" : "Marchés"}
             </Link>
             <Link to="/apprendre" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Apprendre
+              {en ? "Learn" : "Apprendre"}
             </Link>
-            <Link to="/me/creneaux" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Créneaux
+            <Link to="/savoirs" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
+              {en ? "Guides" : "Fiches"}
             </Link>
-            <Link to="/post" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
-              Publier une offre
+            <Link to="/jobs" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
+              {en ? "All jobs" : "Toutes les offres"}
             </Link>
+            <SignedOut>
+              <Link to="/login" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
+                {en ? "Sign in" : "Connexion"}
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <Link to="/me" onClick={() => setOpen(false)} className="block py-3 text-base text-ink">
+                {en ? "My space" : "Mon espace"}
+              </Link>
+            </SignedIn>
           </nav>
         )}
       </header>
@@ -112,77 +99,20 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <div>
             <div className="font-serif text-xl text-primary">Vera</div>
             <p className="mt-1 max-w-md text-sm text-muted">
-              Le Verdict dit de passer. Le Pacte rend les retards visibles. Le Brief remplace le CV. Les Savoirs
-              préforment le geste.
+              {en
+                ? "The trial before the CV. Miss → module → retry. A passport you can export. Europe, not a translation."
+                : "L’épreuve avant le CV. Échec → module → retry. Un passeport exportable. Europe, pas une traduction."}
             </p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
-            <Link to="/savoirs" className="hover:text-ink">
-              Savoirs
-            </Link>
-            <Link to="/drive" className="hover:text-ink">
-              Drive
-            </Link>
-            <Link to="/lexique" className="hover:text-ink">
-              Lexique
-            </Link>
-            <Link to="/viviers" className="hover:text-ink">
-              Viviers
-            </Link>
-            <Link to="/apprendre" className="hover:text-ink">
-              Apprendre
-            </Link>
-            <Link to="/me/creneaux" className="hover:text-ink">
-              Créneaux
-            </Link>
-            <Link to="/journal" className="hover:text-ink">
-              Journal
-            </Link>
-            <Link to="/admin" className="hover:text-ink">
-              Admin
-            </Link>
-            <Link to="/tension" className="hover:text-ink">
-              Tension
-            </Link>
-            <Link to="/ppqc" className="hover:text-ink">
-              PPQC
-            </Link>
-            <Link to="/lieux" className="hover:text-ink">
-              Lieux
-            </Link>
-            <Link to="/metiers" className="hover:text-ink">
-              Métiers
-            </Link>
-            <Link to="/guides" className="hover:text-ink">
-              Guides
-            </Link>
-            <Link to="/marche" className="hover:text-ink">
-              Marché
-            </Link>
-            <Link to="/pacte" className="hover:text-ink">
-              Pacte
-            </Link>
-            <Link to="/coach" className="hover:text-ink">
-              Coach
-            </Link>
-            <Link to="/post" className="hover:text-ink">
-              Publier
-            </Link>
-            <Link to="/me" className="hover:text-ink">
-              Espace
-            </Link>
-            <a href="/sitemap.xml" className="hover:text-ink">
-              Sitemap
-            </a>
-            <a href="/llms.txt" className="hover:text-ink">
-              llms.txt
-            </a>
-            <a href="/feed.json" className="hover:text-ink">
-              feed.json
-            </a>
-            <a href="/vera-code.zip" download="vera-code.zip" className="hover:text-ink">
-              Code source
-            </a>
+            <Link to="/europe" className="hover:text-ink">Europe</Link>
+            <Link to="/preuve" className="hover:text-ink">{en ? "Trial" : "Épreuve"}</Link>
+            <Link to="/passport" className="hover:text-ink">{en ? "Passport" : "Passeport"}</Link>
+            <Link to="/marches" className="hover:text-ink">{en ? "Markets" : "Marchés"}</Link>
+            <Link to="/apprendre" className="hover:text-ink">{en ? "Learn" : "Apprendre"}</Link>
+            <Link to="/pacte" className="hover:text-ink">Pacte</Link>
+            <Link to="/jobs" className="hover:text-ink">{en ? "Jobs" : "Emplois"}</Link>
+            <Link to="/me" className="hover:text-ink">{en ? "My space" : "Mon espace"}</Link>
           </div>
         </div>
       </footer>
@@ -190,30 +120,33 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   );
 }
 
-function AuthSlot() {
+function AuthSlot({ en }: { en: boolean }) {
   const { user, isPending } = useCurrentUserState();
   if (isPending) {
-    return <div className="h-10 w-24 animate-pulse rounded-lg bg-paper" />;
+    return <div className="hidden h-10 w-20 animate-pulse rounded-lg bg-paper lg:block" />;
   }
   return (
     <>
       <SignedOut>
-        <Button asChild variant="secondary" size="sm">
-          <Link to="/login">Connexion</Link>
+        <Button asChild variant="secondary" size="sm" className="hidden lg:inline-flex">
+          <Link to="/login">{en ? "Sign in" : "Connexion"}</Link>
         </Button>
       </SignedOut>
       <SignedIn>
         <div className="hidden items-center gap-3 sm:flex">
-          <Link to="/me/brief" className="text-sm font-medium text-muted hover:text-ink">
-            Brief
+          <Link to="/passport" className="text-sm font-medium text-muted hover:text-ink">
+            {en ? "Passport" : "Passeport"}
           </Link>
           <Link to="/me" className="text-sm font-medium text-muted hover:text-ink">
-            Espace
+            {en ? "My space" : "Mon espace"}
           </Link>
           <UserButton />
         </div>
         {user && (
-          <Link to="/me" className="grid size-10 place-items-center rounded-full bg-primary font-serif text-primary-fg sm:hidden">
+          <Link
+            to="/me"
+            className="grid size-10 place-items-center rounded-full bg-primary font-serif text-primary-fg sm:hidden"
+          >
             {(user.displayName ?? "V").charAt(0)}
           </Link>
         )}
