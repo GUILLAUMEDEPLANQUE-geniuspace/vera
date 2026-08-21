@@ -34,7 +34,7 @@ export const Route = createFileRoute("/drive/media/$id")({
           const start = m?.[1] ? Number(m[1]) : 0;
           const end = m?.[2] ? Number(m[2]) : buf.length - 1;
           const slice = buf.subarray(start, end + 1);
-          return new Response(slice, {
+          return new Response(new Uint8Array(slice), {
             status: 206,
             headers: {
               ...headers,
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/drive/media/$id")({
             },
           });
         }
-        return new Response(buf, {
+        return new Response(new Uint8Array(buf), {
           headers: { ...headers, "Content-Length": String(buf.length) },
         });
       },

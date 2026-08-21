@@ -17,13 +17,11 @@ export const Route = createRootRoute({
       { title: APP_NAME },
       {
         name: "description",
-        content: "Vera — l’emploi, enfin lisible. Verdict, pacte de réponse, brief. Pas de pubs, pas de ghost cachés.",
+        content:
+          "Vera — la preuve avant le titre. Épreuve métier, module si échec, passeport, salaires publiés. France et Europe.",
       },
       { name: "robots", content: "index,follow" },
       { name: "theme-color", content: "#1B4332" },
-      { property: "og:site_name", content: "Vera" },
-      { property: "og:locale", content: "fr_FR" },
-      { property: "og:image", content: "/og.jpg" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },

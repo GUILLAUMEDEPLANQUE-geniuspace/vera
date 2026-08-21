@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { detectPlace } from "@/lib/geo";
+import { useLocale } from "@/lib/locale";
 
 export function SearchBar({
   initial = "",
@@ -14,6 +15,8 @@ export function SearchBar({
 }) {
   const navigate = useNavigate();
   const [q, setQ] = useState(initial);
+  const [locale] = useLocale();
+  const en = locale === "en";
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -49,13 +52,13 @@ export function SearchBar({
         <Input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Électricien Rennes, Fos, Nord, Bretagne…"
-          aria-label="Rechercher une offre ou un territoire"
+          placeholder={en ? "Agent Berlin, FHIR, lockout Fos…" : "Électricien Rennes, Fos, Berlin, Nord…"}
+          aria-label={en ? "Search a role or a place" : "Rechercher une offre ou un territoire"}
           className={size === "lg" ? "h-12 rounded-xl pl-10 text-base" : "pl-10"}
         />
       </div>
       <Button type="submit" size={size === "lg" ? "lg" : "md"} className="px-6">
-        Chercher
+        {en ? "Search" : "Chercher"}
       </Button>
     </form>
   );
