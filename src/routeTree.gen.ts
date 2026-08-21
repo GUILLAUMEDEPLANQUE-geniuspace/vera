@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcademiesRouteImport } from './routes/academies'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ApprendreRouteImport } from './routes/apprendre'
 import { Route as CoachRouteImport } from './routes/coach'
@@ -57,9 +58,14 @@ import { Route as LieuxCityRouteImport } from './routes/lieux.$city'
 import { Route as LieuxDepartementsRouteImport } from './routes/lieux.departements'
 import { Route as LieuxRegionsRouteImport } from './routes/lieux.regions'
 import { Route as MeIndexRouteImport } from './routes/me.index'
+import { Route as MeAcademieRouteImport } from './routes/me.academie'
 import { Route as MeBriefRouteImport } from './routes/me.brief'
 import { Route as MeCarnetRouteImport } from './routes/me.carnet'
+import { Route as MeCckRouteImport } from './routes/me.cck'
 import { Route as MeCreneauxRouteImport } from './routes/me.creneaux'
+import { Route as MeDriveRouteImport } from './routes/me.drive'
+import { Route as MeEpreuveRouteImport } from './routes/me.epreuve'
+import { Route as MeFormationRouteImport } from './routes/me.formation'
 import { Route as MeMaisonRouteImport } from './routes/me.maison'
 import { Route as MeTrackerRouteImport } from './routes/me.tracker'
 import { Route as MetiersIndexRouteImport } from './routes/metiers.index'
@@ -70,6 +76,14 @@ import { Route as TalentsSlugRouteImport } from './routes/talents.$slug'
 import { Route as ViviersIndexRouteImport } from './routes/viviers.index'
 import { Route as ViviersSlugRouteImport } from './routes/viviers.$slug'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as CompaniesSlugIndexRouteImport } from './routes/companies.$slug.index'
+import { Route as CompaniesSlugEquipesRouteImport } from './routes/companies.$slug.equipes'
+import { Route as CompaniesSlugJournalRouteImport } from './routes/companies.$slug.journal'
+import { Route as CompaniesSlugMediasRouteImport } from './routes/companies.$slug.medias'
+import { Route as CompaniesSlugOffresRouteImport } from './routes/companies.$slug.offres'
+import { Route as CompaniesSlugPreuvesRouteImport } from './routes/companies.$slug.preuves'
+import { Route as CompaniesSlugRdvRouteImport } from './routes/companies.$slug.rdv'
+import { Route as CompaniesSlugAcademieRouteImport } from './routes/companies.$slug_.academie'
 import { Route as DriveMediaIdRouteImport } from './routes/drive.media.$id'
 import { Route as FeedMaisonsSlugDotmdRouteImport } from './routes/feed.maisons.$slug[.]md'
 import { Route as LieuxDepartementsIndexRouteImport } from './routes/lieux.departements.index'
@@ -78,10 +92,17 @@ import { Route as LieuxRegionsIndexRouteImport } from './routes/lieux.regions.in
 import { Route as LieuxRegionsSlugRouteImport } from './routes/lieux.regions.$slug'
 import { Route as SavoirsCatIndexRouteImport } from './routes/savoirs.$cat.index'
 import { Route as SavoirsCatSlugRouteImport } from './routes/savoirs.$cat.$slug'
+import { Route as CompaniesSlugAcademieIndexRouteImport } from './routes/companies.$slug_.academie.index'
+import { Route as CompaniesSlugAcademieCourseRouteImport } from './routes/companies.$slug_.academie.$course'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademiesRoute = AcademiesRouteImport.update({
+  id: '/academies',
+  path: '/academies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -319,6 +340,11 @@ const MeIndexRoute = MeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => MeRoute,
 } as any)
+const MeAcademieRoute = MeAcademieRouteImport.update({
+  id: '/academie',
+  path: '/academie',
+  getParentRoute: () => MeRoute,
+} as any)
 const MeBriefRoute = MeBriefRouteImport.update({
   id: '/brief',
   path: '/brief',
@@ -329,9 +355,29 @@ const MeCarnetRoute = MeCarnetRouteImport.update({
   path: '/carnet',
   getParentRoute: () => MeRoute,
 } as any)
+const MeCckRoute = MeCckRouteImport.update({
+  id: '/cck',
+  path: '/cck',
+  getParentRoute: () => MeRoute,
+} as any)
 const MeCreneauxRoute = MeCreneauxRouteImport.update({
   id: '/creneaux',
   path: '/creneaux',
+  getParentRoute: () => MeRoute,
+} as any)
+const MeDriveRoute = MeDriveRouteImport.update({
+  id: '/drive',
+  path: '/drive',
+  getParentRoute: () => MeRoute,
+} as any)
+const MeEpreuveRoute = MeEpreuveRouteImport.update({
+  id: '/epreuve',
+  path: '/epreuve',
+  getParentRoute: () => MeRoute,
+} as any)
+const MeFormationRoute = MeFormationRouteImport.update({
+  id: '/formation',
+  path: '/formation',
   getParentRoute: () => MeRoute,
 } as any)
 const MeMaisonRoute = MeMaisonRouteImport.update({
@@ -384,6 +430,46 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompaniesSlugIndexRoute = CompaniesSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CompaniesSlugRoute,
+} as any)
+const CompaniesSlugEquipesRoute = CompaniesSlugEquipesRouteImport.update({
+  id: '/equipes',
+  path: '/equipes',
+  getParentRoute: () => CompaniesSlugRoute,
+} as any)
+const CompaniesSlugJournalRoute = CompaniesSlugJournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => CompaniesSlugRoute,
+} as any)
+const CompaniesSlugMediasRoute = CompaniesSlugMediasRouteImport.update({
+  id: '/medias',
+  path: '/medias',
+  getParentRoute: () => CompaniesSlugRoute,
+} as any)
+const CompaniesSlugOffresRoute = CompaniesSlugOffresRouteImport.update({
+  id: '/offres',
+  path: '/offres',
+  getParentRoute: () => CompaniesSlugRoute,
+} as any)
+const CompaniesSlugPreuvesRoute = CompaniesSlugPreuvesRouteImport.update({
+  id: '/preuves',
+  path: '/preuves',
+  getParentRoute: () => CompaniesSlugRoute,
+} as any)
+const CompaniesSlugRdvRoute = CompaniesSlugRdvRouteImport.update({
+  id: '/rdv',
+  path: '/rdv',
+  getParentRoute: () => CompaniesSlugRoute,
+} as any)
+const CompaniesSlugAcademieRoute = CompaniesSlugAcademieRouteImport.update({
+  id: '/$slug_/academie',
+  path: '/$slug/academie',
+  getParentRoute: () => CompaniesRoute,
+} as any)
 const DriveMediaIdRoute = DriveMediaIdRouteImport.update({
   id: '/media/$id',
   path: '/media/$id',
@@ -424,9 +510,22 @@ const SavoirsCatSlugRoute = SavoirsCatSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => SavoirsCatRoute,
 } as any)
+const CompaniesSlugAcademieIndexRoute =
+  CompaniesSlugAcademieIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => CompaniesSlugAcademieRoute,
+  } as any)
+const CompaniesSlugAcademieCourseRoute =
+  CompaniesSlugAcademieCourseRouteImport.update({
+    id: '/$course',
+    path: '/$course',
+    getParentRoute: () => CompaniesSlugAcademieRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/academies': typeof AcademiesRoute
   '/admin': typeof AdminRoute
   '/apprendre': typeof ApprendreRouteWithChildren
   '/coach': typeof CoachRoute
@@ -456,7 +555,7 @@ export interface FileRoutesByFullPath {
   '/tension': typeof TensionRoute
   '/viviers': typeof ViviersRouteWithChildren
   '/apprendre/$slug': typeof ApprendreSlugRoute
-  '/companies/$slug': typeof CompaniesSlugRoute
+  '/companies/$slug': typeof CompaniesSlugRouteWithChildren
   '/drive/$id': typeof DriveIdRoute
   '/feed/$slug.md': typeof FeedSlugDotmdRoute
   '/fichiers/$id': typeof FichiersIdRoute
@@ -466,9 +565,14 @@ export interface FileRoutesByFullPath {
   '/lieux/$city': typeof LieuxCityRoute
   '/lieux/departements': typeof LieuxDepartementsRouteWithChildren
   '/lieux/regions': typeof LieuxRegionsRouteWithChildren
+  '/me/academie': typeof MeAcademieRoute
   '/me/brief': typeof MeBriefRoute
   '/me/carnet': typeof MeCarnetRoute
+  '/me/cck': typeof MeCckRoute
   '/me/creneaux': typeof MeCreneauxRoute
+  '/me/drive': typeof MeDriveRoute
+  '/me/epreuve': typeof MeEpreuveRoute
+  '/me/formation': typeof MeFormationRoute
   '/me/maison': typeof MeMaisonRoute
   '/me/tracker': typeof MeTrackerRoute
   '/metiers/$slug': typeof MetiersSlugRoute
@@ -487,17 +591,28 @@ export interface FileRoutesByFullPath {
   '/savoirs/': typeof SavoirsIndexRoute
   '/viviers/': typeof ViviersIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/companies/$slug/equipes': typeof CompaniesSlugEquipesRoute
+  '/companies/$slug/journal': typeof CompaniesSlugJournalRoute
+  '/companies/$slug/medias': typeof CompaniesSlugMediasRoute
+  '/companies/$slug/offres': typeof CompaniesSlugOffresRoute
+  '/companies/$slug/preuves': typeof CompaniesSlugPreuvesRoute
+  '/companies/$slug/rdv': typeof CompaniesSlugRdvRoute
+  '/companies/$slug/academie': typeof CompaniesSlugAcademieRouteWithChildren
   '/drive/media/$id': typeof DriveMediaIdRoute
   '/feed/maisons/$slug.md': typeof FeedMaisonsSlugDotmdRoute
   '/lieux/departements/$slug': typeof LieuxDepartementsSlugRoute
   '/lieux/regions/$slug': typeof LieuxRegionsSlugRoute
   '/savoirs/$cat/$slug': typeof SavoirsCatSlugRoute
+  '/companies/$slug/': typeof CompaniesSlugIndexRoute
   '/lieux/departements/': typeof LieuxDepartementsIndexRoute
   '/lieux/regions/': typeof LieuxRegionsIndexRoute
   '/savoirs/$cat/': typeof SavoirsCatIndexRoute
+  '/companies/$slug/academie/$course': typeof CompaniesSlugAcademieCourseRoute
+  '/companies/$slug/academie/': typeof CompaniesSlugAcademieIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/academies': typeof AcademiesRoute
   '/admin': typeof AdminRoute
   '/coach': typeof CoachRoute
   '/europe': typeof EuropeRoute
@@ -516,7 +631,6 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tension': typeof TensionRoute
   '/apprendre/$slug': typeof ApprendreSlugRoute
-  '/companies/$slug': typeof CompaniesSlugRoute
   '/drive/$id': typeof DriveIdRoute
   '/feed/$slug.md': typeof FeedSlugDotmdRoute
   '/fichiers/$id': typeof FichiersIdRoute
@@ -524,9 +638,14 @@ export interface FileRoutesByTo {
   '/jobs/$slug': typeof JobsSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/lieux/$city': typeof LieuxCityRoute
+  '/me/academie': typeof MeAcademieRoute
   '/me/brief': typeof MeBriefRoute
   '/me/carnet': typeof MeCarnetRoute
+  '/me/cck': typeof MeCckRoute
   '/me/creneaux': typeof MeCreneauxRoute
+  '/me/drive': typeof MeDriveRoute
+  '/me/epreuve': typeof MeEpreuveRoute
+  '/me/formation': typeof MeFormationRoute
   '/me/maison': typeof MeMaisonRoute
   '/me/tracker': typeof MeTrackerRoute
   '/metiers/$slug': typeof MetiersSlugRoute
@@ -544,18 +663,28 @@ export interface FileRoutesByTo {
   '/savoirs': typeof SavoirsIndexRoute
   '/viviers': typeof ViviersIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/companies/$slug/equipes': typeof CompaniesSlugEquipesRoute
+  '/companies/$slug/journal': typeof CompaniesSlugJournalRoute
+  '/companies/$slug/medias': typeof CompaniesSlugMediasRoute
+  '/companies/$slug/offres': typeof CompaniesSlugOffresRoute
+  '/companies/$slug/preuves': typeof CompaniesSlugPreuvesRoute
+  '/companies/$slug/rdv': typeof CompaniesSlugRdvRoute
   '/drive/media/$id': typeof DriveMediaIdRoute
   '/feed/maisons/$slug.md': typeof FeedMaisonsSlugDotmdRoute
   '/lieux/departements/$slug': typeof LieuxDepartementsSlugRoute
   '/lieux/regions/$slug': typeof LieuxRegionsSlugRoute
   '/savoirs/$cat/$slug': typeof SavoirsCatSlugRoute
+  '/companies/$slug': typeof CompaniesSlugIndexRoute
   '/lieux/departements': typeof LieuxDepartementsIndexRoute
   '/lieux/regions': typeof LieuxRegionsIndexRoute
   '/savoirs/$cat': typeof SavoirsCatIndexRoute
+  '/companies/$slug/academie/$course': typeof CompaniesSlugAcademieCourseRoute
+  '/companies/$slug/academie': typeof CompaniesSlugAcademieIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/academies': typeof AcademiesRoute
   '/admin': typeof AdminRoute
   '/apprendre': typeof ApprendreRouteWithChildren
   '/coach': typeof CoachRoute
@@ -585,7 +714,7 @@ export interface FileRoutesById {
   '/tension': typeof TensionRoute
   '/viviers': typeof ViviersRouteWithChildren
   '/apprendre/$slug': typeof ApprendreSlugRoute
-  '/companies/$slug': typeof CompaniesSlugRoute
+  '/companies/$slug': typeof CompaniesSlugRouteWithChildren
   '/drive/$id': typeof DriveIdRoute
   '/feed/$slug.md': typeof FeedSlugDotmdRoute
   '/fichiers/$id': typeof FichiersIdRoute
@@ -595,9 +724,14 @@ export interface FileRoutesById {
   '/lieux/$city': typeof LieuxCityRoute
   '/lieux/departements': typeof LieuxDepartementsRouteWithChildren
   '/lieux/regions': typeof LieuxRegionsRouteWithChildren
+  '/me/academie': typeof MeAcademieRoute
   '/me/brief': typeof MeBriefRoute
   '/me/carnet': typeof MeCarnetRoute
+  '/me/cck': typeof MeCckRoute
   '/me/creneaux': typeof MeCreneauxRoute
+  '/me/drive': typeof MeDriveRoute
+  '/me/epreuve': typeof MeEpreuveRoute
+  '/me/formation': typeof MeFormationRoute
   '/me/maison': typeof MeMaisonRoute
   '/me/tracker': typeof MeTrackerRoute
   '/metiers/$slug': typeof MetiersSlugRoute
@@ -616,19 +750,30 @@ export interface FileRoutesById {
   '/savoirs/': typeof SavoirsIndexRoute
   '/viviers/': typeof ViviersIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/companies/$slug/equipes': typeof CompaniesSlugEquipesRoute
+  '/companies/$slug/journal': typeof CompaniesSlugJournalRoute
+  '/companies/$slug/medias': typeof CompaniesSlugMediasRoute
+  '/companies/$slug/offres': typeof CompaniesSlugOffresRoute
+  '/companies/$slug/preuves': typeof CompaniesSlugPreuvesRoute
+  '/companies/$slug/rdv': typeof CompaniesSlugRdvRoute
+  '/companies/$slug_/academie': typeof CompaniesSlugAcademieRouteWithChildren
   '/drive/media/$id': typeof DriveMediaIdRoute
   '/feed/maisons/$slug.md': typeof FeedMaisonsSlugDotmdRoute
   '/lieux/departements/$slug': typeof LieuxDepartementsSlugRoute
   '/lieux/regions/$slug': typeof LieuxRegionsSlugRoute
   '/savoirs/$cat/$slug': typeof SavoirsCatSlugRoute
+  '/companies/$slug/': typeof CompaniesSlugIndexRoute
   '/lieux/departements/': typeof LieuxDepartementsIndexRoute
   '/lieux/regions/': typeof LieuxRegionsIndexRoute
   '/savoirs/$cat/': typeof SavoirsCatIndexRoute
+  '/companies/$slug_/academie/$course': typeof CompaniesSlugAcademieCourseRoute
+  '/companies/$slug_/academie/': typeof CompaniesSlugAcademieIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/academies'
     | '/admin'
     | '/apprendre'
     | '/coach'
@@ -668,9 +813,14 @@ export interface FileRouteTypes {
     | '/lieux/$city'
     | '/lieux/departements'
     | '/lieux/regions'
+    | '/me/academie'
     | '/me/brief'
     | '/me/carnet'
+    | '/me/cck'
     | '/me/creneaux'
+    | '/me/drive'
+    | '/me/epreuve'
+    | '/me/formation'
     | '/me/maison'
     | '/me/tracker'
     | '/metiers/$slug'
@@ -689,17 +839,28 @@ export interface FileRouteTypes {
     | '/savoirs/'
     | '/viviers/'
     | '/api/auth/$'
+    | '/companies/$slug/equipes'
+    | '/companies/$slug/journal'
+    | '/companies/$slug/medias'
+    | '/companies/$slug/offres'
+    | '/companies/$slug/preuves'
+    | '/companies/$slug/rdv'
+    | '/companies/$slug/academie'
     | '/drive/media/$id'
     | '/feed/maisons/$slug.md'
     | '/lieux/departements/$slug'
     | '/lieux/regions/$slug'
     | '/savoirs/$cat/$slug'
+    | '/companies/$slug/'
     | '/lieux/departements/'
     | '/lieux/regions/'
     | '/savoirs/$cat/'
+    | '/companies/$slug/academie/$course'
+    | '/companies/$slug/academie/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/academies'
     | '/admin'
     | '/coach'
     | '/europe'
@@ -718,7 +879,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tension'
     | '/apprendre/$slug'
-    | '/companies/$slug'
     | '/drive/$id'
     | '/feed/$slug.md'
     | '/fichiers/$id'
@@ -726,9 +886,14 @@ export interface FileRouteTypes {
     | '/jobs/$slug'
     | '/journal/$slug'
     | '/lieux/$city'
+    | '/me/academie'
     | '/me/brief'
     | '/me/carnet'
+    | '/me/cck'
     | '/me/creneaux'
+    | '/me/drive'
+    | '/me/epreuve'
+    | '/me/formation'
     | '/me/maison'
     | '/me/tracker'
     | '/metiers/$slug'
@@ -746,17 +911,27 @@ export interface FileRouteTypes {
     | '/savoirs'
     | '/viviers'
     | '/api/auth/$'
+    | '/companies/$slug/equipes'
+    | '/companies/$slug/journal'
+    | '/companies/$slug/medias'
+    | '/companies/$slug/offres'
+    | '/companies/$slug/preuves'
+    | '/companies/$slug/rdv'
     | '/drive/media/$id'
     | '/feed/maisons/$slug.md'
     | '/lieux/departements/$slug'
     | '/lieux/regions/$slug'
     | '/savoirs/$cat/$slug'
+    | '/companies/$slug'
     | '/lieux/departements'
     | '/lieux/regions'
     | '/savoirs/$cat'
+    | '/companies/$slug/academie/$course'
+    | '/companies/$slug/academie'
   id:
     | '__root__'
     | '/'
+    | '/academies'
     | '/admin'
     | '/apprendre'
     | '/coach'
@@ -796,9 +971,14 @@ export interface FileRouteTypes {
     | '/lieux/$city'
     | '/lieux/departements'
     | '/lieux/regions'
+    | '/me/academie'
     | '/me/brief'
     | '/me/carnet'
+    | '/me/cck'
     | '/me/creneaux'
+    | '/me/drive'
+    | '/me/epreuve'
+    | '/me/formation'
     | '/me/maison'
     | '/me/tracker'
     | '/metiers/$slug'
@@ -817,18 +997,29 @@ export interface FileRouteTypes {
     | '/savoirs/'
     | '/viviers/'
     | '/api/auth/$'
+    | '/companies/$slug/equipes'
+    | '/companies/$slug/journal'
+    | '/companies/$slug/medias'
+    | '/companies/$slug/offres'
+    | '/companies/$slug/preuves'
+    | '/companies/$slug/rdv'
+    | '/companies/$slug_/academie'
     | '/drive/media/$id'
     | '/feed/maisons/$slug.md'
     | '/lieux/departements/$slug'
     | '/lieux/regions/$slug'
     | '/savoirs/$cat/$slug'
+    | '/companies/$slug/'
     | '/lieux/departements/'
     | '/lieux/regions/'
     | '/savoirs/$cat/'
+    | '/companies/$slug_/academie/$course'
+    | '/companies/$slug_/academie/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcademiesRoute: typeof AcademiesRoute
   AdminRoute: typeof AdminRoute
   ApprendreRoute: typeof ApprendreRouteWithChildren
   CoachRoute: typeof CoachRoute
@@ -871,6 +1062,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academies': {
+      id: '/academies'
+      path: '/academies'
+      fullPath: '/academies'
+      preLoaderRoute: typeof AcademiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -1202,6 +1400,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MeIndexRouteImport
       parentRoute: typeof MeRoute
     }
+    '/me/academie': {
+      id: '/me/academie'
+      path: '/academie'
+      fullPath: '/me/academie'
+      preLoaderRoute: typeof MeAcademieRouteImport
+      parentRoute: typeof MeRoute
+    }
     '/me/brief': {
       id: '/me/brief'
       path: '/brief'
@@ -1216,11 +1421,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MeCarnetRouteImport
       parentRoute: typeof MeRoute
     }
+    '/me/cck': {
+      id: '/me/cck'
+      path: '/cck'
+      fullPath: '/me/cck'
+      preLoaderRoute: typeof MeCckRouteImport
+      parentRoute: typeof MeRoute
+    }
     '/me/creneaux': {
       id: '/me/creneaux'
       path: '/creneaux'
       fullPath: '/me/creneaux'
       preLoaderRoute: typeof MeCreneauxRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/drive': {
+      id: '/me/drive'
+      path: '/drive'
+      fullPath: '/me/drive'
+      preLoaderRoute: typeof MeDriveRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/epreuve': {
+      id: '/me/epreuve'
+      path: '/epreuve'
+      fullPath: '/me/epreuve'
+      preLoaderRoute: typeof MeEpreuveRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/formation': {
+      id: '/me/formation'
+      path: '/formation'
+      fullPath: '/me/formation'
+      preLoaderRoute: typeof MeFormationRouteImport
       parentRoute: typeof MeRoute
     }
     '/me/maison': {
@@ -1293,6 +1526,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/companies/$slug/': {
+      id: '/companies/$slug/'
+      path: '/'
+      fullPath: '/companies/$slug/'
+      preLoaderRoute: typeof CompaniesSlugIndexRouteImport
+      parentRoute: typeof CompaniesSlugRoute
+    }
+    '/companies/$slug/equipes': {
+      id: '/companies/$slug/equipes'
+      path: '/equipes'
+      fullPath: '/companies/$slug/equipes'
+      preLoaderRoute: typeof CompaniesSlugEquipesRouteImport
+      parentRoute: typeof CompaniesSlugRoute
+    }
+    '/companies/$slug/journal': {
+      id: '/companies/$slug/journal'
+      path: '/journal'
+      fullPath: '/companies/$slug/journal'
+      preLoaderRoute: typeof CompaniesSlugJournalRouteImport
+      parentRoute: typeof CompaniesSlugRoute
+    }
+    '/companies/$slug/medias': {
+      id: '/companies/$slug/medias'
+      path: '/medias'
+      fullPath: '/companies/$slug/medias'
+      preLoaderRoute: typeof CompaniesSlugMediasRouteImport
+      parentRoute: typeof CompaniesSlugRoute
+    }
+    '/companies/$slug/offres': {
+      id: '/companies/$slug/offres'
+      path: '/offres'
+      fullPath: '/companies/$slug/offres'
+      preLoaderRoute: typeof CompaniesSlugOffresRouteImport
+      parentRoute: typeof CompaniesSlugRoute
+    }
+    '/companies/$slug/preuves': {
+      id: '/companies/$slug/preuves'
+      path: '/preuves'
+      fullPath: '/companies/$slug/preuves'
+      preLoaderRoute: typeof CompaniesSlugPreuvesRouteImport
+      parentRoute: typeof CompaniesSlugRoute
+    }
+    '/companies/$slug/rdv': {
+      id: '/companies/$slug/rdv'
+      path: '/rdv'
+      fullPath: '/companies/$slug/rdv'
+      preLoaderRoute: typeof CompaniesSlugRdvRouteImport
+      parentRoute: typeof CompaniesSlugRoute
+    }
+    '/companies/$slug_/academie': {
+      id: '/companies/$slug_/academie'
+      path: '/$slug/academie'
+      fullPath: '/companies/$slug/academie'
+      preLoaderRoute: typeof CompaniesSlugAcademieRouteImport
+      parentRoute: typeof CompaniesRoute
+    }
     '/drive/media/$id': {
       id: '/drive/media/$id'
       path: '/media/$id'
@@ -1349,6 +1638,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SavoirsCatSlugRouteImport
       parentRoute: typeof SavoirsCatRoute
     }
+    '/companies/$slug_/academie/': {
+      id: '/companies/$slug_/academie/'
+      path: '/'
+      fullPath: '/companies/$slug/academie/'
+      preLoaderRoute: typeof CompaniesSlugAcademieIndexRouteImport
+      parentRoute: typeof CompaniesSlugAcademieRoute
+    }
+    '/companies/$slug_/academie/$course': {
+      id: '/companies/$slug_/academie/$course'
+      path: '/$course'
+      fullPath: '/companies/$slug/academie/$course'
+      preLoaderRoute: typeof CompaniesSlugAcademieCourseRouteImport
+      parentRoute: typeof CompaniesSlugAcademieRoute
+    }
   }
 }
 
@@ -1366,14 +1669,55 @@ const ApprendreRouteWithChildren = ApprendreRoute._addFileChildren(
   ApprendreRouteChildren,
 )
 
+interface CompaniesSlugRouteChildren {
+  CompaniesSlugEquipesRoute: typeof CompaniesSlugEquipesRoute
+  CompaniesSlugJournalRoute: typeof CompaniesSlugJournalRoute
+  CompaniesSlugMediasRoute: typeof CompaniesSlugMediasRoute
+  CompaniesSlugOffresRoute: typeof CompaniesSlugOffresRoute
+  CompaniesSlugPreuvesRoute: typeof CompaniesSlugPreuvesRoute
+  CompaniesSlugRdvRoute: typeof CompaniesSlugRdvRoute
+  CompaniesSlugIndexRoute: typeof CompaniesSlugIndexRoute
+}
+
+const CompaniesSlugRouteChildren: CompaniesSlugRouteChildren = {
+  CompaniesSlugEquipesRoute: CompaniesSlugEquipesRoute,
+  CompaniesSlugJournalRoute: CompaniesSlugJournalRoute,
+  CompaniesSlugMediasRoute: CompaniesSlugMediasRoute,
+  CompaniesSlugOffresRoute: CompaniesSlugOffresRoute,
+  CompaniesSlugPreuvesRoute: CompaniesSlugPreuvesRoute,
+  CompaniesSlugRdvRoute: CompaniesSlugRdvRoute,
+  CompaniesSlugIndexRoute: CompaniesSlugIndexRoute,
+}
+
+const CompaniesSlugRouteWithChildren = CompaniesSlugRoute._addFileChildren(
+  CompaniesSlugRouteChildren,
+)
+
+interface CompaniesSlugAcademieRouteChildren {
+  CompaniesSlugAcademieCourseRoute: typeof CompaniesSlugAcademieCourseRoute
+  CompaniesSlugAcademieIndexRoute: typeof CompaniesSlugAcademieIndexRoute
+}
+
+const CompaniesSlugAcademieRouteChildren: CompaniesSlugAcademieRouteChildren = {
+  CompaniesSlugAcademieCourseRoute: CompaniesSlugAcademieCourseRoute,
+  CompaniesSlugAcademieIndexRoute: CompaniesSlugAcademieIndexRoute,
+}
+
+const CompaniesSlugAcademieRouteWithChildren =
+  CompaniesSlugAcademieRoute._addFileChildren(
+    CompaniesSlugAcademieRouteChildren,
+  )
+
 interface CompaniesRouteChildren {
-  CompaniesSlugRoute: typeof CompaniesSlugRoute
+  CompaniesSlugRoute: typeof CompaniesSlugRouteWithChildren
   CompaniesIndexRoute: typeof CompaniesIndexRoute
+  CompaniesSlugAcademieRoute: typeof CompaniesSlugAcademieRouteWithChildren
 }
 
 const CompaniesRouteChildren: CompaniesRouteChildren = {
-  CompaniesSlugRoute: CompaniesSlugRoute,
+  CompaniesSlugRoute: CompaniesSlugRouteWithChildren,
   CompaniesIndexRoute: CompaniesIndexRoute,
+  CompaniesSlugAcademieRoute: CompaniesSlugAcademieRouteWithChildren,
 }
 
 const CompaniesRouteWithChildren = CompaniesRoute._addFileChildren(
@@ -1476,18 +1820,28 @@ const LieuxRouteChildren: LieuxRouteChildren = {
 const LieuxRouteWithChildren = LieuxRoute._addFileChildren(LieuxRouteChildren)
 
 interface MeRouteChildren {
+  MeAcademieRoute: typeof MeAcademieRoute
   MeBriefRoute: typeof MeBriefRoute
   MeCarnetRoute: typeof MeCarnetRoute
+  MeCckRoute: typeof MeCckRoute
   MeCreneauxRoute: typeof MeCreneauxRoute
+  MeDriveRoute: typeof MeDriveRoute
+  MeEpreuveRoute: typeof MeEpreuveRoute
+  MeFormationRoute: typeof MeFormationRoute
   MeMaisonRoute: typeof MeMaisonRoute
   MeTrackerRoute: typeof MeTrackerRoute
   MeIndexRoute: typeof MeIndexRoute
 }
 
 const MeRouteChildren: MeRouteChildren = {
+  MeAcademieRoute: MeAcademieRoute,
   MeBriefRoute: MeBriefRoute,
   MeCarnetRoute: MeCarnetRoute,
+  MeCckRoute: MeCckRoute,
   MeCreneauxRoute: MeCreneauxRoute,
+  MeDriveRoute: MeDriveRoute,
+  MeEpreuveRoute: MeEpreuveRoute,
+  MeFormationRoute: MeFormationRoute,
   MeMaisonRoute: MeMaisonRoute,
   MeTrackerRoute: MeTrackerRoute,
   MeIndexRoute: MeIndexRoute,
@@ -1550,6 +1904,7 @@ const ViviersRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcademiesRoute: AcademiesRoute,
   AdminRoute: AdminRoute,
   ApprendreRoute: ApprendreRouteWithChildren,
   CoachRoute: CoachRoute,

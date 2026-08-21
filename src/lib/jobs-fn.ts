@@ -11,12 +11,27 @@ import { MARKETS } from "./markets";
 import type { HonorHouse, JobDetail, JobFilters, JobListItem, MarketPulse, Profile } from "./types";
 import { briefScore, type Brief, type ShippedItem } from "./types";
 import { computeVerdict } from "./verdict";
+import { simFromCck } from "./cck-sim";
 
 async function loadProfile(userId: string | null): Promise<Profile | null> {
   if (!userId) return null;
   const sql = await getSql();
   const rows = await sql<ProfileRow>`select * from profiles where user_id = ${userId} limit 1`;
   return rows[0] ? mapProfile(rows[0]) : null;
+}
+
+async function loadHeld(userId: string | null): Promise<Set<number>> {
+  const held = new Set<number>();
+  if (!userId) return held;
+  const sql = await getSql();
+  const rows = await sql<{ company_id: number }>`
+    select distinct a.company_id
+    from academy_enrollments e
+    join academy_courses a on a.id = e.course_id
+    where e.user_id = ${userId} and e.status = ${"completed"}
+  `;
+  for (const r of rows) held.add(r.company_id);
+  return held;
 }
 
 async function optionalUserId(): Promise<string | null> {
@@ -85,7 +100,9 @@ export const listJobs = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<JobListItem[]> => {
     const sql = await getSql();
     await ensureSeeded(sql);
-    const profile = await loadProfile(await optionalUserId());
+    const uid = await optionalUserId();
+    const profile = await loadProfile(uid);
+    const held = await loadHeld(uid);
 
     const q = data.q?.trim().toLowerCase() ?? "";
     const remote = data.remote || "";
@@ -103,7 +120,7 @@ export const listJobs = createServerFn({ method: "POST" })
        order by j.posted_at desc`,
     );
 
-    let jobs = all.map((row) => mapJob(row, profile));
+    let jobs = all.map((row) => mapJob(row, profile, held));
 
     if (q) {
       jobs = jobs.filter((j) => {
@@ -214,8 +231,9 @@ export const getJob = createServerFn({ method: "POST" })
     }
 
     const quietRows = await sql<{ n: number }>`select count(*)::int as n from quiet_signals where job_id = ${row.id}`;
+    const held = await loadHeld(userId);
     const process = parseProcess(row.process_json);
-    const base = mapJob(row, profile);
+    const base = mapJob(row, profile, held);
     const marketMedian = median(industryPay.map((r) => r.salary_max ?? 0));
     const offer =
       parseOffer(row.offer_json) ??
@@ -235,6 +253,31 @@ export const getJob = createServerFn({ method: "POST" })
         industry: company.industry,
       });
     const storedGrid = parseStoredGrid(row.grid_json);
+    const cckRows = await sql<{ name: string; value_json: string }>`
+      select f.name, v.value_json
+      from cck_values v
+      join cck_fields f on f.id = v.field_id
+      where v.entity_kind = ${"job"} and v.entity_id = ${row.id}
+    `;
+    const cckVals: Record<string, string> = {};
+    for (const r of cckRows) {
+      try {
+        const v = JSON.parse(r.value_json) as unknown;
+        if (v == null) cckVals[r.name] = "";
+        else if (Array.isArray(v)) cckVals[r.name] = v.map(String).join(", ");
+        else if (typeof v === "boolean") cckVals[r.name] = v ? "oui" : "non";
+        else cckVals[r.name] = String(v);
+      } catch {
+        cckVals[r.name] = r.value_json;
+      }
+    }
+    const cckSim = simFromCck(cckVals, offer.sim, {
+      title: base.title,
+      collection: base.collection,
+      city: base.city,
+      slug: base.slug,
+    });
+    if (cckSim) offer.sim = cckSim;
     const verdict = computeVerdict({
       ghostRisk: base.ghostRisk,
       hiringVelocity: company.hiringVelocity,
@@ -279,7 +322,15 @@ export const listCompanies = createServerFn({ method: "GET" }).handler(async () 
     select company_id, count(*)::int as n from jobs group by company_id
   `;
   const nById = new Map(counts.map((c) => [c.company_id, c.n]));
-  return rows.map((r) => ({ ...mapCompany(r), jobCount: nById.get(r.id) ?? 0 }));
+  const academy = await sql<{ company_id: number; n: number }>`
+    select company_id, count(*)::int as n from academy_courses where published group by company_id
+  `;
+  const aById = new Map(academy.map((c) => [c.company_id, c.n]));
+  return rows.map((r) => ({
+    ...mapCompany(r),
+    jobCount: nById.get(r.id) ?? 0,
+    courseCount: aById.get(r.id) ?? 0,
+  }));
 });
 
 export const getCompany = createServerFn({ method: "POST" })
@@ -287,7 +338,9 @@ export const getCompany = createServerFn({ method: "POST" })
   .handler(async ({ data: slug }) => {
     const sql = await getSql();
     await ensureSeeded(sql);
-    const profile = await loadProfile(await optionalUserId());
+    const uid = await optionalUserId();
+    const profile = await loadProfile(uid);
+    const held = await loadHeld(uid);
     const rows = await sql<CompanyRow>`select * from companies where slug = ${slug} limit 1`;
     if (!rows[0]) return null;
     const company = mapCompany(rows[0]);
@@ -299,7 +352,7 @@ export const getCompany = createServerFn({ method: "POST" })
        order by j.posted_at desc`,
       [slug],
     );
-    return { company, jobs: jobs.map((j) => mapJob(j, profile)) };
+    return { company, jobs: jobs.map((j) => mapJob(j, profile, held)) };
   });
 
 export const getMarketPulse = createServerFn({ method: "GET" }).handler(

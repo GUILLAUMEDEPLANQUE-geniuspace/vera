@@ -74,6 +74,7 @@ export type JobListItem = {
     responseSlaDays: number;
   };
   match: number | null;
+  moduleHeld?: boolean;
 };
 
 export type JobDetail = JobListItem & {

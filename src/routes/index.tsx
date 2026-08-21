@@ -105,6 +105,9 @@ function Home() {
             <Link to="/passport" className="text-muted hover:text-ink">
               {en ? "Passport" : "Passeport"}
             </Link>
+            <Link to="/academies" className="text-muted hover:text-ink">
+              {en ? "Academies" : "Académies"}
+            </Link>
           </div>
           <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
             <Stat label={en ? "Live roles" : "Offres actives"} value={String(p.activeJobs)} />
@@ -119,7 +122,14 @@ function Home() {
       </section>
 
       <section className="border-b border-border">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-3 sm:px-6">
+        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+          <LabCard
+            kicker="Académies"
+            title="La formation est sur la fiche"
+            body="Chaque entreprise Vera a son académie salariés : parcours, quiz, attestations. Branchée à la page, pas un LMS à côté."
+            to="/academies"
+            cta="Voir les académies"
+          />
           <LabCard
             kicker="Journal"
             title="Blogs entreprises & journaux"
@@ -575,7 +585,7 @@ function LabCard({
   kicker: string;
   title: string;
   body: string;
-  to: "/journal" | "/savoirs" | "/admin";
+  to: "/journal" | "/savoirs" | "/admin" | "/academies";
   cta: string;
 }) {
   return (

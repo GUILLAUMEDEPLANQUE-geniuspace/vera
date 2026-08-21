@@ -10,6 +10,7 @@ export const Route = createFileRoute("/robots.txt")({
 Allow: /
 Allow: /jobs
 Allow: /companies
+Allow: /academies
 Allow: /guides
 Allow: /lieux
 Allow: /metiers

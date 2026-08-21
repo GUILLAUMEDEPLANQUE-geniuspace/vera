@@ -128,7 +128,7 @@ export function mapCompany(row: CompanyRow): Company {
   };
 }
 
-export function mapJob(row: JobRow, profile: Profile | null): JobListItem {
+export function mapJob(row: JobRow, profile: Profile | null, heldCompanies?: Set<number>): JobListItem {
   const job: JobListItem = {
     id: row.id,
     slug: row.slug,
@@ -168,6 +168,7 @@ export function mapJob(row: JobRow, profile: Profile | null): JobListItem {
       responseSlaDays: Number(row.company_sla ?? 10),
     },
     match: null,
+    moduleHeld: heldCompanies?.has(row.company_id) ?? false,
   };
   job.ghostRisk = inferGhost({
     postedAt: job.postedAt,
@@ -177,6 +178,7 @@ export function mapJob(row: JobRow, profile: Profile | null): JobListItem {
     stored: job.ghostRisk,
   });
   job.match = computeMatch(job, profile);
+  if (job.moduleHeld && job.match != null) job.match = Math.min(99, job.match + 10);
   return job;
 }
 

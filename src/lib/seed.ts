@@ -1,3 +1,6 @@
+import { seedAcademy } from "./academy-seed";
+import { seedCck } from "./cck-seed";
+import { seedDriveMedia } from "./drive-seed";
 import { seedHub } from "./hub-seed";
 import type { Sql } from "./db";
 import { packForJob } from "./offer-data";
@@ -478,6 +481,9 @@ export async function ensureSeeded(sql: Sql): Promise<void> {
     await ensureMoatBackfill(sql);
     await ensureOfferBackfill(sql);
     await seedHub(sql);
+    await seedAcademy(sql);
+    await seedCck(sql);
+    await seedDriveMedia(sql);
   })().catch((err) => {
     g.__veraSeeded__ = undefined;
     throw err;

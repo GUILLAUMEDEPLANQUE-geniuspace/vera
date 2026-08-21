@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
+import { CckChips } from "@/components/company/cck-chips";
 import { CompanyMark } from "@/components/company-mark";
 import { GhostMeter } from "@/components/ghost-meter";
 import { Badge } from "@/components/ui/badge";
+import type { CckValue } from "@/lib/cck-fn";
 import { formatPosted, formatSalary } from "@/lib/format";
 import { honorCaption, honorTone } from "@/lib/pact";
 import { formatHours } from "@/lib/process";
@@ -10,7 +12,7 @@ import { scarcityOf } from "@/lib/scarcity";
 import { CONTRACT_LABEL, REMOTE_LABEL, SENIORITY_LABEL, type JobListItem } from "@/lib/types";
 import { vivierByPool } from "@/lib/viviers";
 
-export function JobCard({ job }: { job: JobListItem }) {
+export function JobCard({ job, cck }: { job: JobListItem; cck?: CckValue[] }) {
   const pass = job.ghostRisk === "high" || job.company.honorScore < 65;
   const scarcity = scarcityOf(job);
   const rare = scarcity.band === "penurie" || scarcity.band === "rare";
@@ -43,6 +45,7 @@ export function JobCard({ job }: { job: JobListItem }) {
             {job.equity && <Badge>Equity</Badge>}
             <GhostMeter risk={job.ghostRisk} postedAt={job.postedAt} velocity={job.company.hiringVelocity} />
             {FULL_OFFER_SLUGS.has(job.slug) && <Badge tone="primary">Offre lue · épreuve</Badge>}
+            {job.moduleHeld && <Badge tone="good">Module tenu</Badge>}
             {vivier && <Badge>{vivier.name}</Badge>}
             {rare && (
               <Badge tone="primary">
@@ -57,6 +60,11 @@ export function JobCard({ job }: { job: JobListItem }) {
               </Badge>
             )}
           </div>
+          {cck && cck.length > 0 && (
+            <div className="mt-2">
+              <CckChips values={cck} where="card" />
+            </div>
+          )}
           <p className="mt-2 text-xs text-subtle">{formatHours(job.processHours)} de process publié</p>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {job.skills.slice(0, 4).map((s) => (

@@ -104,7 +104,23 @@ function Entreprise({ name }: { name: string }) {
       <p className="text-xs tracking-wide text-primary uppercase">Entreprise</p>
       <h1 className="mt-2 font-serif text-4xl">Espace recruteur</h1>
       <p className="mt-2 text-muted">
-        Offres, candidats qualifiés (PPQC), journal, refus avec diagnostic. Publication{" "}
+        Offres, candidats qualifiés (PPQC), journal, refus avec diagnostic.{" "}
+        <Link to="/me/academie" className="text-primary">
+          Catalogue formation
+        </Link>
+        {" · "}
+        <Link to="/me/cck" className="text-primary">
+          Champs CCK
+        </Link>
+        {" · "}
+        <Link to="/me/epreuve" className="text-primary">
+          Guide épreuve
+        </Link>
+        {" · "}
+        <Link to="/me/drive" className="text-primary">
+          Drive
+        </Link>
+        . Publication{" "}
         <Link to="/post" className="text-primary">ici</Link>.
       </p>
       <div className="mt-6 flex flex-wrap items-end gap-2">

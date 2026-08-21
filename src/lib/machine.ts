@@ -135,6 +135,7 @@ export function companyMarkdown(
     `url: ${url}`,
     `md: ${origin}/feed/maisons/${company.slug}.md`,
     `jobs: ${jobs.length}`,
+    `academy: ${origin}/companies/${company.slug}/academie`,
     `---`,
     ``,
     `# ${company.name}`,
@@ -155,6 +156,10 @@ export function companyMarkdown(
     `- Management: ${culture.management}`,
     `- Week: ${culture.weekStyle}`,
     `- Axes: speech ${culture.axes.directness}, hierarchy ${culture.axes.hierarchy}, tempo ${culture.axes.tempo}, writing ${culture.axes.writing}, risk ${culture.axes.risk}`,
+    ``,
+    `## Academy`,
+    `- Employee training catalog: ${origin}/companies/${company.slug}/academie`,
+    `- Same page as the house. Not a disconnected LMS.`,
     ``,
     `## Open jobs`,
     ...jobs.map(

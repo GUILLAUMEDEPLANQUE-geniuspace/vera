@@ -29,6 +29,7 @@ import { PILLARS } from "@/lib/pillars";
 import { scarcityOf } from "@/lib/scarcity";
 import { jobDescriptionTag, jobFaqs, jobJsonLd, jobLongform, jobTitleTag, ldScript } from "@/lib/seo";
 import { CompanyMark } from "@/components/company-mark";
+import { CckChips } from "@/components/company/cck-chips";
 import { GhostMeter } from "@/components/ghost-meter";
 import { MatchRing } from "@/components/match-ring";
 import { PactBadge } from "@/components/pact-badge";
@@ -48,6 +49,7 @@ import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { toggleQuietSignal } from "@/lib/brief-fn";
 import { formatPosted, formatSalary } from "@/lib/format";
 import { getJob } from "@/lib/jobs-fn";
+import { listCckValues } from "@/lib/cck-fn";
 import { applyToJob, getMyProfile, toggleSaveJob } from "@/lib/profile-fn";
 import { CONTRACT_LABEL, REMOTE_LABEL, SENIORITY_LABEL } from "@/lib/types";
 import { computeVerdict } from "@/lib/verdict";
@@ -56,12 +58,13 @@ import { WEEKDAYS } from "@/lib/weekdays";
 export const Route = createFileRoute("/jobs/$slug")({
   loader: async ({ params }) => {
     const job = await getJob({ data: params.slug });
-    if (!job) return { job: null, preform: null, drive: [] };
-    const [preform, drive] = await Promise.all([
+    if (!job) return { job: null, preform: null, drive: [], cck: [] };
+    const [preform, drive, cck] = await Promise.all([
       preformForJob({ data: { skills: job.skills, have: [] } }),
       listDriveAssets({ data: { entityType: "job", entityKey: job.slug } }),
+      listCckValues({ data: { kind: "job", id: job.id } }),
     ]);
-    return { job, preform, drive };
+    return { job, preform, drive, cck };
   },
   head: ({ loaderData }) => {
     const job = loaderData?.job;
@@ -300,6 +303,14 @@ function JobPage() {
               {job.company.name} · {job.location} · {REMOTE_LABEL[job.remoteType]} · {CONTRACT_LABEL[job.contract]} ·{" "}
               {SENIORITY_LABEL[job.seniority]}
             </p>
+            {job.moduleHeld && (
+              <p className="mt-2 text-sm text-good">
+                Module tenu dans cette maison — le signal est relevé de 10 points.
+              </p>
+            )}
+            <div className="mt-3">
+              <CckChips values={packed?.cck} where="card" />
+            </div>
           </div>
         </div>
         <p className="mt-2 text-sm text-subtle">
@@ -517,6 +528,18 @@ function JobPage() {
               <div className="text-xs text-muted">{job.companyFull.tagline}</div>
             </div>
           </Link>
+          <div className="mt-4 flex flex-col gap-2">
+            <Button asChild variant="secondary" size="sm">
+              <Link to="/companies/$slug/rdv" params={{ slug: job.company.slug }}>
+                Prendre rendez-vous
+              </Link>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/companies/$slug/academie" params={{ slug: job.company.slug }}>
+                Académie salariés
+              </Link>
+            </Button>
+          </div>
           <div className="mt-4 border-t border-border pt-4">
             <PactBadge
               honor={job.companyFull.honorScore}
